@@ -11,13 +11,13 @@ setuptools.setup(
     author_email="owen8461@protonmail.com",
     name='raster-indices-calc',
     license="MIT",
-    description='chocobo is a python package for delicious chocobo recipes.',
-    version='v0.0.3',
+    description='raster-indices-calc is a python package created to calculate Landsat-8 indices.',
+    version='v0.0.1',
     long_description=README,
-    url='https://github.com/shaypal5/chocobo',
+    url='https://github.com/ocsmit/raster-indices-calc',
     packages=setuptools.find_packages(),
     python_requires=">=3.5",
-    install_requires=['requests'],
+    install_requires=['numpy', 'gdal'],
     classifiers=[
         # Trove classifiers
         # (https://pypi.python.org/pypi?%3Aaction=list_classifiers)
@@ -26,8 +26,11 @@ setuptools.setup(
         'Programming Language :: Python',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
+        'Programming Language :: Python :: 3.8',
         'Topic :: Software Development :: Libraries',
         'Topic :: Software Development :: Libraries :: Python Modules',
-        'Intended Audience :: Developers',
+        'Topic :: Scientific/Engineering :: GIS',
+        'Intended Audience :: Science/Research',
     ],
 )
