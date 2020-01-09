@@ -9,4 +9,4 @@ Indices
 - NDMI
 - MNDWI
 - AWEIsh
-- BAI
+
