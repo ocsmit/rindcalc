@@ -1,3 +1,9 @@
+import os
+import numpy as np
+from osgeo import gdal
+from glob import glob
+
+
 def NDMI_Index(landsat_dir, ndmi_out):
     # Create list with file names
     nir = glob(landsat_dir + "/*B5.tif")
