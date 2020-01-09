@@ -283,38 +283,3 @@ def AWEIsh_Index_Masked(landsat_dir, aweish_out):
 
     return print('Masked AWEIsh created.')
 
-
-# Fire Indices
-def BAI_Index(landsat_dir, bai_out):
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
-
-    gdal.UseExceptions()
-    gdal.AllRegister()
-    np.seterr(divide='ignore', invalid='ignore')
-    red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
-    red_band = red_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    NIR_path = gdal.Open(os.path.join(landsat_dir, nir[0]))
-    nir_band = NIR_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    snap = gdal.Open(os.path.join(landsat_dir, red[0]))
-
-    bai = (1 / ((0.1 - red_band)**2 + (0.06 - nir_band)**2))
-
-    # Save Raster
-    if os.path.exists(bai_out):
-        raise IOError('BAI raster already created')
-    if not os.path.exists(bai_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = bai.shape
-        dst_ds = driver.Create(bai_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(bai)
-        dst_ds.FlushCache()
-        dst_ds = None
-
-    return print('BAI index created')
-
