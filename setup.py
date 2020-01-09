@@ -1,5 +1,3 @@
-"""Setup for the chocobo package."""
-
 import setuptools
 
 
@@ -9,9 +7,9 @@ with open('README.md') as f:
 setuptools.setup(
     author="Owen Smith",
     author_email="owen8461@protonmail.com",
-    name='raster-indices-calc',
+    name='rindcalc',
     license="MIT",
-    description='raster-indices-calc is a python package created to calculate Landsat-8 indices.',
+    description='rindcalc is a python package created to calculate Landsat-8 indices.',
     version='v0.0.1',
     long_description=README,
     url='https://github.com/ocsmit/raster-indices-calc',
