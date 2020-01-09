@@ -38,4 +38,4 @@ def SAVI_Index(landsat_dir, soil_brightness, savi_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return print('SAVI created.')
+    return print('SAVI index created.')

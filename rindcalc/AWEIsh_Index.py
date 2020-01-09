@@ -46,3 +46,5 @@ def AWEIsh_Index(landsat_dir, aweish_out):
         dst_ds.GetRasterBand(1).WriteArray(aweish)
         dst_ds.FlushCache()
         dst_ds = None
+
+    return print('AWEIsh index created')
