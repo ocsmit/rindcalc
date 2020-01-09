@@ -39,4 +39,4 @@ def NBLI_Index(landsat_dir, nbli_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return print('NBLI index created.')
+    return nbli, print('NBLI index created.')

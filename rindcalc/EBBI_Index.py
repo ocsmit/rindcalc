@@ -42,4 +42,4 @@ def EBBI_Index(landsat_dir, ebbi_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return print('EBBI index created.')
+    return ebbi, print('EBBI index created.')

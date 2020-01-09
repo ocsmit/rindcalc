@@ -38,4 +38,4 @@ def NDBaI_Index(landsat_dir, ndbai_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return print('NDBaI index created')
+    return ndbai, print('NDBaI index created')

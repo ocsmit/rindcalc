@@ -51,4 +51,4 @@ def AWEIsh_Index_Masked(landsat_dir, aweish_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return print('Masked AWEIsh created.')
+    return aweish, print('Masked AWEIsh created.')

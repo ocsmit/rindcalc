@@ -38,4 +38,4 @@ def MNDWI_Index(landsat_dir, mndwi_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return print('MNDWI index created.')
+    return mndwi, print('MNDWI index created.')
