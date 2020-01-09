@@ -9,4 +9,3 @@ Indices
 - NDMI
 - MNDWI
 - AWEIsh
-
