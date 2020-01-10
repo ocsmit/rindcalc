@@ -4,7 +4,7 @@ from osgeo import gdal
 from glob import glob
 
 
-def AWEIsh_Index_Masked(landsat_dir, aweish_out):
+def AWEIsh(landsat_dir, aweish_out):
     # Create list with file names
     blue = glob(landsat_dir + "/*B2.tif")
     green = glob(landsat_dir + "/*B3.tif")
@@ -31,13 +31,10 @@ def AWEIsh_Index_Masked(landsat_dir, aweish_out):
     # Perform Calculation
     aweish = ((blue_band + 2.5 * green_band - 1.5 * (nir_band + swir1_band) - 0.25 * swir2_band)
               / (blue_band + green_band + nir_band + swir1_band + swir2_band))
-    aweish[np.isnan(aweish)] = 0
-    aweish_mask = np.ma.MaskedArray(aweish, mask=(aweish == 0))
-    aweish_mask.reshape(aweish.shape)
 
     # Save Raster
     if os.path.exists(aweish_out):
-        raise IOError('Masked AWEIsh raster already created')
+        raise IOError('AWEIsh raster already created')
     if not os.path.exists(aweish_out):
         driver = gdal.GetDriverByName('GTiff')
         metadata = driver.GetMetadata()
@@ -47,8 +44,8 @@ def AWEIsh_Index_Masked(landsat_dir, aweish_out):
         geo = snap.GetGeoTransform()
         dst_ds.SetGeoTransform(geo)
         dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(aweish_mask)
+        dst_ds.GetRasterBand(1).WriteArray(aweish)
         dst_ds.FlushCache()
         dst_ds = None
 
-    return aweish, print('Masked AWEIsh created.')
+    return aweish, print('AWEIsh index created')

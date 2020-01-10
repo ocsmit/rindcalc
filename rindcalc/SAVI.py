@@ -4,7 +4,7 @@ from osgeo import gdal
 from glob import glob
 
 
-def SAVI_Index(landsat_dir, soil_brightness, savi_out):
+def SAVI(landsat_dir, soil_brightness, savi_out):
     # Create list with file names
     red = glob(landsat_dir + "/*B4.tif")
     nir = glob(landsat_dir + "/*B5.tif")
