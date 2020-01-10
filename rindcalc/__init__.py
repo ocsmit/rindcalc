@@ -1,8 +1,3 @@
-import os
-import numpy as np
-from osgeo import gdal
-from glob import glob
-
 from .GetBands import GetBands
 from .AWEIsh import AWEIsh
 from .AWEIsh_Masked import AWEIsh_Masked
