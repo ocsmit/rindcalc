@@ -2,14 +2,22 @@
 **Raster Index Calculator**
 
 
-rind calc is a python package created to allow complete raster index calculation using Landsat-8 using gdal and numpy.
-Landsat bands are pulled directly from file downloaded from USGS containing all bands os landsat scene. 
+rind calc is a python package created to allow raster index calculation using Landsat-8 using gdal and numpy.
+Landsat bands are pulled directly from file downloaded from USGS containing all bands in landsat scene. 
 Since rindcalc only requires the file in which Landsat-8 bands are contained instead of each individual 
 band to be specified, it allows for easy, quick, and seamless index calculations from Landsat-8 imagery.   
+
+
+K means unsupervised classification module utilizes sci-kit learn's MiniBatchKMeans which provides significantly 
+faster computation times than the standard K-means algorithm, but with slightly worse result [[1]](https://scikit-learn.org/stable/modules/clustering.html#mini-batch-kmeans).
+'No Data' values are populated with the median value of the array as the classification algorithm does not work 
+with numpy arrays that contain 'nan' values.
+
 
 ## Dependencies
 > * GDAL (v 3.0.0 or greater)
 > * numpy (v 1.0.0 or greater)
+> * sci-kit learn ( v (0.22.1 or greater))
 
 ## Installation 
 **Windows**
@@ -20,6 +28,20 @@ For Windows installation [gdal](https://pypi.org/project/GDAL/) wheels must be i
 
 ## Modules
 
+**Index Modules**
+* AWEIsh(landsat_dir, aweish_out)
+* AWEInsh(landsat_dir, aweinsh_out)
+* NDMI(landsat_dir, ndmi_out)
+* MNDWI(landsat_dir, mndwi_out)
+* NDVI(landsat_dir, ndvi_out)
+* GNDVI(landsat_dir)
+* SAVI(landsat_dir, soil_brightness, savi_out)
+* NDBI(landsat_dir, ndbi_out)
+* NDBaI(landsat_dir, ndbai_out)
+* NBLI(landsat_dir, nbli_out)
+* EBBI(landsat_dir, ebbi_out)
+* UI(landsat_dir, ui_out )
+* NBRI(landsat_dir, nbri_out)
 
 > landsat_dir = Landsat-8 folder that contains all bands
 > 
@@ -40,18 +62,14 @@ i.e. Landsat-8 folder structure:
 |   |-- ...
 ```
 
-* AWEIsh(landsat_dir, aweish_out)
-* NDMI(landsat_dir, ndmi_out)
-* MNDWI(landsat_dir, mndwi_out)
-* NDVI(landsat_dir, ndvi_out)
-* GNDVI(landsat_dir)
-* SAVI(landsat_dir, soil_brightness, savi_out)
-* NDBI(landsat_dir, ndbi_out)
-* NDBaI(landsat_dir, ndbai_out)
-* NBLI(landsat_dir, nbli_out)
-* EBBI(landsat_dir, ebbi_out)
-* UI(landsat_dir, ui_out )
-* NBRI(landsat_dir, nbri_out)
+**K Means Classification Module**
+
+* k_means(input_raster, out_raster, clusters, itr, batch_size)
+> clusters = Number of classes wanted
+
+> itr = Number of iterations to perform
+
+> batch_size = Size of mini batches
 
 EX:
 
@@ -66,6 +84,17 @@ OR:
 ```python
 import rindcalc as rc
 rc.NDVI(landsat_dir = 'C:/.../.../2019_12_22', ndvi_out = 'C:/.../.../NDVI_2.tif')
+```
+
+KMEANS EX:
+```python
+import rindcalc as rc
+input_raster = 'C:/.../.../NDVI.tif'
+out_raster = 'C:/.../.../NDVI_K.TIF'
+clusters = 2
+itr = 10
+batch_size = 50
+rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 ```
 
 ## Landsat-8 Bands
@@ -90,6 +119,9 @@ rc.NDVI(landsat_dir = 'C:/.../.../2019_12_22', ndvi_out = 'C:/.../.../NDVI_2.tif
 
 **Water**
 - AWEIsh = ((Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 * SWIR2)) / (Blue + Green + NIR + SWIR1 + SWIR2)
+
+- AWEInsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /
+               (green_band + swir1_band + nir_band))
 
 - NDWI = ((nir_band - swir1_band) / (nir_band + swir1_band))
 

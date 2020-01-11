@@ -1,6 +1,7 @@
 from .GetBands import GetBands
 from .AWEIsh import AWEIsh
 from .AWEIsh_Masked import AWEIsh_Masked
+from .AWEInsh import AWEInsh
 from .MNDWI import MNDWI
 from .NDMI import NDMI
 from .NDVI import NDVI
@@ -14,3 +15,4 @@ from .NBRI import NBRI
 from .GNDVI import GNDVI
 from .UI import UI
 from .MSAVI2 import MSAVI2
+from .k_means import k_means
