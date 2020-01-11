@@ -12,3 +12,4 @@ from .EBBI import EBBI
 from .NDWI import NDWI
 from .NBRI import NBRI
 from .GNDVI import GNDVI
+from .UI import UI
