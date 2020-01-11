@@ -13,3 +13,4 @@ from .NDWI import NDWI
 from .NBRI import NBRI
 from .GNDVI import GNDVI
 from .UI import UI
+from .MSAVI2 import MSAVI2
