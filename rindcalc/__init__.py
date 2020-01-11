@@ -16,3 +16,5 @@ from .GNDVI import GNDVI
 from .UI import UI
 from .MSAVI2 import MSAVI2
 from .k_means import k_means
+from .RGB import RGB
+from .FalseColor import FalseColor

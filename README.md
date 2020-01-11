@@ -2,12 +2,17 @@
 **Raster Index Calculator**
 
 
-rind calc is a python package created to allow raster index calculation using Landsat-8 using gdal and numpy.
-Landsat bands are pulled directly from file downloaded from USGS containing all bands in landsat scene. 
-Since rindcalc only requires the file in which Landsat-8 bands are contained instead of each individual 
-band to be specified, it allows for easy, quick, and seamless index calculations from Landsat-8 imagery.   
+rindcalc is an open source python package created to provide seamless and accurate raster index calculations, composites, and unsupervised classification of 
+Landsat-8 imagery using gdal and numpy. Landsat bands are pulled directly from file downloaded from USGS containing all bands 
+in landsat scene. Since rindcalc only requires the file in which Landsat-8 bands are contained instead of 
+each individual band to be specified, it allows for easy, quick, and seamless index calculations from Landsat-8 
+imagery.   
 
 Indices: AWEIsh, AWEInsh, NDMI, MNDWI, NDVI, GNDVI, SAVI, NDBI, NDBaI, NBLI, EBBI, UI, NBRI
+
+Composites: RGB, False Color
+
+Unsupervised Classification: K-Means (Mini Batch)
 
 
 K means unsupervised classification module utilizes sci-kit learn's MiniBatchKMeans which provides significantly 
@@ -29,6 +34,10 @@ with numpy arrays that contain 'nan' values.
 For Windows installation [gdal](https://pypi.org/project/GDAL/) wheels must be installed first.
 
 ## Modules
+
+**Composite Modules**
+* RGB(landsat_dir, out_composite)
+* FalseColor(landsat_dir, out_composite)
 
 **Index Modules**
 * AWEIsh(landsat_dir, aweish_out)
@@ -118,6 +127,9 @@ rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 
 
 ## Indices
+
+**Composites**
+RGB = (Red, Green, Blue)
 
 **Water**
 - AWEIsh = ((Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 * SWIR2)) / (Blue + Green + NIR + SWIR1 + SWIR2)
