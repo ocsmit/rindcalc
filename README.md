@@ -7,6 +7,8 @@ Landsat bands are pulled directly from file downloaded from USGS containing all 
 Since rindcalc only requires the file in which Landsat-8 bands are contained instead of each individual 
 band to be specified, it allows for easy, quick, and seamless index calculations from Landsat-8 imagery.   
 
+Indices: AWEIsh, AWEInsh, NDMI, MNDWI, NDVI, GNDVI, SAVI, NDBI, NDBaI, NBLI, EBBI, UI, NBRI
+
 
 K means unsupervised classification module utilizes sci-kit learn's MiniBatchKMeans which provides significantly 
 faster computation times than the standard K-means algorithm, but with slightly worse result [[1]](https://scikit-learn.org/stable/modules/clustering.html#mini-batch-kmeans).
