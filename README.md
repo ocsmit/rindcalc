@@ -102,17 +102,17 @@ rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 ## Landsat-8 Bands
 
 
-| Band Number      |     Name    |  µm   | Resolution   |
+| Band Number      |     Name    |µm   | Resolution   |
 | ------------- |:-------------:| -----:|-----:|
-| 1| Coastal/Aerosal| 0.433–0.453 |30 m|
-| 2| Blue           | 0.450–0.515 |30 m |
-| 3| Green          | 0.525–0.600 |30 m |
-| 4| Red            | 0.630–0.680 |30 m |
-| 5| NIR            | 0.845–0.885 |30 m |
-| 6| SWIR 1         | 1.560–1.660 |30 m |
-| 7| SWIR 2         | 2.100–2.300 |30 m |
-| 8| Panchromatic   | 0.500–0.680 |15 m |
-| 9| Cirrus         | 1.360–1.390 |30 m |
+| 1| Coastal/Aerosal| 0.433-0.453 |30 m|
+| 2| Blue           | 0.450-0.515 |30 m |
+| 3| Green          | 0.525-0.600 |30 m |
+| 4| Red            | 0.630-0.680 |30 m |
+| 5| NIR            | 0.845-0.885 |30 m |
+| 6| SWIR 1         | 1.560-1.660 |30 m |
+| 7| SWIR 2         | 2.100-2.300 |30 m |
+| 8| Panchromatic   | 0.500-0.680 |15 m |
+| 9| Cirrus         | 1.360-1.390 |30 m |
 | 10| TIR 1         | 10.6-11.2   |100 m |
 | 11| TIR 2         | 11.5-12.5   |100 m |
 
