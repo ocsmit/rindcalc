@@ -24,7 +24,7 @@ with numpy arrays that contain 'nan' values.
 ## Dependencies
 > * GDAL (v 3.0.0 or greater)
 > * numpy (v 1.0.0 or greater)
-> * sci-kit learn ( v (0.22.1 or greater))
+> * sci-kit learn (v0.22.1 or greater)
 
 ## Installation 
 **Windows**
