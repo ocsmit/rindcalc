@@ -132,21 +132,22 @@ rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 RGB = (Red, Green, Blue)
 
 **Water**
-- AWEIsh = ((Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 * SWIR2)) / (Blue + Green + NIR + SWIR1 + SWIR2)
+- AWEIsh = ((Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 * SWIR2)) / [1]
+              (Blue + Green + NIR + SWIR1 + SWIR2)  
 
-- AWEInsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /
+- AWEInsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /  [1]
                (green_band + swir1_band + nir_band))
 
-- NDWI = ((nir_band - swir1_band) / (nir_band + swir1_band))
+- NDWI = ((nir_band - swir1_band) / (nir_band + swir1_band)) [2]
 
-- MNDWI = ((Green - SWIR1) / (Green + SWIR1))
+- MNDWI = ((Green - SWIR1) / (Green + SWIR1))  [3]
 
 **Moisture**
 
-- NDMI = ((NIR - SWIR1) / (NIR + SWIR1))
+- NDMI = ((NIR - SWIR1) / (NIR + SWIR1)) [2]
 
 **Vegetation**
-- NDVI = ((NIR - Red) / (NIR + Red))
+- NDVI = ((NIR - Red) / (NIR + Red)) [4]
 
 - Green NDVI (GNDVI) = ((nir_band - green_band) / (nir_band + green_band))
     
@@ -170,3 +171,11 @@ RGB = (Red, Green, Blue)
 - NBRI = ((nir_band - swir2_band) / (nir_band + swir2_band))
 
 
+### Refernces
+[1] Feyisa, G. L., Meilby, H., Fensholt, R., & Proud, S. R. (2014). Automated Water Extraction Index: A new technique for surface water mapping using Landsat imagery. Remote Sensing of Environment, 140, 23-35
+
+[2] Gao, B. C. (1996). NDWI—A normalized difference water index for remote sensing of vegetation liquid water from space. Remote sensing of environment, 58(3), 257-266.
+
+[3] Xu, H. (2006). Modification of normalised difference water index (NDWI) to enhance open water features in remotely sensed imagery. International journal of remote sensing, 27(14), 3025-3033.
+
+[4] Tucker, C. J. (1979). Red and photographic infrared linear combinations for monitoring vegetation. Remote sensing of Environment, 8(2), 127-150.
