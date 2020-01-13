@@ -13,7 +13,7 @@ def RGB(landsat_dir, out_composite):
 
     def norm(array):
         array_min, array_max = array.min(), array.max()
-        return ((255-0) * ((array - array_min) / (array_max - array_min))) + 0
+        return ((255 - 0) * ((array - array_min) / (array_max - array_min))) + 0
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     blue_band = norm(blue_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
