@@ -171,7 +171,7 @@ RGB = (Red, Green, Blue)
 - NBRI = ((nir_band - swir2_band) / (nir_band + swir2_band))
 
 
-### Refernces
+### References
 [1] Feyisa, G. L., Meilby, H., Fensholt, R., & Proud, S. R. (2014). Automated Water Extraction Index: A new technique for surface water mapping using Landsat imagery. Remote Sensing of Environment, 140, 23-35
 
 [2] Gao, B. C. (1996). NDWI—A normalized difference water index for remote sensing of vegetation liquid water from space. Remote sensing of environment, 58(3), 257-266.
