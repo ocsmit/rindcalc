@@ -132,11 +132,11 @@ rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 RGB = (Red, Green, Blue)
 
 **Water**
-- AWEIsh = ((Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 * SWIR2)) / [1]
-              (Blue + Green + NIR + SWIR1 + SWIR2)  
+- AWEIsh = ((Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 * SWIR2)) / 
+              (Blue + Green + NIR + SWIR1 + SWIR2) [1]
 
-- AWEInsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /  [1]
-               (green_band + swir1_band + nir_band))
+- AWEInsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /  
+               (green_band + swir1_band + nir_band)) [1]
 
 - NDWI = ((nir_band - swir1_band) / (nir_band + swir1_band)) [2]
 
