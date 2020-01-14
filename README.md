@@ -4,8 +4,7 @@
 
 rindcalc is an open source python package created to provide seamless and accurate raster index calculations, composites, and unsupervised classification of 
 Landsat-8 imagery using gdal and numpy. Landsat bands are pulled directly from file downloaded from USGS containing all bands 
-in landsat scene. Since rindcalc only requires the file in which Landsat-8 bands are contained instead of 
-each individual band to be specified, it allows for easy, quick, and seamless index calculations from Landsat-8 
+in landsat scene. Since rindcalc uses the standard naming convention of landsat bands, it only needs the folder in which Landsat-8 bands are contained instead. This method allows for easy, quick, and seamless index calculations from Landsat-8 
 imagery.   
 
 Indices: AWEIsh, AWEInsh, NDMI, MNDWI, NDVI, GNDVI, SAVI, NDBI, NDBaI, NBLI, EBBI, UI, NBRI
