@@ -38,4 +38,4 @@ def NDVI(landsat_dir, ndvi_out):
         dst_ds.FlushCache()
         dst_ds = None
 
-    return ndvi, print('NDvi index created.')
+    return ndvi, print('NDVI index created.')
