@@ -8,6 +8,10 @@ from osgeo import gdal
 from glob import glob
 
 
+def norm(array):
+    array_min, array_max = array.min(), array.max()
+    return ((255 - 0) * ((array - array_min) / (array_max - array_min))) + 0
+
 def RGB(landsat_dir, out_composite):
     """ RGB composite
 
@@ -20,10 +24,6 @@ def RGB(landsat_dir, out_composite):
     blue = glob(landsat_dir + "/*B2.tif")
     green = glob(landsat_dir + "/*B3.tif")
     red = glob(landsat_dir + "/*B4.tif")
-
-    def norm(array):
-        array_min, array_max = array.min(), array.max()
-        return ((255 - 0) * ((array - array_min) / (array_max - array_min))) + 0
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     blue_band = norm(blue_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
@@ -66,10 +66,6 @@ def FalseColor(landsat_dir, out_composite):
     green = glob(landsat_dir + "/*B3.tif")
     red = glob(landsat_dir + "/*B4.tif")
     nir = glob(landsat_dir + "/*B5.tif")
-
-    def norm(array):
-        array_min, array_max = array.min(), array.max()
-        return ((255-0) * ((array - array_min) / (array_max - array_min))) + 0
 
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = norm(green_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))

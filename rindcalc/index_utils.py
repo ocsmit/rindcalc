@@ -473,7 +473,7 @@ def NDBaI(landsat_dir, ndbai_out):
     swir1_band = SWIR1_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     TIR_path = gdal.Open(os.path.join(landsat_dir, tir[0]))
     tir_band = TIR_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    snap = gdal.Open(os.path.join(landsat_dir, swir1[0]))
+    snap = gdal.Open(os.path.join(landsat_dir, tir[0]))
 
     # Perform Calculation
     ndbai = ((swir1_band - tir_band) / (swir1_band + tir_band))
