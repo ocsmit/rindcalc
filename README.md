@@ -2,20 +2,23 @@
 **Raster Index Calculator**
 
 
-rindcalc is an open source python package created to provide seamless and accurate raster index calculations, composites, and unsupervised classification of 
-Landsat-8 imagery using gdal and numpy. Landsat bands are pulled directly from file downloaded from USGS containing all bands 
-in landsat scene. Since rindcalc uses the standard naming convention of landsat bands, it only needs the folder in which Landsat-8 bands are contained instead. This method allows for easy, quick, and seamless index calculations from Landsat-8 
-imagery.   
+rindcalc is an open source python library built on numpy and gdal aiming to provide seamless and accurate raster index 
+calculations and composites of 
+Landsat-8 imagery using gdal and numpy. Landsat bands are pulled directly from files downloaded from USGS containing 
+all bands 
+in the landsat scene. Since rindcalc uses the standard naming convention of landsat bands, it only needs the folder in 
+which Landsat-8 bands are contained instead. This method allows for easy, quick, and consistent index calculations
+from Landsat-8 imagery.   
 
-Indices: AWEIsh, AWEInsh, NDMI, MNDWI, NDVI, GNDVI, SAVI, NDBI, NDBaI, NBLI, EBBI, UI, NBRI
+Indices: AWEIsh, AWEInsh, NDMI, MNDWI, NDVI, GNDVI, SAVI, NDBI, NDBaI, NBLI, EBBI, UI, NBRI,
 
 Composites: RGB, False Color
 
 Unsupervised Classification: K-Means (Mini Batch)
 
-
-K means unsupervised classification module utilizes sci-kit learn's MiniBatchKMeans which provides significantly 
-faster computation times than the standard K-means algorithm, but with slightly worse result [[1]](https://scikit-learn.org/stable/modules/clustering.html#mini-batch-kmeans).
+The k-means unsupervised classification module utilizes sci-kit learn's MiniBatchKMeans which provides significantly 
+faster computation times than the standard K-means algorithm, but with slightly worse result 
+[[1]](https://scikit-learn.org/stable/modules/clustering.html#mini-batch-kmeans).
 'No Data' values are populated with the median value of the array as the classification algorithm does not work 
 with numpy arrays that contain 'nan' values.
 
@@ -34,17 +37,18 @@ For Windows installation [gdal](https://pypi.org/project/GDAL/) wheels must be i
 
 ## Modules
 
-**Composite Modules**
+**Composite Modules | rindcalc.composite_utils**
 * RGB(landsat_dir, out_composite)
 * FalseColor(landsat_dir, out_composite)
 
-**Index Modules**
+**Index Modules | rindcalc.index_utils**
 * AWEIsh(landsat_dir, aweish_out)
 * AWEInsh(landsat_dir, aweinsh_out)
 * NDMI(landsat_dir, ndmi_out)
 * MNDWI(landsat_dir, mndwi_out)
 * NDVI(landsat_dir, ndvi_out)
-* GNDVI(landsat_dir)
+* GNDVI(landsat_dir, gndvi_out)
+* ARVI(landsat_dir, arvi_out)
 * SAVI(landsat_dir, soil_brightness, savi_out)
 * NDBI(landsat_dir, ndbi_out)
 * NDBaI(landsat_dir, ndbai_out)
@@ -72,7 +76,7 @@ i.e. Landsat-8 folder structure:
 |   |-- ...
 ```
 
-**K Means Classification Module**
+**K Means Classification Module | rindcalc.class_utils**
 
 * k_means(input_raster, out_raster, clusters, itr, batch_size)
 > clusters = Number of classes wanted
@@ -81,7 +85,7 @@ i.e. Landsat-8 folder structure:
 
 > batch_size = Size of mini batches
 
-EX:
+Example:
 
 ```python
 import rindcalc as rc
@@ -96,7 +100,7 @@ import rindcalc as rc
 rc.NDVI(landsat_dir = 'C:/.../.../2019_12_22', ndvi_out = 'C:/.../.../NDVI_2.tif')
 ```
 
-KMEANS EX:
+K means unsupervised example:
 ```python
 import rindcalc as rc
 input_raster = 'C:/.../.../NDVI.tif'
@@ -110,7 +114,7 @@ rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 ## Landsat-8 Bands
 
 
-| Band Number      |     Name    |µm   | Resolution   |
+| Band Number      |     Name    | µm   | Resolution   |
 | ------------- |:-------------:| -----:|-----:|
 | 1| Coastal/Aerosal| 0.433-0.453 |30 m|
 | 2| Blue           | 0.450-0.515 |30 m |
@@ -137,8 +141,6 @@ RGB = (Red, Green, Blue)
 - AWEInsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /  
                (green_band + swir1_band + nir_band)) [1]
 
-- NDWI = ((nir_band - swir1_band) / (nir_band + swir1_band)) [2]
-
 - MNDWI = ((Green - SWIR1) / (Green + SWIR1))  [3]
 
 **Moisture**
@@ -148,7 +150,9 @@ RGB = (Red, Green, Blue)
 **Vegetation**
 - NDVI = ((NIR - Red) / (NIR + Red)) [4]
 
-- Green NDVI (GNDVI) = ((nir_band - green_band) / (nir_band + green_band))
+- Green NDVI (GNDVI) = ((nir_band - green_band) / (nir_band + green_band)) 
+    
+- ARVI = ((nir_band - (2 * red_band) + blue_band) / (nir_band + (2 * red_band) + blue_band)) [5]
     
 - SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L) 
     - *L = Soil Brightness Factor*
@@ -178,3 +182,5 @@ RGB = (Red, Green, Blue)
 [3] Xu, H. (2006). Modification of normalised difference water index (NDWI) to enhance open water features in remotely sensed imagery. International journal of remote sensing, 27(14), 3025-3033.
 
 [4] Tucker, C. J. (1979). Red and photographic infrared linear combinations for monitoring vegetation. Remote sensing of Environment, 8(2), 127-150.
+
+[5] Kaufman, Y. J., & Tanre, D. (1992). Atmospherically resistant vegetation index (ARVI) for EOS-MODIS. IEEE transactions on Geoscience and Remote Sensing, 30(2), 261-270.
