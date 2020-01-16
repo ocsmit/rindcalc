@@ -1,20 +1,4 @@
-from .GetBands import GetBands
-from .AWEIsh import AWEIsh
-from .AWEIsh_Masked import AWEIsh_Masked
-from .AWEInsh import AWEInsh
-from .MNDWI import MNDWI
-from .NDMI import NDMI
-from .NDVI import NDVI
-from .SAVI import SAVI
-from .NBLI import NBLI
-from .NDBaI import NDBaI
-from .NDBI import NDBI
-from .EBBI import EBBI
-from .NDWI import NDWI
-from .NBRI import NBRI
-from .GNDVI import GNDVI
-from .UI import UI
-from .MSAVI2 import MSAVI2
-from .k_means import k_means
-from .RGB import RGB
-from .FalseColor import FalseColor
+from .index_utils import GetBands, AWEIsh, AWEInsh, NDMI, MNDWI, NDVI, \
+    GNDVI, SAVI, ARVI, NDBI, NDBaI, NBLI, EBBI, UI, NBRI, ferrous_min, iron_ox_min, clay_min
+from .composite_utils import RGB, FalseColor
+from .class_utils import k_means
