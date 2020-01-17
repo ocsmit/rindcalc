@@ -6,6 +6,7 @@ import os
 import numpy as np
 from osgeo import gdal
 from glob import glob
+from .cloud_utils import cloud_mask
 
 
 # Generic function to get band data. Not needed for using any other function
@@ -240,11 +241,12 @@ def MNDWI(landsat_dir, mndwi_out):
 
 
 # Vegetation indices
-def NDVI(landsat_dir, ndvi_out):
+def NDVI(landsat_dir, ndvi_out, mask_clouds):
     """
 
     :param landsat_dir:
     :param ndvi_out:
+    :param mask_clouds:
     :return:
     """
     # Create list with file names
@@ -261,26 +263,48 @@ def NDVI(landsat_dir, ndvi_out):
     red_band = red_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     snap = gdal.Open(os.path.join(landsat_dir, red[0]))
 
-    # Perform Calculation
-    ndvi = ((nir_band - red_band) / (nir_band + red_band))
+    if mask_clouds:
+        nir_masked = cloud_mask(landsat_dir, nir_band)
+        red_masked = cloud_mask(landsat_dir, red_band)
 
-    # Save Raster
-    if os.path.exists(ndvi_out):
-        raise IOError('NDVI raster already created')
-    if not os.path.exists(ndvi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = ndvi.shape
-        dst_ds = driver.Create(ndvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(ndvi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        ndvi_masked = ((nir_masked - red_masked) / (nir_masked + red_masked))
+        if os.path.exists(ndvi_out):
+            raise IOError('Masked NDVI raster already created')
+        if not os.path.exists(ndvi_out):
+            driver = gdal.GetDriverByName('GTiff')
+            metadata = driver.GetMetadata()
+            shape = ndvi_masked.shape
+            dst_ds = driver.Create(ndvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
+            proj = snap.GetProjection()
+            geo = snap.GetGeoTransform()
+            dst_ds.SetGeoTransform(geo)
+            dst_ds.SetProjection(proj)
+            dst_ds.GetRasterBand(1).WriteArray(ndvi_masked)
+            dst_ds.FlushCache()
+            dst_ds = None
 
-    return ndvi, print('NDVI raster created.')
+    if not mask_clouds:
+        # Perform Calculation
+        ndvi = ((nir_band - red_band) / (nir_band + red_band))
+
+        # Save Raster
+        if os.path.exists(ndvi_out):
+            raise IOError('NDVI raster already created')
+        if not os.path.exists(ndvi_out):
+            driver = gdal.GetDriverByName('GTiff')
+            metadata = driver.GetMetadata()
+            shape = ndvi.shape
+            dst_ds = driver.Create(ndvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
+            proj = snap.GetProjection()
+            geo = snap.GetGeoTransform()
+            dst_ds.SetGeoTransform(geo)
+            dst_ds.SetProjection(proj)
+            dst_ds.GetRasterBand(1).WriteArray(ndvi)
+            dst_ds.FlushCache()
+            dst_ds = None
+
+
+    return print('NDVI raster created.')
 
 
 def GNDVI(landsat_dir, gndvi_out):
