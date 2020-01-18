@@ -7,50 +7,14 @@ import numpy as np
 from osgeo import gdal
 from glob import glob
 from .cloud_utils import cloud_mask
-
-
-# Generic function to get band data. Not needed for using any other function
-def GetBands(landsat_dir):
-    """
-
-    :param landsat_dir:
-    :return:
-    """
-    # Create list with file names
-    blue = glob(landsat_dir + "/*B2.tif")
-    green = glob(landsat_dir + "/*B3.tif")
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
-    swir2 = glob(landsat_dir + "/*B7.tif")
-    tir = glob(landsat_dir + "/*B10.tif")
-
-    # Open with gdal & create numpy arrays
-    gdal.UseExceptions()
-    gdal.AllRegister()
-    np.seterr(divide='ignore', invalid='ignore')
-    blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
-    blue_band = blue_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
-    green_band = green_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
-    red_band = red_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    NIR_path = gdal.Open(os.path.join(landsat_dir, nir[0]))
-    nir_band = NIR_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    SWIR1_path = gdal.Open(os.path.join(landsat_dir, swir1[0]))
-    swir1_band = SWIR1_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    SWIR2_path = gdal.Open(os.path.join(landsat_dir, swir2[0]))
-    swir2_band = SWIR2_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    TIR_path = gdal.Open(os.path.join(landsat_dir, tir[0]))
-    tir_band = TIR_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-
-    return blue_band, green_band, red_band, nir_band, swir1_band, swir2_band, tir_band
+from .bands_utils import save_raster
 
 
 # Water Indices
-def AWEIsh(landsat_dir, aweish_out):
+def AWEIsh(landsat_dir, aweish_out, mask_clouds):
     """
 
+    :param mask_clouds:
     :param landsat_dir:
     :param aweish_out:
     :return:
@@ -78,32 +42,45 @@ def AWEIsh(landsat_dir, aweish_out):
     swir2_band = SWIR2_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
-    # Perform Calculation
-    aweish = ((blue_band + 2.5 * green_band - 1.5 * (nir_band + swir1_band) - 0.25 * swir2_band)
-              / (blue_band + green_band + nir_band + swir1_band + swir2_band))
+    if mask_clouds:
 
-    # Save Raster
-    if os.path.exists(aweish_out):
-        raise IOError('AWEIsh raster already created')
-    if not os.path.exists(aweish_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = aweish.shape
-        dst_ds = driver.Create(aweish_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(aweish)
-        dst_ds.FlushCache()
-        dst_ds = None
+        # Create masked AWEInsh
+        # Mask bands before raster calculations
+        blue_masked = cloud_mask(landsat_dir, blue_band)
 
-    return aweish, print('AWEIsh raster created')
+        green_masked = cloud_mask(landsat_dir, green_band)
+        nir_masked = cloud_mask(landsat_dir, nir_band)
+        swir1_masked = cloud_mask(landsat_dir, swir1_band)
+        swir2_masked = cloud_mask(landsat_dir, swir2_band)
+
+        aweish_mask = ((blue_masked + 2.5 * green_masked - 1.5 * (nir_masked + swir1_masked) - 0.25 * swir2_masked)
+                       / (blue_masked + green_masked + nir_masked + swir1_masked + swir2_masked))
+        if os.path.exists(aweish_out):
+            raise IOError('Masked AWEIsh raster already created')
+        if not os.path.exists(aweish_out):
+            save_raster(aweish_mask, aweish_out, snap)
+        return aweish_mask, print('Finished')
+
+    if not mask_clouds:
+
+        # Create unmasked AWEInsh
+        # Perform Calculation
+        aweish = ((blue_band + 2.5 * green_band - 1.5 * (nir_band + swir1_band) - 0.25 * swir2_band)
+                  / (blue_band + green_band + nir_band + swir1_band + swir2_band))
+
+        # Save Raster
+        if os.path.exists(aweish_out):
+            raise IOError('AWEIsh raster already created')
+        if not os.path.exists(aweish_out):
+            save_raster(aweish, aweish_out, snap)
+
+        return aweish, print('Finished')
 
 
-def AWEInsh(landsat_dir, aweinsh_out):
+def AWEInsh(landsat_dir, aweinsh_out, mask_clouds):
     """
 
+    :param mask_clouds:
     :param landsat_dir:
     :param aweinsh_out:
     :return:
@@ -119,39 +96,45 @@ def AWEInsh(landsat_dir, aweinsh_out):
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
-    blue_band = blue_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = green_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     NIR_path = gdal.Open(os.path.join(landsat_dir, nir[0]))
     nir_band = NIR_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     SWIR1_path = gdal.Open(os.path.join(landsat_dir, swir1[0]))
     swir1_band = SWIR1_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    SWIR2_path = gdal.Open(os.path.join(landsat_dir, swir2[0]))
-    swir2_band = SWIR2_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
+
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
-    # Perform Calculation
-    aweinsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /
-               (green_band + swir1_band + nir_band))
+    if mask_clouds:
 
-    # Save Raster
-    if os.path.exists(aweinsh_out):
-        raise IOError('AWEInsh raster already created')
-    if not os.path.exists(aweinsh_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = aweinsh.shape
-        dst_ds = driver.Create(aweinsh_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(aweinsh)
-        dst_ds.FlushCache()
-        dst_ds = None
+        # Create masked AWEInsh
+        # Mask bands before raster calculations
+        green_masked = cloud_mask(landsat_dir, green_band)
+        nir_masked = cloud_mask(landsat_dir, nir_band)
+        swir1_masked = cloud_mask(landsat_dir, swir1_band)
 
-    return aweinsh, print('AWEInsh raster created')
+        aweinsh_mask = ((4 * (green_masked - swir1_masked) - (0.25 * nir_masked + 2.75 * swir1_masked)) /
+                        (green_masked + swir1_masked + nir_masked))
+
+        if os.path.exists(aweinsh_out):
+            raise IOError('Masked NDVI raster already created')
+        if not os.path.exists(aweinsh_out):
+            save_raster(aweinsh_mask, aweinsh_out, snap)
+
+        return aweinsh_mask, print('Finished')
+
+    if not mask_clouds:
+
+        # Create unmasked AWEInsh
+        aweinsh = ((4 * (green_band - swir1_band) - (0.25 * nir_band + 2.75 * swir1_band)) /
+                   (green_band + swir1_band + nir_band))
+
+        if os.path.exists(aweinsh_out):
+            raise IOError('Masked NDVI raster already created')
+        if not os.path.exists(aweinsh_out):
+            save_raster(aweinsh, aweinsh_out, snap)
+
+        return aweinsh, print('Finished')
 
 
 def NDMI(landsat_dir, ndmi_out):
@@ -182,19 +165,9 @@ def NDMI(landsat_dir, ndmi_out):
     if os.path.exists(ndmi_out):
         raise IOError('NDMI raster already created')
     if not os.path.exists(ndmi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = ndmi.shape
-        dst_ds = driver.Create(ndmi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(ndmi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(ndmi, ndmi_out, snap)
 
-    return ndmi, print('NDMI raster created.')
+    return ndmi, print('Finished')
 
 
 def MNDWI(landsat_dir, mndwi_out):
@@ -225,19 +198,9 @@ def MNDWI(landsat_dir, mndwi_out):
     if os.path.exists(mndwi_out):
         raise IOError('MNDWI raster already created')
     if not os.path.exists(mndwi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = mndwi.shape
-        dst_ds = driver.Create(mndwi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(mndwi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(mndwi, mndwi_out, snap)
 
-    return mndwi, print('MNDWI raster created.')
+    return mndwi, print('Finished')
 
 
 # Vegetation indices
@@ -271,17 +234,9 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds):
         if os.path.exists(ndvi_out):
             raise IOError('Masked NDVI raster already created')
         if not os.path.exists(ndvi_out):
-            driver = gdal.GetDriverByName('GTiff')
-            metadata = driver.GetMetadata()
-            shape = ndvi_masked.shape
-            dst_ds = driver.Create(ndvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-            proj = snap.GetProjection()
-            geo = snap.GetGeoTransform()
-            dst_ds.SetGeoTransform(geo)
-            dst_ds.SetProjection(proj)
-            dst_ds.GetRasterBand(1).WriteArray(ndvi_masked)
-            dst_ds.FlushCache()
-            dst_ds = None
+            save_raster(ndvi_masked, ndvi_out, snap)
+
+        return ndvi_masked, print('Finished')
 
     if not mask_clouds:
         # Perform Calculation
@@ -291,20 +246,9 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds):
         if os.path.exists(ndvi_out):
             raise IOError('NDVI raster already created')
         if not os.path.exists(ndvi_out):
-            driver = gdal.GetDriverByName('GTiff')
-            metadata = driver.GetMetadata()
-            shape = ndvi.shape
-            dst_ds = driver.Create(ndvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-            proj = snap.GetProjection()
-            geo = snap.GetGeoTransform()
-            dst_ds.SetGeoTransform(geo)
-            dst_ds.SetProjection(proj)
-            dst_ds.GetRasterBand(1).WriteArray(ndvi)
-            dst_ds.FlushCache()
-            dst_ds = None
+            save_raster(ndvi, ndvi_out)
 
-
-    return print('NDVI raster created.')
+        return ndvi, print('Finished')
 
 
 def GNDVI(landsat_dir, gndvi_out):
@@ -335,19 +279,9 @@ def GNDVI(landsat_dir, gndvi_out):
     if os.path.exists(gndvi_out):
         raise IOError('Green NDVI raster already created')
     if not os.path.exists(gndvi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = gndvi.shape
-        dst_ds = driver.Create(gndvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(gndvi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(gndvi, gndvi_out, snap)
 
-    return gndvi, print('Green NDVI raster created.')
+    return gndvi, print('Finished')
 
 
 def SAVI(landsat_dir, soil_brightness, savi_out):
@@ -379,19 +313,9 @@ def SAVI(landsat_dir, soil_brightness, savi_out):
     if os.path.exists(savi_out):
         raise IOError('SAVI raster already created')
     if not os.path.exists(savi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = savi.shape
-        dst_ds = driver.Create(savi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(savi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(savi, savi_out, snap)
 
-    return savi, print('SAVI raster created.')
+    return savi, print('Finished')
 
 
 def ARVI(landsat_dir, arvi_out):
@@ -419,19 +343,9 @@ def ARVI(landsat_dir, arvi_out):
     if os.path.exists(arvi_out):
         raise IOError('ARVI raster already created')
     if not os.path.exists(arvi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = arvi.shape
-        dst_ds = driver.Create(arvi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(arvi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(arvi, arvi_out, snap)
 
-    return arvi, print('ARVI raster created.')
+    return arvi, print('Finished')
 
 
 # Urban and Landscape indices
@@ -463,19 +377,9 @@ def NDBI(landsat_dir, ndbi_out):
     if os.path.exists(ndbi_out):
         raise IOError('NDBI raster already created')
     if not os.path.exists(ndbi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = ndbi.shape
-        dst_ds = driver.Create(ndbi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(ndbi)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(ndbi, ndbi_out, snap)
 
-    return ndbi, print('NDBI raster created.')
+    return ndbi, print('Finished')
 
 
 def NDBaI(landsat_dir, ndbai_out):
@@ -506,17 +410,7 @@ def NDBaI(landsat_dir, ndbai_out):
     if os.path.exists(ndbai_out):
         raise IOError('NDBaI raster already created')
     if not os.path.exists(ndbai_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = ndbai.shape
-        dst_ds = driver.Create(ndbai_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(ndbai)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(ndbai, ndbai_out, snap)
 
     return ndbai, print('NDBaI raster created')
 
@@ -549,17 +443,7 @@ def NBLI(landsat_dir, nbli_out):
     if os.path.exists(nbli_out):
         raise IOError('NBLI raster already created')
     if not os.path.exists(nbli_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = nbli.shape
-        dst_ds = driver.Create(nbli_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(nbli)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(nbli, nbli_out, snap)
 
     return nbli, print('NBLI raster created.')
 
@@ -597,17 +481,7 @@ def EBBI(landsat_dir, ebbi_out):
     if os.path.exists(ebbi_out):
         raise IOError('EBBI raster already created')
     if not os.path.exists(ebbi_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = ebbi.shape
-        dst_ds = driver.Create(ebbi_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(ebbi_mask)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(ebbi_mask, ebbi_out, snap)
 
     return ebbi_mask, print('EBBI raster created.')
 
@@ -640,17 +514,7 @@ def UI(landsat_dir, ui_out):
     if os.path.exists(ui_out):
         raise IOError('UI raster already created')
     if not os.path.exists(ui_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = ui.shape
-        dst_ds = driver.Create(ui_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(ui)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(ui, ui_out, snap)
 
     return ui, print('UI raster created.')
 
@@ -684,16 +548,6 @@ def NBRI(landsat_dir, nbri_out):
     if os.path.exists(nbri_out):
         raise IOError('NBRI raster already created')
     if not os.path.exists(nbri_out):
-        driver = gdal.GetDriverByName('GTiff')
-        metadata = driver.GetMetadata()
-        shape = nbri.shape
-        dst_ds = driver.Create(nbri_out, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
-        dst_ds.SetGeoTransform(geo)
-        dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(nbri)
-        dst_ds.FlushCache()
-        dst_ds = None
+        save_raster(nbri, nbri_out, snap)
 
     return nbri, print('NBRI raster created.')
