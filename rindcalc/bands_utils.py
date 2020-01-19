@@ -2,10 +2,10 @@ import os
 from glob import glob
 from osgeo import gdal
 import numpy as np
+from scipy import stats
 
 
 # Generic function to get landsat bands
-
 def GetBands(landsat_dir):
     """
 
@@ -45,6 +45,14 @@ def GetBands(landsat_dir):
 
 
 def save_raster(in_array, out, snap):
+    """
+
+    :param in_array:
+    :param out:
+    :param snap:
+    :return:
+    """
+
     driver = gdal.GetDriverByName('GTiff')
     metadata = driver.GetMetadata()
     shape = in_array.shape
@@ -63,3 +71,10 @@ def save_raster(in_array, out, snap):
 
     return in_array
 
+
+def gen_stats(input_arr):
+    min = np.nanmin(input_arr)
+    max = np.nanmax(input_arr)
+
+    std = np.nanstd(input_arr)
+    return statistics

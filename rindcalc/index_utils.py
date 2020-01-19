@@ -7,7 +7,7 @@ import numpy as np
 from osgeo import gdal
 from glob import glob
 from .cloud_utils import cloud_mask
-from .bands_utils import save_raster
+from .bands_utils import save_raster, gen_stats
 
 
 # Water Indices
@@ -231,12 +231,11 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds):
         red_masked = cloud_mask(landsat_dir, red_band)
 
         ndvi_masked = ((nir_masked - red_masked) / (nir_masked + red_masked))
+
         if os.path.exists(ndvi_out):
             raise IOError('Masked NDVI raster already created')
         if not os.path.exists(ndvi_out):
             save_raster(ndvi_masked, ndvi_out, snap)
-
-        return ndvi_masked, print('Finished')
 
     if not mask_clouds:
         # Perform Calculation
@@ -246,9 +245,9 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds):
         if os.path.exists(ndvi_out):
             raise IOError('NDVI raster already created')
         if not os.path.exists(ndvi_out):
-            save_raster(ndvi, ndvi_out)
+            save_raster(ndvi, ndvi_out, snap)
 
-        return ndvi, print('Finished')
+    return ndvi if mask_clouds is False else ndvi_masked
 
 
 def GNDVI(landsat_dir, gndvi_out):
