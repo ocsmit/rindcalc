@@ -12,6 +12,7 @@ def norm(array):
     array_min, array_max = array.min(), array.max()
     return ((255 - 0) * ((array - array_min) / (array_max - array_min))) + 0
 
+
 def RGB(landsat_dir, out_composite):
     """ RGB composite
 
