@@ -58,7 +58,7 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds):
         if os.path.exists(aweish_out):
             raise IOError('Masked AWEIsh raster already created')
         if not os.path.exists(aweish_out):
-            save_raster(aweish_mask, aweish_out, snap)
+            save_raster(aweish_mask, aweish_out, gdal.GDT_Float32, snap)
         return aweish_mask, print('Finished')
 
     if not mask_clouds:
@@ -72,7 +72,7 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds):
         if os.path.exists(aweish_out):
             raise IOError('AWEIsh raster already created')
         if not os.path.exists(aweish_out):
-            save_raster(aweish, aweish_out, snap)
+            save_raster(aweish, aweish_out, gdal.GDT_Float32, snap)
 
         return aweish, print('Finished')
 
@@ -119,7 +119,7 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds):
         if os.path.exists(aweinsh_out):
             raise IOError('Masked NDVI raster already created')
         if not os.path.exists(aweinsh_out):
-            save_raster(aweinsh_mask, aweinsh_out, snap)
+            save_raster(aweinsh_mask, aweinsh_out, gdal.GDT_Float32, snap)
 
         return aweinsh_mask, print('Finished')
 
@@ -132,7 +132,7 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds):
         if os.path.exists(aweinsh_out):
             raise IOError('Masked NDVI raster already created')
         if not os.path.exists(aweinsh_out):
-            save_raster(aweinsh, aweinsh_out, snap)
+            save_raster(aweinsh, aweinsh_out, gdal.GDT_Float32, snap)
 
         return aweinsh, print('Finished')
 
@@ -165,7 +165,7 @@ def NDMI(landsat_dir, ndmi_out):
     if os.path.exists(ndmi_out):
         raise IOError('NDMI raster already created')
     if not os.path.exists(ndmi_out):
-        save_raster(ndmi, ndmi_out, snap)
+        save_raster(ndmi, ndmi_out, gdal.GDT_Float32, snap)
 
     return ndmi, print('Finished')
 
@@ -198,7 +198,7 @@ def MNDWI(landsat_dir, mndwi_out):
     if os.path.exists(mndwi_out):
         raise IOError('MNDWI raster already created')
     if not os.path.exists(mndwi_out):
-        save_raster(mndwi, mndwi_out, snap)
+        save_raster(mndwi, mndwi_out, gdal.GDT_Float32, snap)
 
     return mndwi, print('Finished')
 
@@ -235,7 +235,7 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds):
         if os.path.exists(ndvi_out):
             raise IOError('Masked NDVI raster already created')
         if not os.path.exists(ndvi_out):
-            save_raster(ndvi_masked, ndvi_out, snap)
+            save_raster(ndvi_masked, ndvi_out, gdal.GDT_Float32, snap)
 
     if not mask_clouds:
         # Perform Calculation
@@ -245,7 +245,7 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds):
         if os.path.exists(ndvi_out):
             raise IOError('NDVI raster already created')
         if not os.path.exists(ndvi_out):
-            save_raster(ndvi, ndvi_out, snap)
+            save_raster(ndvi, ndvi_out, gdal.GDT_Float32, snap)
 
     return ndvi if mask_clouds is False else ndvi_masked
 
@@ -278,7 +278,7 @@ def GNDVI(landsat_dir, gndvi_out):
     if os.path.exists(gndvi_out):
         raise IOError('Green NDVI raster already created')
     if not os.path.exists(gndvi_out):
-        save_raster(gndvi, gndvi_out, snap)
+        save_raster(gndvi, gndvi_out, gdal.GDT_Float32, snap)
 
     return gndvi, print('Finished')
 
@@ -312,7 +312,7 @@ def SAVI(landsat_dir, soil_brightness, savi_out):
     if os.path.exists(savi_out):
         raise IOError('SAVI raster already created')
     if not os.path.exists(savi_out):
-        save_raster(savi, savi_out, snap)
+        save_raster(savi, savi_out, gdal.GDT_Float32, snap)
 
     return savi, print('Finished')
 
@@ -342,7 +342,7 @@ def ARVI(landsat_dir, arvi_out):
     if os.path.exists(arvi_out):
         raise IOError('ARVI raster already created')
     if not os.path.exists(arvi_out):
-        save_raster(arvi, arvi_out, snap)
+        save_raster(arvi, arvi_out, gdal.GDT_Float32, snap)
 
     return arvi, print('Finished')
 
@@ -376,7 +376,7 @@ def NDBI(landsat_dir, ndbi_out):
     if os.path.exists(ndbi_out):
         raise IOError('NDBI raster already created')
     if not os.path.exists(ndbi_out):
-        save_raster(ndbi, ndbi_out, snap)
+        save_raster(ndbi, ndbi_out, gdal.GDT_Float32, snap)
 
     return ndbi, print('Finished')
 
@@ -409,7 +409,7 @@ def NDBaI(landsat_dir, ndbai_out):
     if os.path.exists(ndbai_out):
         raise IOError('NDBaI raster already created')
     if not os.path.exists(ndbai_out):
-        save_raster(ndbai, ndbai_out, snap)
+        save_raster(ndbai, ndbai_out, gdal.GDT_Float32, snap)
 
     return ndbai, print('NDBaI raster created')
 
@@ -442,7 +442,7 @@ def NBLI(landsat_dir, nbli_out):
     if os.path.exists(nbli_out):
         raise IOError('NBLI raster already created')
     if not os.path.exists(nbli_out):
-        save_raster(nbli, nbli_out, snap)
+        save_raster(nbli, nbli_out, gdal.GDT_Float32, snap)
 
     return nbli, print('NBLI raster created.')
 
@@ -480,7 +480,7 @@ def EBBI(landsat_dir, ebbi_out):
     if os.path.exists(ebbi_out):
         raise IOError('EBBI raster already created')
     if not os.path.exists(ebbi_out):
-        save_raster(ebbi_mask, ebbi_out, snap)
+        save_raster(ebbi_mask, ebbi_out, gdal.GDT_Float32, snap)
 
     return ebbi_mask, print('EBBI raster created.')
 
@@ -513,7 +513,7 @@ def UI(landsat_dir, ui_out):
     if os.path.exists(ui_out):
         raise IOError('UI raster already created')
     if not os.path.exists(ui_out):
-        save_raster(ui, ui_out, snap)
+        save_raster(ui, ui_out, gdal.GDT_Float32, snap)
 
     return ui, print('UI raster created.')
 
@@ -547,6 +547,6 @@ def NBRI(landsat_dir, nbri_out):
     if os.path.exists(nbri_out):
         raise IOError('NBRI raster already created')
     if not os.path.exists(nbri_out):
-        save_raster(nbri, nbri_out, snap)
+        save_raster(nbri, nbri_out, gdal.GDT_Float32, snap)
 
     return nbri, print('NBRI raster created.')
