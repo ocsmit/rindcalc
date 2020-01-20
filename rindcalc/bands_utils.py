@@ -44,9 +44,10 @@ def GetBands(landsat_dir):
     return blue_band, green_band, red_band, nir_band, swir1_band, swir2_band, tir_band, snap
 
 
-def save_raster(in_array, out, snap):
+def save_raster(in_array, out, dType, snap):
     """
 
+    :param dType:
     :param in_array:
     :param out:
     :param snap:
@@ -60,7 +61,7 @@ def save_raster(in_array, out, snap):
                            xsize=shape[1],
                            ysize=shape[0],
                            bands=1,
-                           eType=gdal.GDT_Float32)
+                           eType=dType)
     proj = snap.GetProjection()
     geo = snap.GetGeoTransform()
     dst_ds.SetGeoTransform(geo)
@@ -72,9 +73,24 @@ def save_raster(in_array, out, snap):
     return in_array
 
 
-def gen_stats(input_arr):
-    min = np.nanmin(input_arr)
-    max = np.nanmax(input_arr)
+def gen_stats(raster_path):
+    """
 
-    std = np.nanstd(input_arr)
-    return statistics
+    :param raster_path:
+    :return:
+    """
+
+
+    path = gdal.Open(raster_path)
+    input_arr = path.GetRasterBand(1).ReadAsArray().astype(np.float32)
+
+    arr_min = np.nanmin(input_arr)
+    arr_max = np.nanmax(input_arr)
+    arr_mean = np.nanmean(input_arr)
+    arr_med = np.nanmedian(input_arr)
+    arr_std = np.nanstd(input_arr)
+    return print('min: ' + str(arr_min),
+                 'max: ' + str(arr_max),
+                 'mean: ' + str(arr_mean),
+                 'med: ' + str(arr_med),
+                 'std: ' + str(arr_std))
