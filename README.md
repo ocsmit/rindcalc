@@ -93,13 +93,13 @@ Example:
 import rindcalc as rc
 landsat_dir = 'C:/.../.../LC08_L1TP_091086_20191222_20191223_01_RT'
 ndvi_out = 'C:/.../.../NDVI_1.tif'
-rc.NDVI(landsat_dir, ndvi_out)
+rc.NDVI(landsat_dir, ndvi_out, False)
 ```
 OR:
 
 ```python
 import rindcalc as rc
-rc.NDVI(landsat_dir = 'C:/.../.../2019_12_22', ndvi_out = 'C:/.../.../NDVI_2.tif')
+rc.NDVI(landsat_dir = 'C:/.../.../2019_12_22', ndvi_out = 'C:/.../.../NDVI_2.tif', mask_clouds=True)
 ```
 
 K means unsupervised example:
@@ -130,6 +130,28 @@ rc.k_means(input_raster, out_raster, clusters, itr, batch_size)
 | 10| TIR 1         | 10.6-11.2   |100 m |
 | 11| TIR 2         | 11.5-12.5   |100 m |
 
+## Cloud Masking Algorithm
+
+Cloud masking takes the landsat QA band and reads it as a numpy array.
+ Values classed as clouds and cloud shadows are then given the value of 0.
+Values not equal to zero are then given the value of 1. This mask array is then reshaped
+back into it's original dimensons. The reshaped array is then multiplied by each input band of 
+the index calulation. This ensures all pixels where clouds and cloud shadows are contained 
+are replaced with 'nan' and all other pixels retain their original values.
+
+```textmate
+mask_values = [2800, 2804, 2808, 2812, 6986, 6900, 6904, 6908,
+               2976, 2980, 2984, 2988, 3008, 3012, 3016, 3020,
+               7072, 7076, 7080, 7084, 7104, 7108, 7112, 7116]
+
+m = np.ma.array(qa_band,
+                    mask=np.logical_or.reduce([qa_band == value for value in mask_values]))
+np.ma.set_fill_value(m, 0)
+m1 = m.filled()
+m1[m1 != 0] = 1
+
+m1.reshape(qa_band.shape)
+```
 
 ## Indices
 
