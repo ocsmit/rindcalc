@@ -25,6 +25,7 @@ def GetBands(landsat_dir):
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
+
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     blue_band = blue_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
