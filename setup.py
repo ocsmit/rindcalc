@@ -1,7 +1,7 @@
 import setuptools
 
 
-with open('README.rst') as f:
+with open('rindcalc/docs/README.rst') as f:
     README = f.read()
 
 setuptools.setup(
