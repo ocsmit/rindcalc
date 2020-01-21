@@ -49,6 +49,7 @@ For Windows installation [gdal](https://pypi.org/project/GDAL/) wheels must be i
 * NDVI(landsat_dir, ndvi_out, mask_clouds)
 * GNDVI(landsat_dir, gndvi_out)
 * ARVI(landsat_dir, arvi_out)
+* VARI(landsat_dir, vari_out)
 * SAVI(landsat_dir, soil_brightness, savi_out)
 * NDBI(landsat_dir, ndbi_out)
 * NDBaI(landsat_dir, ndbai_out)
@@ -177,6 +178,8 @@ RGB = (Red, Green, Blue)
 - Green NDVI (GNDVI) = ((nir_band - green_band) / (nir_band + green_band)) 
     
 - ARVI = ((nir_band - (2 * red_band) + blue_band) / (nir_band + (2 * red_band) + blue_band)) [5]
+
+- VARI = ((green_band - red_band) / (green_band + red_band - blue_band))
     
 - SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L) 
     - *L = Soil Brightness Factor*

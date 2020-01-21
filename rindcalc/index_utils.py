@@ -347,6 +347,34 @@ def ARVI(landsat_dir, arvi_out):
     return arvi, print('Finished')
 
 
+def VARI(landsat_dir, vari_out):
+
+    # Create list with file names
+    blue = glob(landsat_dir + "/*B2.tif")
+    green = glob(landsat_dir + "/*B3.tif")
+    red = glob(landsat_dir + "/*B4.tif")
+
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
+    blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
+    blue_band = blue_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
+    green_band = green_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
+    red_band = red_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    snap = gdal.Open(os.path.join(landsat_dir, red[0]))
+
+    vari = ((green_band - red_band) / (green_band + red_band - blue_band))
+
+    if os.path.exists(vari_out):
+        raise IOError('ARVI raster already created')
+    if not os.path.exists(vari_out):
+        save_raster(vari, vari_out, gdal.GDT_Float32, snap)
+
+    return vari, print('Finished')
+
+
 # Urban and Landscape indices
 def NDBI(landsat_dir, ndbi_out):
     """
