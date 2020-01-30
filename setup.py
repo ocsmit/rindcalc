@@ -11,7 +11,7 @@ setuptools.setup(
     license="MIT",
     description='rindcalc is an open source python package created to calculate Landsat-8 indices, composites, '
                 'and classification.',
-    version='v1.2.4',
+    version='v1.2.5',
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/ocsmit/raster-indices-calc',
