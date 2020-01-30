@@ -54,9 +54,12 @@ def save_raster(in_array, out, dType, snap):
     :param snap:
     :return:
     """
+    if not os.path.exists(out):
+        print('Writing raster')
 
     if os.path.exists(out):
         os.remove(out)
+        print('Overwriting raster.')
 
     driver = gdal.GetDriverByName('GTiff')
     metadata = driver.GetMetadata()
