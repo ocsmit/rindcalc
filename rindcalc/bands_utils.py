@@ -55,6 +55,9 @@ def save_raster(in_array, out, dType, snap):
     :return:
     """
 
+    if os.path.exists(out):
+        os.remove(out)
+
     driver = gdal.GetDriverByName('GTiff')
     metadata = driver.GetMetadata()
     shape = in_array.shape
