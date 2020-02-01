@@ -2,7 +2,6 @@ import os
 from glob import glob
 from osgeo import gdal
 import numpy as np
-from scipy import stats
 
 
 # Generic function to get landsat bands
@@ -42,7 +41,8 @@ def GetBands(landsat_dir):
     tir_band = TIR_path.GetRasterBand(1).ReadAsArray().astype(np.float32)
     snap = red_path
 
-    return blue_band, green_band, red_band, nir_band, swir1_band, swir2_band, tir_band, snap
+    return blue_band, green_band, red_band, nir_band, swir1_band, swir2_band, \
+           tir_band, snap
 
 
 def save_raster(in_array, out, dType, snap):
@@ -86,7 +86,6 @@ def gen_stats(raster_path):
     :param raster_path:
     :return:
     """
-
 
     path = gdal.Open(raster_path)
     input_arr = path.GetRasterBand(1).ReadAsArray().astype(np.float32)
