@@ -11,7 +11,7 @@ from .bands_utils import save_raster, gen_stats
 
 
 # Water Indices
-def AWEIsh(landsat_dir, aweish_out, mask_clouds):
+def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     """
 
     :param mask_clouds:
@@ -79,7 +79,7 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds):
         return aweish, print('Finished')
 
 
-def AWEInsh(landsat_dir, aweinsh_out, mask_clouds):
+def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
     """
 
     :param mask_clouds:
@@ -199,7 +199,7 @@ def MNDWI(landsat_dir, mndwi_out):
 
 
 # Vegetation indices
-def NDVI(landsat_dir, ndvi_out, mask_clouds):
+def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
     """
 
     :param landsat_dir:
@@ -269,7 +269,7 @@ def GNDVI(landsat_dir, gndvi_out):
     return gndvi, print('Finished')
 
 
-def SAVI(landsat_dir, soil_brightness, savi_out):
+def SAVI(landsat_dir, soil_brightness=0.5, savi_out):
     """
 
     :param landsat_dir:
