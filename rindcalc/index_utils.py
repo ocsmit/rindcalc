@@ -1,6 +1,8 @@
-"""
-Functions for calculating spectral indexes of Landsat-8 bands
-"""
+###############################################################################
+# Name: rindcalc.index_utils.py
+# Author: Owen Smith, University of North Georgia IESA
+# Purpose: Create a functioning python module for Landsat 8 index calculations
+###############################################################################
 
 import os
 import numpy as np
@@ -227,7 +229,7 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
 
         ndvi_masked = ((nir_masked - red_masked) / (nir_masked + red_masked))
 
-    save_raster(ndvi_masked, ndvi_out, gdal.GDT_Float32, snap)
+        save_raster(ndvi_masked, ndvi_out, gdal.GDT_Float32, snap)
 
     if not mask_clouds:
         # Perform Calculation
