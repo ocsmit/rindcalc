@@ -1,6 +1,8 @@
-"""
-Functions for creating composites of Landsat-8 scenes
-"""
+###############################################################################
+# Name: rindcalc.composite_utils.py
+# Author: Owen Smith, University of North Georgia IESA
+# Purpose: Functions for creating composites out of Landsat-8 bands
+###############################################################################
 
 import os
 import numpy as np

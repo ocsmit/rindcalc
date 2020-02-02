@@ -1,3 +1,9 @@
+###############################################################################
+# Name: rindcalc.bands_utils.py
+# Author: Owen Smith, University of North Georgia IESA
+# Purpose: Misc. band functions for rindcalc
+###############################################################################
+
 import os
 from glob import glob
 from osgeo import gdal

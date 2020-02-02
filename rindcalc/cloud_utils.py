@@ -1,3 +1,9 @@
+###############################################################################
+# Name: rindcalc.cloud_utils.py
+# Author: Owen Smith, University of North Georgia IESA
+# Purpose: Cloud mask function for rindcalc. Will be combined with band_utils
+###############################################################################
+
 import os
 import numpy as np
 from osgeo import gdal

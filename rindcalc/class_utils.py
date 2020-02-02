@@ -1,3 +1,9 @@
+###############################################################################
+# Name: rindcalc.class_utils.py
+# Author: Owen Smith, University of North Georgia IESA
+# Purpose: Unsupervised classification function for rindcalcs
+###############################################################################
+
 import os
 import numpy as np
 from osgeo import gdal
