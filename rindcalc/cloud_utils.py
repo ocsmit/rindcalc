@@ -19,7 +19,7 @@ def cloud_mask(landsat_dir, band):
     """
 
     # Get qa path
-    qa = glob(landsat_dir + "/*BQA.tif")
+    qa = glob(landsat_dir + "/*BQA*")
 
     # Read band with gdal
     gdal.UseExceptions()

@@ -24,9 +24,9 @@ def RGB(landsat_dir, out_composite):
     """
 
     # Create list with file names
-    blue = glob(landsat_dir + "/*B2.tif")
-    green = glob(landsat_dir + "/*B3.tif")
-    red = glob(landsat_dir + "/*B4.tif")
+    blue = glob(landsat_dir + "/*B2*")
+    green = glob(landsat_dir + "/*B3*")
+    red = glob(landsat_dir + "/*B4*")
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     blue_band = norm(blue_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
@@ -66,9 +66,9 @@ def FalseColor(landsat_dir, out_composite):
     """
 
     # Create list with file names
-    green = glob(landsat_dir + "/*B3.tif")
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
+    green = glob(landsat_dir + "/*B3*")
+    red = glob(landsat_dir + "/*B4*")
+    nir = glob(landsat_dir + "/*B5*")
 
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = norm(green_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))

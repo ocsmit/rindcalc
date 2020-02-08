@@ -18,13 +18,13 @@ def GetBands(landsat_dir):
     :return:
     """
     # Create list with file names
-    blue = glob(landsat_dir + "/*B2.tif")
-    green = glob(landsat_dir + "/*B3.tif")
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
-    swir2 = glob(landsat_dir + "/*B7.tif")
-    tir = glob(landsat_dir + "/*B10.tif")
+    blue = glob(landsat_dir + "/*B2*")
+    green = glob(landsat_dir + "/*B3*")
+    red = glob(landsat_dir + "/*B4*")
+    nir = glob(landsat_dir + "/*B5*")
+    swir1 = glob(landsat_dir + "/*B6*")
+    swir2 = glob(landsat_dir + "/*B7*")
+    tir = glob(landsat_dir + "/*B10*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
