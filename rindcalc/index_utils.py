@@ -9,7 +9,7 @@ import numpy as np
 from osgeo import gdal
 from glob import glob
 from .cloud_utils import cloud_mask
-from .bands_utils import save_raster, gen_stats
+from .bands_utils import save_raster
 
 
 # Water Indices
@@ -22,11 +22,11 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     :return:
     """
     # Create list with file names
-    blue = glob(landsat_dir + "/*B2.tif")
-    green = glob(landsat_dir + "/*B3.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
-    swir2 = glob(landsat_dir + "/*B7.tif")
+    blue = glob(landsat_dir + "/*B2*")
+    green = glob(landsat_dir + "/*B3*")
+    nir = glob(landsat_dir + "/*B5*")
+    swir1 = glob(landsat_dir + "/*B6*")
+    swir2 = glob(landsat_dir + "/*B7*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -45,7 +45,6 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
     if mask_clouds:
-
         # Create masked AWEInsh
         # Mask bands before raster calculations
         blue_masked = cloud_mask(landsat_dir, blue_band)
@@ -60,13 +59,11 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
                        / (blue_masked + green_masked + nir_masked +
                           swir1_masked + swir2_masked))
 
-
         save_raster(aweish_mask, aweish_out, gdal.GDT_Float32, snap)
 
         return aweish_mask, print('Finished')
 
     if not mask_clouds:
-
         # Create unmasked AWEInsh
         # Perform Calculation
         aweish = ((blue_band + 2.5 * green_band - 1.5 * (nir_band + swir1_band)
@@ -90,11 +87,11 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
     :return:
     """
     # Create list with file names
-    blue = glob(landsat_dir + "/*B2.tif")
-    green = glob(landsat_dir + "/*B3.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
-    swir2 = glob(landsat_dir + "/*B7.tif")
+    blue = glob(landsat_dir + "/*B2*")
+    green = glob(landsat_dir + "/*B3*")
+    nir = glob(landsat_dir + "/*B5*")
+    swir1 = glob(landsat_dir + "/*B6*")
+    swir2 = glob(landsat_dir + "/*B7*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -110,7 +107,6 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
     if mask_clouds:
-
         # Create masked AWEInsh
         # Mask bands before raster calculations
         green_masked = cloud_mask(landsat_dir, green_band)
@@ -121,18 +117,15 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
                          - (0.25 * nir_masked + 2.75 * swir1_masked)) /
                         (green_masked + swir1_masked + nir_masked))
 
-
         save_raster(aweinsh_mask, aweinsh_out, gdal.GDT_Float32, snap)
 
         return aweinsh_mask, print('Finished')
 
     if not mask_clouds:
-
         # Create unmasked AWEInsh
         aweinsh = ((4 * (green_band - swir1_band) -
                     (0.25 * nir_band + 2.75 * swir1_band)) /
                    (green_band + swir1_band + nir_band))
-
 
         save_raster(aweinsh, aweinsh_out, gdal.GDT_Float32, snap)
 
@@ -147,8 +140,8 @@ def NDMI(landsat_dir, ndmi_out):
     :return:
     """
     # Create list with file names
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
+    nir = glob(landsat_dir + "/*B5*")
+    swir1 = glob(landsat_dir + "/*B6*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -178,8 +171,8 @@ def MNDWI(landsat_dir, mndwi_out):
     :return:
     """
     # Create list with file names
-    green = glob(landsat_dir + "/*B3.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
+    green = glob(landsat_dir + "/*B3*")
+    swir1 = glob(landsat_dir + "/*B6*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -210,8 +203,8 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
     :return:
     """
     # Create list with file names
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
+    red = glob(landsat_dir + "/*B4*")
+    nir = glob(landsat_dir + "/*B5*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -249,8 +242,8 @@ def GNDVI(landsat_dir, gndvi_out):
     :return:
     """
     # Create list with file names
-    green = glob(landsat_dir + "/*B3.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
+    green = glob(landsat_dir + "/*B3*")
+    nir = glob(landsat_dir + "/*B5*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -271,7 +264,7 @@ def GNDVI(landsat_dir, gndvi_out):
     return gndvi, print('Finished')
 
 
-def SAVI(landsat_dir, savi_out, soil_brightness=0.5,):
+def SAVI(landsat_dir, savi_out, soil_brightness=0.5, ):
     """
 
     :param landsat_dir:
@@ -280,8 +273,8 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5,):
     :return:
     """
     # Create list with file names
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
+    red = glob(landsat_dir + "/*B4*")
+    nir = glob(landsat_dir + "/*B5*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -305,9 +298,9 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5,):
 
 def ARVI(landsat_dir, arvi_out):
     # Create list with file names
-    red = glob(landsat_dir + "/*B4.tif")
-    nir = glob(landsat_dir + "/*B5.tif")
-    blue = glob(landsat_dir + "/*B2.tif")
+    red = glob(landsat_dir + "/*B4*")
+    nir = glob(landsat_dir + "/*B5*")
+    blue = glob(landsat_dir + "/*B2*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -332,11 +325,10 @@ def ARVI(landsat_dir, arvi_out):
 
 
 def VARI(landsat_dir, vari_out):
-
     # Create list with file names
-    blue = glob(landsat_dir + "/*B2.tif")
-    green = glob(landsat_dir + "/*B3.tif")
-    red = glob(landsat_dir + "/*B4.tif")
+    blue = glob(landsat_dir + "/*B2*")
+    green = glob(landsat_dir + "/*B3*")
+    red = glob(landsat_dir + "/*B4*")
 
     gdal.UseExceptions()
     gdal.AllRegister()
@@ -365,8 +357,8 @@ def NDBI(landsat_dir, ndbi_out):
     :return:
     """
     # Create list with file names
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
+    nir = glob(landsat_dir + "/*B5*")
+    swir1 = glob(landsat_dir + "/*B6*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -395,8 +387,8 @@ def NDBaI(landsat_dir, ndbai_out):
     :return:
     """
     # Create list with file names
-    swir1 = glob(landsat_dir + "/*B6.tif")
-    tir = glob(landsat_dir + "/*B10.tif")
+    swir1 = glob(landsat_dir + "/*B6*")
+    tir = glob(landsat_dir + "/*B10*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -425,8 +417,8 @@ def NBLI(landsat_dir, nbli_out):
     :return:
     """
     # Create list with file names
-    red = glob(landsat_dir + "/*B4.tif")
-    tir = glob(landsat_dir + "/*B10.tif")
+    red = glob(landsat_dir + "/*B4*")
+    tir = glob(landsat_dir + "/*B10*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -455,9 +447,9 @@ def EBBI(landsat_dir, ebbi_out):
     :return:
     """
     # Create list with file names
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir1 = glob(landsat_dir + "/*B6.tif")
-    tir = glob(landsat_dir + "/*B10.tif")
+    nir = glob(landsat_dir + "/*B5*")
+    swir1 = glob(landsat_dir + "/*B6*")
+    tir = glob(landsat_dir + "/*B10*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -490,8 +482,8 @@ def UI(landsat_dir, ui_out):
     :return:
     """
     # Create list with file names
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir2 = glob(landsat_dir + "/*B7.tif")
+    nir = glob(landsat_dir + "/*B5*")
+    swir2 = glob(landsat_dir + "/*B7*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -521,8 +513,8 @@ def NBRI(landsat_dir, nbri_out):
     :return:
     """
     # Create list with file names
-    nir = glob(landsat_dir + "/*B5.tif")
-    swir2 = glob(landsat_dir + "/*B7.tif")
+    nir = glob(landsat_dir + "/*B5*")
+    swir2 = glob(landsat_dir + "/*B7*")
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
