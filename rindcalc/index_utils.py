@@ -271,7 +271,7 @@ def GNDVI(landsat_dir, gndvi_out):
     return gndvi, print('Finished')
 
 
-def SAVI(landsat_dir, soil_brightness=0.5, savi_out):
+def SAVI(landsat_dir, savi_out, soil_brightness=0.5,):
     """
 
     :param landsat_dir:
