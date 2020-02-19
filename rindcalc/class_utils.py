@@ -1,8 +1,8 @@
-###############################################################################
+#------------------------------------------------------------------------------
 # Name: rindcalc.class_utils.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Unsupervised classification function for rindcalcs
-###############################################################################
+#------------------------------------------------------------------------------
 
 import os
 import numpy as np
@@ -27,7 +27,8 @@ def k_means(input_raster, out_raster, clusters, itr, batch_size):
 
     # K means clustering
     X = raster_mask.reshape((-1, 1))
-    kcluster = MiniBatchKMeans(n_clusters=clusters, max_iter=itr, batch_size=batch_size)
+    kcluster = MiniBatchKMeans(n_clusters=clusters, max_iter=itr, 
+            batch_size=batch_size)
     _ = kcluster.fit(X)
     raster_clustered = np.reshape(kcluster.labels_, raster.shape)
     print("Saving output")
@@ -37,7 +38,11 @@ def k_means(input_raster, out_raster, clusters, itr, batch_size):
         driver = gdal.GetDriverByName('GTiff')
         metadata = driver.GetMetadata()
         shape = raster_clustered.shape
-        dst_ds = driver.Create(out_raster, xsize=shape[1], ysize=shape[0], bands=1, eType=gdal.GDT_Float32)
+        dst_ds = driver.Create(out_raster, 
+                               xsize=shape[1], 
+                               ysize=shape[0], 
+                               bands=1, 
+                               eType=gdal.GDT_Float32)
         proj = snap.GetProjection()
         geo = snap.GetGeoTransform()
         dst_ds.SetGeoTransform(geo)
