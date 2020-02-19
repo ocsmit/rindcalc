@@ -22,7 +22,7 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     :return:
     """
     # Create list with file names
-    blue = glob(os.pathjoin(landsat_dir, '*B2*')
+    blue = glob(os.pathjoin(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
     nir = glob(os.path.join(landsat_dir, '*B5*'))
     swir1 = glob(os.path.join(landsat_dir, '*B6*'))
@@ -274,7 +274,7 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5, ):
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
-    nir = glob(os.path.join(landsat_dir, '*B5*')
+    nir = glob(os.path.join(landsat_dir, '*B5*'))
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -327,7 +327,7 @@ def ARVI(landsat_dir, arvi_out):
 def VARI(landsat_dir, vari_out):
     # Create list with file names
     blue = glob(os.path.join(landsat_dir, '*B2*'))
-    green = glob(os.path.join(landsat_dir, '*B3*')
+    green = glob(os.path.join(landsat_dir, '*B3*'))
     red = glob(os.path.join(landsat_dir, '*B4*'))
 
     gdal.UseExceptions()
@@ -418,7 +418,7 @@ def NBLI(landsat_dir, nbli_out):
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
-    tir = glob(os.path.join(landsat_dir, '*B10*')
+    tir = glob(os.path.join(landsat_dir, '*B10*'))
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
