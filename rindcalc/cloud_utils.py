@@ -1,8 +1,8 @@
-###############################################################################
+#------------------------------------------------------------------------------
 # Name: rindcalc.cloud_utils.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Cloud mask function for rindcalc. Will be combined with band_utils
-###############################################################################
+#------------------------------------------------------------------------------
 
 import os
 import numpy as np
@@ -19,7 +19,7 @@ def cloud_mask(landsat_dir, band):
     """
 
     # Get qa path
-    qa = glob(landsat_dir + "/*BQA*")
+    qa = glob(os.path.join(landsat_dir, '*BQA*'))
 
     # Read band with gdal
     gdal.UseExceptions()

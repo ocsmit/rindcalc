@@ -1,8 +1,8 @@
-###############################################################################
+#------------------------------------------------------------------------------
 # Name: rindcalc.bands_utils.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Misc. band functions for rindcalc
-###############################################################################
+#------------------------------------------------------------------------------
 
 import os
 from glob import glob
@@ -18,13 +18,13 @@ def GetBands(landsat_dir):
     :return:
     """
     # Create list with file names
-    blue = glob(landsat_dir + "/*B2*")
-    green = glob(landsat_dir + "/*B3*")
-    red = glob(landsat_dir + "/*B4*")
-    nir = glob(landsat_dir + "/*B5*")
-    swir1 = glob(landsat_dir + "/*B6*")
-    swir2 = glob(landsat_dir + "/*B7*")
-    tir = glob(landsat_dir + "/*B10*")
+    blue = glob(os.path.join(landsat_dir, '*B2*'))
+    green = glob(os.path.join(landsat_dir, '*B3*'))
+    red = glob(os.path.join(landsat_dir, '*B4*'))
+    nir = glob(os.path.join(landsat_dir, '*B5*'))
+    swir1 = glob(os.path.join(landsat_dir, '*B6*'))
+    swir2 = glob(os.path.join(landsat_dir, '*B7*'))
+    tir = glob(os.path.join(landsat_dir, '*B10*'))
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
