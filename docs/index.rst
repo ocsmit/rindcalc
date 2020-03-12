@@ -31,19 +31,21 @@ Features
 Installation
 ------------
 
-Install with pip :
+Install with pip:
 
 .. code-block:: python
+
  pip install rindcalc
+
 For Windows installation `gdal https://pypi.org/project/GDAL/`
 wheels must be installed first.
 
 Conda install in future.
 
-Source Code / Contributepip install rindcalc
+Source Code / Contribute
 ------------------------
 
-- Source Code: github.com/ocsmit/rindcalc
+- Source Code: github.com/ocsmit/rindcalcpip install rindcalc
 
 License
 -------
