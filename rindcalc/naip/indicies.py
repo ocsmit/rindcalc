@@ -77,3 +77,52 @@ def nVARI(in_naip, out_raster):
     save_raster(normalized_vari, out_raster, gdal.GDT_Float32, snap)
 
     print(out_raster)
+
+
+def NDVI(in_naip, out_raster):
+    """
+    Args:
+        in_naip :: str : input naip tile
+        out_raster :: str : output calculated raster
+    """
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
+    naip = gdal.Open(in_naip)
+    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    nir_band = naip.GetRasterBand(4).ReadAsArray().astype(np.float32)
+    snap = naip
+
+    # Perform Calculation
+    ndvi = ((nir_band - red_band) /
+            (nir_band + red_band))
+    # Save Raster
+    save_raster(ndvi, out_raster, gdal.GDT_Float32, snap)
+
+    print(out_raster)
+
+
+def SAVI(in_naip, soil_brightness, out_raster):
+    """
+    Args:
+        soil_brightness:
+        in_naip :: str : input naip tile
+        out_raster :: str : output calculated raster
+    """
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
+    naip = gdal.Open(in_naip)
+    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    nir_band = naip.GetRasterBand(4).ReadAsArray().astype(np.float32)
+    snap = naip
+
+    # Perform Calculation
+    savi = (((nir_band - red_band) / (nir_band + red_band + soil_brightness))
+            * (1 + soil_brightness))
+    # Save Raster
+    save_raster(savi, out_raster, gdal.GDT_Float32, snap)
+
+    print(out_raster)
