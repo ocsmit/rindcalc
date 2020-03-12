@@ -1,8 +1,8 @@
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Name: rindcalc.composites.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Functions for creating composites out of Landsat-8 bands
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 import os
 import numpy as np
@@ -30,10 +30,10 @@ def RGB(landsat_dir, out_composite):
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     blue_band = norm(blue_path.GetRasterBand(1).ReadAsArray(
-                                                          ).astype(np.uint16))
+    ).astype(np.uint16))
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = norm(green_path.GetRasterBand(1).ReadAsArray(
-                                                          ).astype(np.uint16))
+    ).astype(np.uint16))
     red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
     red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
     snap = gdal.Open(os.path.join(landsat_dir, red[0]))
@@ -45,10 +45,10 @@ def RGB(landsat_dir, out_composite):
         driver = gdal.GetDriverByName('GTiff')
         metadata = driver.GetMetadata()
         shape = red_band.shape
-        dst_ds = driver.Create(out_composite, 
-                               xsize=shape[1], 
-                               ysize=shape[0], 
-                               bands=3, 
+        dst_ds = driver.Create(out_composite,
+                               xsize=shape[1],
+                               ysize=shape[0],
+                               bands=3,
                                eType=gdal.GDT_Byte)
         proj = snap.GetProjection()
         geo = snap.GetGeoTransform()
@@ -78,7 +78,7 @@ def FalseColor(landsat_dir, out_composite):
 
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = norm(green_path.GetRasterBand(1).ReadAsArray(
-                                                          ).astype(np.uint16))
+    ).astype(np.uint16))
     red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
     red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
     NIR_path = gdal.Open(os.path.join(landsat_dir, nir[0]))
@@ -92,10 +92,10 @@ def FalseColor(landsat_dir, out_composite):
         driver = gdal.GetDriverByName('GTiff')
         metadata = driver.GetMetadata()
         shape = red_band.shape
-        dst_ds = driver.Create(out_composite, 
-                               xsize=shape[1], 
-                               ysize=shape[0], 
-                               bands=3, 
+        dst_ds = driver.Create(out_composite,
+                               xsize=shape[1],
+                               ysize=shape[0],
+                               bands=3,
                                eType=gdal.GDT_Byte)
         proj = snap.GetProjection()
         geo = snap.GetGeoTransform()

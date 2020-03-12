@@ -1,8 +1,8 @@
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Name: rindcalc.indicies.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Create a functioning python module for Landsat 8 index calculations
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 import os
 import numpy as np
@@ -242,7 +242,7 @@ def GNDVI(landsat_dir, gndvi_out):
     :return:
     """
     # Create list with file names
-    green = glob(os.path.join(landsat_dir,  '*B3*'))
+    green = glob(os.path.join(landsat_dir, '*B3*'))
     nir = glob(os.path.join(landsat_dir, '*B5*'))
 
     # Open with gdal & create numpy arrays
