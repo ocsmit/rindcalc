@@ -14,7 +14,7 @@
 # import sys
 # sys.path.insert(0, os.path.abspath('.'))
 
-master_doc = 'index'
+master_doc = 'index.rst'
 
 
 # -- Project information -----------------------------------------------------
