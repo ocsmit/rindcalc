@@ -8,7 +8,7 @@ import os
 import numpy as np
 from osgeo import gdal
 from glob import glob
-from .cloud_utils import cloud_mask
+from .cloud_masking import cloud_mask
 from .bands_utils import save_raster
 
 
