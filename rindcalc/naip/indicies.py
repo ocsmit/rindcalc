@@ -8,7 +8,7 @@ def ARVI(in_naip, out_raster):
     """
     Args:
         in_naip :: str : input naip tile
-        out_dir :: str : output calculated raster
+        out_raster :: str : output calculated raster
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -32,14 +32,13 @@ def VARI(in_naip, out_raster):
     """
     Args:
         in_naip :: str : input naip tile
-        out_dir :: str : output calculated raster
+        out_raster :: str : output calculated raster
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
     naip = gdal.Open(in_naip)
-    naip = gdal.Open(os.path.join(dir, f))
     red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
     green_band = naip.GetRasterBand(2).ReadAsArray().astype(np.float32)
     blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
@@ -58,14 +57,13 @@ def nVARI(in_naip, out_raster):
     """
     Args:
         in_naip :: str : input naip tile
-        out_dir :: str : output calculated raster
+        out_raster :: str : output calculated raster
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
     naip = gdal.Open(in_naip)
-    naip = gdal.Open(os.path.join(dir, f))
     red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
     green_band = naip.GetRasterBand(2).ReadAsArray().astype(np.float32)
     blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
