@@ -17,7 +17,7 @@ setuptools.setup(
     url='https://github.com/ocsmit/raster-indices-calc',
     packages=setuptools.find_packages(),
     python_requires=">=3.5",
-    install_requires=['numpy', 'scikit-learn', 'gdal'],
+    install_requires=['numpy'],
     classifiers=[
         # Trove classifiers
         # (https://pypi.python.org/pypi?%3Aaction=list_classifiers)
