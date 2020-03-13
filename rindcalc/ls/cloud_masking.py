@@ -1,8 +1,8 @@
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 # Name: rindcalc.cloud_masking.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Cloud mask function for rindcalc. Will be combined with band_utils
-#------------------------------------------------------------------------------
+# ------------------------------------------------------------------------------
 
 import os
 import numpy as np
@@ -39,7 +39,8 @@ def cloud_mask(landsat_dir, band):
 
 
     m = np.ma.array(qa_band,
-                    mask=np.logical_or.reduce([qa_band == value for value in mask_values]))
+                    mask=np.logical_or.reduce([qa_band == value
+                                               for value in mask_values]))
     np.ma.set_fill_value(m, 0)
     m1 = m.filled()
     m1[m1 != 0] = 1
