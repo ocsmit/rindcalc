@@ -16,13 +16,6 @@ def norm(array):
 
 
 def RGB(landsat_dir, out_composite):
-    """ RGB composite
-
-    :param landsat_dir:
-    :param out_composite:
-    :return:
-    """
-
     # Create list with file names
     blue = glob(os.path.join(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -64,13 +57,6 @@ def RGB(landsat_dir, out_composite):
 
 
 def FalseColor(landsat_dir, out_composite):
-    """
-
-    :param landsat_dir:
-    :param out_composite:
-    :return:
-    """
-
     # Create list with file names
     green = glob(os.path.join(landsat_dir, '*B3*'))
     red = glob(os.path.join(landsat_dir, '*B4*'))
