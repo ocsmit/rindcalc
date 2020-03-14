@@ -1,6 +1,8 @@
 Modules
 =======
-Conatains all modules 
+Contains all modules
+
+---------------------
 
 Satellites & Imagery
 ^^^^^^^^^^^^^^^^^^^^
