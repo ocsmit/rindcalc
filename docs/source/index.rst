@@ -47,5 +47,5 @@ Install with conda
 --------------------------------------------------------------------------------
 
 :Authors: Owen Smith, University of North Georgia IESA
-:Version: 1.2.9
+:Version: 2.0.0
 :License: GPL v3.0
