@@ -4,11 +4,22 @@ import numpy as np
 from .bands_utils import save_raster, norm
 
 
-def ARVI(in_naip, out_raster):
+def ARVI(in_naip, arvi_out):
     """
-    Args:
-        in_naip :: str : input naip tile
-        out_raster :: str : output calculated raster
+    ARVI(in_naip, arvi_out)
+
+    Calculates the Atmospherically Resistant Vegetation Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    ARVI = (NIR - (2 * Red) + Blue) / (NIR + (2 * Red) + Blue)
+
+    Parameters:
+
+            in_naip :: str, required
+                * File path for NAIP image.
+
+            arvi_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -24,15 +35,26 @@ def ARVI(in_naip, out_raster):
     arvi = ((nir_band - (2 * red_band) + blue_band) /
             (nir_band + (2 * red_band) + blue_band))
     # Save Raster
-    save_raster(arvi, out_raster, gdal.GDT_Float32, snap)
-    print(out_raster)
+    save_raster(arvi, arvi_out, gdal.GDT_Float32, snap)
+    print(arvi_out)
 
 
-def VARI(in_naip, out_raster):
+def VARI(in_naip, vari_out):
     """
-    Args:
-        in_naip :: str : input naip tile
-        out_raster :: str : output calculated raster
+     VARI(landsat_dir, vari_out)
+
+    Calculates the Visual Atmospherically Resistant Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    VARI = ((Green - Red) / (Green + Red - Blue))
+
+    Parameters:
+
+            in_naip :: str, required
+                * File path for NAIP image.
+
+            vari_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -48,16 +70,29 @@ def VARI(in_naip, out_raster):
     vari = ((2 * green_band - (red_band + blue_band)) /
             (2 * green_band + (red_band + blue_band)))
     # Save Raster
-    save_raster(vari, out_raster, gdal.GDT_Float32, snap)
+    save_raster(vari, vari_out, gdal.GDT_Float32, snap)
 
-    print(out_raster)
+    print(vari_out)
 
 
-def nVARI(in_naip, out_raster):
+def nVARI(in_naip, nvari_out):
     """
-    Args:
-        in_naip :: str : input naip tile
-        out_raster :: str : output calculated raster
+    nVARI(landsat_dir, vari_out)
+
+     **Normalized between -1 - 1**
+
+    Calculates the Visual Atmospherically Resistant Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    VARI = ((Green - Red) / (Green + Red - Blue))
+
+    Parameters:
+
+            in_naip :: str, required
+                * File path for NAIP image.
+
+            nvari_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -74,16 +109,27 @@ def nVARI(in_naip, out_raster):
             (2 * green_band + (red_band + blue_band)))
     normalized_vari = norm(vari, 1, 1)
     # Save Raster
-    save_raster(normalized_vari, out_raster, gdal.GDT_Float32, snap)
+    save_raster(normalized_vari, nvari_out, gdal.GDT_Float32, snap)
 
-    print(out_raster)
+    print(nvari_out)
 
 
-def NDVI(in_naip, out_raster):
+def NDVI(in_naip, ndvi_out):
     """
-    Args:
-        in_naip :: str : input naip tile
-        out_raster :: str : output calculated raster
+    NDVI(landsat_dir, ndvi_out, mask_clouds=False)
+
+    Calculates the Normalized Difference Vegetation Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    NDVI = ((NIR - Red) / (NIR + Red))
+
+    Parameters:
+
+            in_naip :: str, required
+                * File path for NAIP image.
+
+            ndvi_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -98,17 +144,30 @@ def NDVI(in_naip, out_raster):
     ndvi = ((nir_band - red_band) /
             (nir_band + red_band))
     # Save Raster
-    save_raster(ndvi, out_raster, gdal.GDT_Float32, snap)
+    save_raster(ndvi, ndvi_out, gdal.GDT_Float32, snap)
 
-    print(out_raster)
+    print(ndvi_out)
 
 
-def SAVI(in_naip, soil_brightness, out_raster):
+def SAVI(in_naip, savi_out, soil_brightness=0.5):
     """
-    Args:
-        soil_brightness:
-        in_naip :: str : input naip tile
-        out_raster :: str : output calculated raster
+    SAVI(landsat_dir, soil_brightness=0.5, savi_out)
+
+    Calculates the Soil Adjusted Vegetation Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
+                                        *L = Soil BrightnessFactor*
+
+    Parameters:
+
+            in_naip :: str, required
+                *File path for NAIP image.
+
+            savi_out :: str, required
+                * Output path and file name for calculated index raster.
+
+            soil_brightness :: float, required (default=0.5)
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -123,6 +182,6 @@ def SAVI(in_naip, soil_brightness, out_raster):
     savi = (((nir_band - red_band) / (nir_band + red_band + soil_brightness))
             * (1 + soil_brightness))
     # Save Raster
-    save_raster(savi, out_raster, gdal.GDT_Float32, snap)
+    save_raster(savi, savi_out, gdal.GDT_Float32, snap)
 
-    print(out_raster)
+    print(savi_out)

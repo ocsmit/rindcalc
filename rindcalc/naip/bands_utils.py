@@ -17,12 +17,24 @@ def norm(array, max_value, min_value):
 
 def save_raster(in_array, out, dType, snap):
     """
+    save_raster(in_array, out, snap, dType=gdal.GDT_Float32)
 
-    :param dType:
-    :param in_array:
-    :param out:
-    :param snap:
-    :return:
+    Saves the input NumPy array as a one band raster.
+
+    Parameters:
+
+            in_array :: array, required
+                * NumPy array to be saved as TIFF raster file.
+
+            out :: str, required
+                * Output path and file name for TIFF raster file.
+
+            snap :: gdal raster, required
+                * Raster file with which projections and geotransformations
+                  are based off.
+
+            dType :: gdal datatype, required (default=gdal.GDT_Float32)_
+                * Datatype to save raster as.
     """
     if not os.path.exists(out):
         print('Writing raster')
@@ -52,9 +64,19 @@ def save_raster(in_array, out, dType, snap):
 
 def gen_stats(raster_path):
     """
+    gen_stats(raster_path)
 
-    :param raster_path:
-    :return:
+    Prints minimum, maximum, mean, median, and standard deviation values for
+    a raster.
+
+    Parameters:
+
+            raster_path ::str, required
+                * input raster with which to generate statistical summary of.
+
+    Returns:
+
+            minimum, maximum, mean, median, standard deviation
     """
 
     path = gdal.Open(raster_path)
