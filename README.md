@@ -14,13 +14,18 @@ the work
 **Install with pip**
 
 Dependencies:
-    * GDAL - *need to build from .whl file* 
-    * NumPy
-    
->> pip install rindcalc
+ * GDAL - *need to build from .whl file* 
+ * NumPy
+
+```console
+pip install rindcalc
+```    
 
 **Install with conda**
 
->> conda install -c rindcalc rindcalc 
+```console
+conda install -c rindcalc rindcalc 
+```
+
 
 ### For more information visit the [Rindcalc documentation](https://rindcalc.readthedocs.io/en/latest/)
