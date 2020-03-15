@@ -11,4 +11,16 @@ It currently consists of index calculation and utility functions for Landsat
 -8 and USDA NAIP imagery, with Sentinel-2 and MODIS satellite functions in
 the work 
 
+**Install with pip**
+
+Dependencies:
+    * GDAL - *need to build from .whl file* 
+    * NumPy
+    
+>> pip install rindcalc
+
+**Install with conda**
+
+>> conda install -c rindcalc rindcalc 
+
 ### For more information visit the [Rindcalc documentation](https://rindcalc.readthedocs.io/en/latest/)
