@@ -9,7 +9,7 @@ the folder in which Landsat-8 bands are contained as the input. This method
 allowsfor easy, quick, and consistent index calculations from Landsat-8 imagery.
 
 
-Index Modules | rindcalc.ls.indicies
+Index Modules | rindcalc.ls.indices
 -------------------------------------
 
 Water Indices
