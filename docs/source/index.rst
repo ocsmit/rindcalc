@@ -1,5 +1,5 @@
-Rindcalc
-========
+Rindcalc Documentation
+======================
 A remote sensing index calculation library
 
 Directory
@@ -9,6 +9,7 @@ Directory
    :maxdepth: 2
 
    Landsat-8
+   Index Formula List
 
 About
 -----
@@ -39,4 +40,4 @@ Install with pip from PyPI repository:
 
 :Authors: Owen Smith, University of North Georgia IESA
 :Version: 1.2.9
-:License: MIT
+:License: GNU v3.0
