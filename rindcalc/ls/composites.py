@@ -16,6 +16,22 @@ def norm(array):
 
 
 def RGB(landsat_dir, out_composite):
+    """
+    RGB(landsat_dir, out_composite)
+
+    Creates a RGB composite using Landsat-8 and out puts a TIFF raster file
+    with the values normalized between 0 - 255
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            out_composite :: str, required
+                * Output path and file name for calculated index raster.
+    """
+
     # Create list with file names
     blue = glob(os.path.join(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -57,6 +73,21 @@ def RGB(landsat_dir, out_composite):
 
 
 def FalseColor(landsat_dir, out_composite):
+    """
+    FalseColor(landsat_dir, out_composite)
+
+    Creates a False Color composite using Landsat-8 and out puts a TIFF raster
+    file with the values normalized between 0 - 255
+
+    Parameters:
+
+            landsat_dir ::str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            out_composite :: str, required
+                * Output path and file name for calculated index raster.
+    """
     # Create list with file names
     green = glob(os.path.join(landsat_dir, '*B3*'))
     red = glob(os.path.join(landsat_dir, '*B4*'))

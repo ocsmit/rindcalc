@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.indicies.py
+# Name: rindcalc.indices.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Create a functioning python module for Landsat 8 index calculations
 # ------------------------------------------------------------------------------
@@ -15,14 +15,28 @@ from .bands_utils import save_raster
 # Water Indices
 def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     """
+    AWEIsh(landsat_dir, aweish_out, mask_clouds=False)
 
-    :param mask_clouds:
-    :param landsat_dir:
-    :param aweish_out:
-    :return:
+    Calculates the Automated Water Extraction Index (shadow) with Landsat-8
+    and outputs a TIFF raster file.
+
+    AWEIsh = (Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 *
+                SWIR2) /  (Blue + Green + NIR + SWIR1 + SWIR2)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            aweish_out :: str, required
+                * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
-    blue = glob(os.pathjoin(landsat_dir, '*B2*'))
+    blue = glob(os.path.join(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
     nir = glob(os.path.join(landsat_dir, '*B5*'))
     swir1 = glob(os.path.join(landsat_dir, '*B6*'))
@@ -80,18 +94,31 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
 
 def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
     """
+    AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)
 
-    :param mask_clouds:
-    :param landsat_dir:
-    :param aweinsh_out:
-    :return:
+    Calculates the Automated Water Extraction Index (no shadow) with Landsat-8
+    and outputs a TIFF raster file.
+
+    AWEInsh = (4 * (Green - SWIR1) - (0.25 * NIR + 2.75 *
+                SWIR1)) /  (Green + SWIR1 + NIR)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            aweinsh_out :: str, required
+                * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     blue = glob(os.path.join(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
     nir = glob(os.path.join(landsat_dir, '*B5*'))
     swir1 = glob(os.path.join(landsat_dir, '*B6*'))
-    swir2 = glob(os.path.join(landsat_dir, '*B7*'))
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
@@ -134,10 +161,21 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
 
 def NDMI(landsat_dir, ndmi_out):
     """
+    NDMI(landsat_dir, ndmi_out)
 
-    :param landsat_dir:
-    :param ndmi_out:
-    :return:
+    Calculates the Normalized Difference Moisture Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    NDMI = (NIR - SWIR1) / (NIR + SWIR1)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            ndmi_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -165,10 +203,21 @@ def NDMI(landsat_dir, ndmi_out):
 
 def MNDWI(landsat_dir, mndwi_out):
     """
+    MNDWI(landsat_dir, mndwi_out)
 
-    :param landsat_dir:
-    :param mndwi_out:
-    :return:
+    Calculates the Modified Normalized Difference Water Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    MNDWI = (Green - SWIR1) / (Green + SWIR1)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            mndwi_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     # Create list with file names
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -196,11 +245,24 @@ def MNDWI(landsat_dir, mndwi_out):
 # Vegetation indices
 def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
     """
+    NDVI(landsat_dir, ndvi_out, mask_clouds=False)
 
-    :param landsat_dir:
-    :param ndvi_out:
-    :param mask_clouds:
-    :return:
+    Calculates the Normalized Difference Vegetation Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    NDVI = ((NIR - Red) / (NIR + Red))
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            ndvi_out :: str, required
+                * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -236,10 +298,22 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
 
 def GNDVI(landsat_dir, gndvi_out):
     """
+    GNDVI(landsat_dir, gndvi_out)
 
-    :param landsat_dir:
-    :param gndvi_out:
-    :return:
+    Calculates the Green Normalized Difference Vegetation Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    GNDVI = (NIR - Green) / (NIR + Green)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            gndvi_out :: str, required
+                * Output path and file name for calculated index raster.
+
     """
     # Create list with file names
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -266,11 +340,24 @@ def GNDVI(landsat_dir, gndvi_out):
 
 def SAVI(landsat_dir, savi_out, soil_brightness=0.5, ):
     """
+    SAVI(landsat_dir, soil_brightness=0.5, savi_out)
 
-    :param landsat_dir:
-    :param soil_brightness:
-    :param savi_out:
-    :return:
+    Calculates the Soil Adjusted Vegetation Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
+                                        *L = Soil BrightnessFactor*
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            soil_brightness :: float, required (default=0.5)
+
+            savi_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -297,6 +384,23 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5, ):
 
 
 def ARVI(landsat_dir, arvi_out):
+    """
+    ARVI(landsat_dir, arvi_out)
+
+    Calculates the Atmospherically Resistant Vegetation Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    ARVI = (NIR - (2 * Red) + Blue) / (NIR + (2 * Red) + Blue)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            arvi_out :: str, required
+                * Output path and file name for calculated index raster.
+    """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -325,6 +429,23 @@ def ARVI(landsat_dir, arvi_out):
 
 
 def VARI(landsat_dir, vari_out):
+    """
+    VARI(landsat_dir, vari_out)
+
+    Calculates the Visual Atmospherically Resistant Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    VARI = ((Green - Red) / (Green + Red - Blue))
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            vari_out :: str, required
+                * Output path and file name for calculated index raster.
+    """
     # Create list with file names
     blue = glob(os.path.join(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -351,10 +472,21 @@ def VARI(landsat_dir, vari_out):
 # Urban and Landscape indices
 def NDBI(landsat_dir, ndbi_out):
     """
+    NDBI(landsat_dir, ndbi_out)
 
-    :param landsat_dir:
-    :param ndbi_out:
-    :return:
+    Calculates the Normalized Difference Built-up Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    NDBI = (SWIR1 - NIR) / (SWIR1 + NIR)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            ndbi_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -381,10 +513,22 @@ def NDBI(landsat_dir, ndbi_out):
 
 def NDBaI(landsat_dir, ndbai_out):
     """
+    NDBaI(landsat_dir, ndbai_out)
 
-    :param landsat_dir:
-    :param ndbai_out:
-    :return:
+    Calculates the Normalized Difference Bareness Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    NDBaI = ((SWIR1 - TIR) / (SWIR1 + TIR))
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            ndbai_out :: str, required
+                * Output path and file name for calculated index raster.
+
     """
     # Create list with file names
     swir1 = glob(os.path.join(landsat_dir, '*B6*'))
@@ -411,10 +555,22 @@ def NDBaI(landsat_dir, ndbai_out):
 
 def NBLI(landsat_dir, nbli_out):
     """
+    NBLI(landsat_dir, nbli_out)
 
-    :param landsat_dir:
-    :param nbli_out:
-    :return:
+    Calculates the Normalized Difference Bareland Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    NBLI = (Red - TIR) / (Red + TIR)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            nbli_out :: str, required
+                * Output path and file name for calculated index raster.
+
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -441,10 +597,21 @@ def NBLI(landsat_dir, nbli_out):
 
 def EBBI(landsat_dir, ebbi_out):
     """
+    EBBI(landsat_dir, ebbi_out)
 
-    :param landsat_dir:
-    :param ebbi_out:
-    :return:
+    Calculates the Enhanced Built-up and Bareness Index with Landsat-8
+    and outputs a TIFF raster file.
+
+    EBBI = (SWIR1 - NIR) / (10 * (sqrt(SWIR1 + tir)))
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            ebbi_out :: str, required
+                * Output path and file name for calculated index raster
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -476,10 +643,20 @@ def EBBI(landsat_dir, ebbi_out):
 
 def UI(landsat_dir, ui_out):
     """
+    UI(landsat_dir, ui_out)
 
-    :param landsat_dir:
-    :param ui_out:
-    :return:
+    Calculates the Urban Index with Landsat-8 and outputs a TIFF raster file.
+
+    UI = (SWIR2 - NIR) / (SWIR2 + NIR)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            ui_out :: str, required
+                * Output path and file name for calculated index raster.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -507,10 +684,22 @@ def UI(landsat_dir, ui_out):
 # Fire indices
 def NBRI(landsat_dir, nbri_out):
     """
+    NBRI(landsat_dir, nbri_out)
 
-    :param landsat_dir:
-    :param nbri_out:
-    :return:
+    Calculates the Normalized Burn Ratio Index with Landsat-8 and outputs a
+    TIFF raster file.
+
+    UI = (SWIR2 - NIR) / (SWIR2 + NIR)
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+            nbri_out :: str, required
+                * Output path and file name for calculated index raster.
+
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
