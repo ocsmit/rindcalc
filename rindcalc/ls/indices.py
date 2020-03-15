@@ -354,10 +354,10 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5, ):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            soil_brightness :: float, required (default=0.5)
-
             savi_out :: str, required
                 * Output path and file name for calculated index raster.
+
+            soil_brightness :: float, required (default=0.5)
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
