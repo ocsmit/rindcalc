@@ -1,5 +1,5 @@
-Landsat-8
-=========
+Landsat-8 | rindcalc.ls
+=======================
 
 Landsat bands are pulled directly from files downloaded from USGS containing
 all bands in the landsat scene. Since rindcalc uses the standard naming
@@ -7,10 +7,17 @@ convention of landsat bands, it only needs the folder in which Landsat-8
 bands are contained instead. This method allows for easy, quick, and
 consistent index calculations from Landsat-8 imagery.
 
+.. contents:: Contents
+    :local:
+
 Index Modules | rindcalc.ls.index_utils
 ---------------------------------------
 
+
 **AWEIsh(landsat_dir, aweish_out, mask_clouds=False)**
+
+    Calculates the Automated Water Extraction Index (shadow) with Landsat-8
+    and outputs a TIFF raster file.
 
     **Parameters:**
 
@@ -37,10 +44,41 @@ Index Modules | rindcalc.ls.index_utils
             .. code-block:: python
 
                import rindcalc as rc
-               rc.NDVI('./.../2019_12_22', './.../AWEIsh_2.tif', True)
+               rc.ls.AWEInsh('./.../2019_12_22', './.../AWEIsh_2.tif', True)
 
 
 **AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)**
+
+    Calculates the Automated Water Extraction Index (no shadow) with Landsat-8
+    and outputs a TIFF raster file.
+
+    **Parameters:**
+
+            **landsat_dir ::** *str, required*
+                * Folder path where all landsat bands for the scene are contained.
+
+            **aweish_out ::** *str, required*
+                * Output path and file name for calculated index raster.
+
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
+    **Example:**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               landsat_dir = './.../LC08_L1TP_091086_20191222_20191223_01_RT'
+               aweinsh_out = './.../AWEInsh_1.tif'
+               rc.ls.AWEInsh(landsat_dir, aweinsh_out, False)
+
+       **OR**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               rc.AWEInsh('./.../2019_12_22', './.../AWEInsh_2.tif', True)
+
 
 **NDMI(landsat_dir, ndmi_out)**
 
