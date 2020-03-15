@@ -28,15 +28,21 @@ Satellites & Imagery
 
 Installation
 ------------
+Install with pip from PyPI repository:
+
 Dependencies
  * GDAL (v 3.0.0 or greater)
  * NumPy (v 1.0.0 or greater)
 
-Install with pip from PyPI repository:
-
 .. code-block:: python
 
    pip install rindcalc
+
+Install with conda
+
+.. code-block:: python
+
+   conda install -c rindcalc rindcalc
 
 --------------------------------------------------------------------------------
 
