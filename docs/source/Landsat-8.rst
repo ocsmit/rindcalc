@@ -10,8 +10,8 @@ consistent index calculations from Landsat-8 imagery.
 .. contents:: Contents
     :local:
 
-Index Modules | rindcalc.ls.index_utils
----------------------------------------
+Index Modules | rindcalc.ls.indicies
+-------------------------------------
 
 
 **AWEIsh(landsat_dir, aweish_out, mask_clouds=False)**
@@ -106,15 +106,15 @@ Index Modules | rindcalc.ls.index_utils
 
 **NBRI(landsat_dir, nbri_out)**
 
-Composite Modules | rindcalc.ls.composite_utils
------------------------------------------------
+Composite Modules | rindcalc.ls.composites
+------------------------------------------
 
 **RGB(landsat_dir, out_composite)**
 
 **FalseColor(landsat_dir, out_composite)**
 
-Cloud Masking - Landsat-8
--------------------------
+Cloud Masking - Landsat-8 | rindcalc.ls.cloud_masking
+-----------------------------------------------------
 
 Cloud masking takes the landsat QA band and reads it as a numpy array.
 Values classed as clouds and cloud shadows are then given the value of 0.
