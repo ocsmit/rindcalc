@@ -9,7 +9,9 @@ Directory
    :maxdepth: 2
 
    Landsat-8
+   naip
    Index Formula List
+   Contact
 
 About
 -----
