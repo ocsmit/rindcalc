@@ -11,13 +11,13 @@ setuptools.setup(
     description='rindcalc is an open source python package created to calculate'
                 'Landsat-8 indices, composites, '
                 'and classification.',
-    version='v1.2.9',
+    version='v2.0.0',
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/ocsmit/raster-indices-calc',
     packages=setuptools.find_packages(),
     python_requires=">=3.5",
-    install_requires=['numpy', 'scikit-learn', 'gdal'],
+    install_requires=['numpy', 'gdal'],
     classifiers=[
         # Trove classifiers
         # (https://pypi.python.org/pypi?%3Aaction=list_classifiers)
