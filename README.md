@@ -1,6 +1,8 @@
 # Rindcalc 
 **A Spectral Index Raster Calculator**
 
+[![Documentation Status](https://readthedocs.org/projects/rindcalc/badge/?version=latest)](https://rindcalc.readthedocs.io/en/latest/?badge=latest)
+
 v.1.2.9 notes: Increased stability when reading input landsat bands.
 
 Rindcalc is an open source python library built on numpy and gdal aiming to
