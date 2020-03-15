@@ -48,4 +48,4 @@ Install with conda
 
 :Authors: Owen Smith, University of North Georgia IESA
 :Version: 1.2.9
-:License: GNU v3.0
+:License: GPL v3.0
