@@ -10,6 +10,12 @@ from osgeo import gdal
 import numpy as np
 
 
+def norm(array, max_value, min_value):
+    array_min, array_max = array.min(), array.max()
+    return ((max_value - 0) * ((array - array_min) /
+            (array_max - array_min))) + min_value
+
+
 def save_raster(in_array, out, snap, dType=gdal.GDT_Float32):
     """
     save_raster(in_array, out, snap, dType=gdal.GDT_Float32)
