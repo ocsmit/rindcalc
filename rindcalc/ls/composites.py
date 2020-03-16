@@ -8,11 +8,7 @@ import os
 import numpy as np
 from osgeo import gdal
 from glob import glob
-
-
-def norm(array):
-    array_min, array_max = array.min(), array.max()
-    return ((255 - 0) * ((array - array_min) / (array_max - array_min))) + 0
+from .bands_utils import norm
 
 
 def RGB(landsat_dir, out_composite):
@@ -39,12 +35,13 @@ def RGB(landsat_dir, out_composite):
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     blue_band = norm(blue_path.GetRasterBand(1).ReadAsArray(
-    ).astype(np.uint16))
+    ).astype(np.uint16), 255, 0)
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = norm(green_path.GetRasterBand(1).ReadAsArray(
-    ).astype(np.uint16))
+    ).astype(np.uint16), 255, 0)
     red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
-    red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
+    red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(
+        np.uint16), 255, 0)
     snap = gdal.Open(os.path.join(landsat_dir, red[0]))
 
     # Save Raster
@@ -95,11 +92,13 @@ def FalseColor(landsat_dir, out_composite):
 
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
     green_band = norm(green_path.GetRasterBand(1).ReadAsArray(
-    ).astype(np.uint16))
+    ).astype(np.uint16), 255, 0)
     red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
-    red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
+    red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(
+        np.uint16), 255, 0)
     NIR_path = gdal.Open(os.path.join(landsat_dir, nir[0]))
-    nir_band = norm(NIR_path.GetRasterBand(1).ReadAsArray().astype(np.uint16))
+    nir_band = norm(NIR_path.GetRasterBand(1).ReadAsArray().astype(
+        np.uint16), 255, 0)
     snap = gdal.Open(os.path.join(landsat_dir, red[0]))
 
     # Save Raster
