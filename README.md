@@ -27,5 +27,7 @@ pip install rindcalc
 conda install -c rindcalc rindcalc 
 ```
 
+rindcalc files need to be moved from Lib/pythonX.X/site-packages/ to Lib/site-packages on Windows 10.
+
 
 ### For more information visit the [Rindcalc documentation](https://rindcalc.readthedocs.io/en/latest/)
