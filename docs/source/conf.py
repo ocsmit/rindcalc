@@ -62,5 +62,7 @@ html_theme_options = {
     'accent_color': 'indigo',
     'header_scroll': False,
     'show_drawer_title': True,
-    'show_footer': False
+    'show_footer': False,
+    'fixed_drawer': False,
+    'button_next': False
 }
