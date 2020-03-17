@@ -8,7 +8,7 @@ import os
 import numpy as np
 from osgeo import gdal
 from glob import glob
-from rindcalc.bands_utils import norm
+from rindcalc.band_utils import norm
 
 
 def RGB(landsat_dir, out_composite):

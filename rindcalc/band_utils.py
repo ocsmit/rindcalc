@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.bands_utils.py
+# Name: rindcalc.band_utils.py
 # Author: Owen Smith, University of North Georgia IESA
 # Purpose: Misc. band functions for rindcalc
 # ------------------------------------------------------------------------------

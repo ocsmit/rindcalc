@@ -1,6 +1,6 @@
 from osgeo import gdal
 import numpy as np
-from rindcalc.bands_utils import save_raster, norm
+from rindcalc.band_utils import save_raster, norm
 
 
 def ARVI(in_naip, arvi_out):
