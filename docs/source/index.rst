@@ -2,18 +2,6 @@ Rindcalc Documentation
 ======================
 A remote sensing index calculation library
 
-Directory
----------
-
-.. toctree::
-   :maxdepth: 2
-
-   Landsat-8
-   naip
-   band_utils
-   Index Formula List
-   Contact
-
 About
 -----
 Rindcalc is an open source python library built on numpy and gdal with the
@@ -44,6 +32,18 @@ Install with conda
 .. code-block:: python
 
    conda install -c rindcalc rindcalc
+
+Directory
+---------
+
+.. toctree::
+   :maxdepth: 2
+
+   Landsat-8
+   naip
+   band_utils
+   Index Formula List
+   Contact
 
 --------------------------------------------------------------------------------
 

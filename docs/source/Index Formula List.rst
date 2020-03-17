@@ -3,9 +3,6 @@ Index Formula List
 
 All index formulas are grouped by specific use here.
 
-.. contents:: Index Directory 
-    :local:
-
 --------------------------------------------------------------------------------
 
 Water Indices

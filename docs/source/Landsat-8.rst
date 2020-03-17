@@ -1,9 +1,6 @@
 Landsat-8 | rindcalc.ls
 =======================
 
-.. contents:: Contents
-    :local:
-
 Rindcalc uses the standard naming convention of landsat bands, it only needs
 the folder in which Landsat-8 bands are contained as the input. This method
 allowsfor easy, quick, and consistent index calculations from Landsat-8 imagery.

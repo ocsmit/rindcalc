@@ -56,10 +56,11 @@ html_theme = 'sphinx_materialdesign_theme'
 
 html_theme_options = {
     'header_links' : [
+        ('Home', 'index', False, 'home'),
         ('GitHub', "https://github.com/ocsmit/rindcalc", True, 'link')
     ],
-    'primary_color': 'amber',
-    'accent_color': 'grey',
+    'primary_color': 'teal',
+    'accent_color': 'amber',
     'header_scroll': False,
     'show_drawer_title': False,
     'show_footer': False
