@@ -1,5 +1,5 @@
-NAIP | rindcalc.naip
-====================
+**NAIP | rindcalc.naip**
+========================
 
 .. toctree::
    :caption: Functions

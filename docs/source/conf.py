@@ -55,8 +55,7 @@ html_theme = 'sphinx_materialdesign_theme'
 # so a file named "default.css" will overwrite the builtin "default.css".
 
 html_theme_options = {
-    'header_links' : [
-        ('Home', 'index', False, 'home'),
+    'header_links': [
         ('GitHub', "https://github.com/ocsmit/rindcalc", True, 'link')
     ],
     'primary_color': 'teal',
