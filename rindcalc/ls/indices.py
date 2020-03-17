@@ -9,7 +9,7 @@ import numpy as np
 from osgeo import gdal
 from glob import glob
 from .cloud_masking import cloud_mask
-from .bands_utils import save_raster
+from rindcalc.bands_utils import save_raster
 
 
 # Water Indices
