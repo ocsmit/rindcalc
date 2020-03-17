@@ -1,2 +1,2 @@
-from .bands_utils import *
+from .composites import *
 from .indices import *
