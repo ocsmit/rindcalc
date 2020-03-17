@@ -39,7 +39,7 @@ Directory
    :maxdepth: 2
 
    landsat/Landsat-8
-   naip
+   naip/naip
    band_utils
    Index Formula List
    Contact

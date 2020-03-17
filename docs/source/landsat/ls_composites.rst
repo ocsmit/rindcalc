@@ -1,11 +1,11 @@
 Composite Modules | rindcalc.ls.composites
 ==========================================
 
-RGB Composite
-^^^^^^^^^^^^^
+**RGB Composite**
+^^^^^^^^^^^^^^^^^
 
-**RGB(landsat_dir, out_composite)**
-
+RGB(landsat_dir, out_composite)
+------------------------------------------------
     Creates a RGB composite using Landsat-8 and out puts a TIFF raster file
     with the values normalized between 0 - 255
 
@@ -25,11 +25,11 @@ RGB Composite
                rc.ls.RGB('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../RGB_Composite.tif')
 
-False Color Composite
-^^^^^^^^^^^^^^^^^^^^^
+**False Color Composite**
+^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**FalseColor(landsat_dir, out_composite)**
-
+FalseColor(landsat_dir, out_composite)
+------------------------------------------------
     Creates a False Color composite using Landsat-8 and out puts a TIFF raster
     file with the values normalized between 0 - 255
 

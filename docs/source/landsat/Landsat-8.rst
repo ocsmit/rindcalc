@@ -8,7 +8,7 @@ allowsfor easy, quick, and consistent index calculations from Landsat-8 imagery.
 
 .. toctree::
    :caption: Functions
-   :maxdepth: 1
+   :maxdepth: 2
 
    ls_indices
    ls_composites
