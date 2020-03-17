@@ -60,7 +60,7 @@ html_theme_options = {
         ('GitHub', "https://github.com/ocsmit/rindcalc", True, 'link')
     ],
     'primary_color': 'teal',
-    'accent_color': 'amber',
+    'accent_color': 'indigo',
     'header_scroll': False,
     'show_drawer_title': True,
     'show_footer': False
