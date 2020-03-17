@@ -62,6 +62,6 @@ html_theme_options = {
     'primary_color': 'teal',
     'accent_color': 'amber',
     'header_scroll': False,
-    'show_drawer_title': False,
+    'show_drawer_title': True,
     'show_footer': False
 }
