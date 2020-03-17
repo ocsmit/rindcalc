@@ -49,6 +49,14 @@ Vegetation Indices
             **vari_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+    **Example:**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               rc.naip.VARI('./.../m_3008101_ne_17_1_20151017.tif',
+                          './.../VARI.tif')
+
 **nVARI(in_naip, nvari_out)**
 
     Calculates the Visual Atmospherically Resistant Index with NAIP Imagery
@@ -66,6 +74,14 @@ Vegetation Indices
             **nvari_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+    **Example:**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               rc.naip.nVARI('./.../m_3008101_ne_17_1_20151017.tif',
+                          './.../nVARI.tif')
+
 **NDVI(in_naip, ndvi_out)**
 
     Calculates the Normalized Difference Vegetation Index with NAIP imagery
@@ -80,6 +96,14 @@ Vegetation Indices
 
             **ndvi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
+
+    **Example:**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               rc.naip.NDVI('./.../m_3008101_ne_17_1_20151017.tif',
+                          './.../NDVI.tif')
 
 **SAVI(in_naip, soil_brightness=0.5, savi_out)**
 
@@ -98,6 +122,14 @@ Vegetation Indices
                 * Output path and file name for calculated index raster.
 
             **soil_brightness ::** *float, required (default=0.5)*
+
+    **Example:**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               rc.naip.SAVI('./.../m_3008101_ne_17_1_20151017.tif',
+                          './.../SAVI.tif')
 
 Composite Modules | rindcalc.naip.composites
 --------------------------------------------
