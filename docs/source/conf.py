@@ -18,7 +18,7 @@ master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'rindcalc'
+project = 'Rindcalc - A Spectral Index Calculator'
 copyright = '2020, Owen Smith'
 author = 'Owen Smith'
 
