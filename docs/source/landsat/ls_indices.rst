@@ -1,11 +1,11 @@
 Index Modules | rindcalc.ls.indices
 ===================================
 
-Water Indices
-^^^^^^^^^^^^^
+**Water Indices**
+^^^^^^^^^^^^^^^^^
 
-**AWEIsh(landsat_dir, aweish_out, mask_clouds=False)**
-
+AWEIsh(landsat_dir, aweish_out, mask_clouds=False)
+--------------------------------------------------------
     Calculates the Automated Water Extraction Index (shadow) with Landsat-8
     and outputs a TIFF raster file.
 
@@ -33,8 +33,8 @@ Water Indices
                               True)
 
 
-**AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)**
-
+AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)
+--------------------------------------------------------
     Calculates the Automated Water Extraction Index (no shadow) with Landsat-8
     and outputs a TIFF raster file.
 
@@ -62,8 +62,8 @@ Water Indices
                               True)
 
 
-**NDMI(landsat_dir, ndmi_out)**
-
+NDMI(landsat_dir, ndmi_out)
+--------------------------------------------------------
     Calculates the Normalized Difference Moisture Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -85,8 +85,8 @@ Water Indices
                rc.ls.NDMI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDMI.tif')
 
-**MNDWI(landsat_dir, mndwi_out)**
-
+MNDWI(landsat_dir, mndwi_out)
+--------------------------------------------------------
     Calculates the Modified Normalized Difference Water Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -108,11 +108,13 @@ Water Indices
                rc.ls.MNDWI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                            './.../NDMI.tif')
 
-Vegetation Indices
-^^^^^^^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 
-**NDVI(landsat_dir, ndvi_out, mask_clouds=False)**
+**Vegetation Indices**
+^^^^^^^^^^^^^^^^^^^^^^
 
+NDVI(landsat_dir, ndvi_out, mask_clouds=False)
+--------------------------------------------------------
     Calculates the Normalized Difference Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -138,8 +140,8 @@ Vegetation Indices
                           './.../NDVI.tif',
                           True)
 
-**GNDVI(landsat_dir, gndvi_out)**
-
+GNDVI(landsat_dir, gndvi_out)
+--------------------------------------------------------
     Calculates the Green Normalized Difference Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -161,8 +163,8 @@ Vegetation Indices
                rc.ls.GNDVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../GNDVI.tif')
 
-**ARVI(landsat_dir, arvi_out)**
-
+ARVI(landsat_dir, arvi_out)
+--------------------------------------------------------
     Calculates the Atmospherically Resistant Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -184,8 +186,8 @@ Vegetation Indices
                rc.ls.ARVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../ARVI.tif')
 
-**VARI(landsat_dir, vari_out)**
-
+VARI(landsat_dir, vari_out)
+--------------------------------------------------------
     Calculates the Visual Atmospherically Resistant Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -207,8 +209,8 @@ Vegetation Indices
                rc.ls.VARI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../VARI.tif')
 
-**SAVI(landsat_dir, soil_brightness=0.5, savi_out)**
-
+SAVI(landsat_dir, soil_brightness=0.5, savi_out)
+--------------------------------------------------------
     Calculates the Soil Adjusted Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -234,11 +236,13 @@ Vegetation Indices
                           0.75,
                           './.../SAVI.tif')
 
-Urban / Landscape Indices
-^^^^^^^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 
-**NDBI(landsat_dir, ndbi_out)**
+**Urban / Landscape Indices**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+NDBI(landsat_dir, ndbi_out)
+--------------------------------------------------------
     Calculates the Normalized Difference Built-up Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -260,8 +264,8 @@ Urban / Landscape Indices
                rc.ls.NDBI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDBI.tif')
 
-**NDBaI(landsat_dir, ndbai_out)**
-
+NDBaI(landsat_dir, ndbai_out)
+--------------------------------------------------------
     Calculates the Normalized Difference Bareness Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -283,8 +287,8 @@ Urban / Landscape Indices
                rc.ls.NDBaI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDBaI.tif')
 
-**NBLI(landsat_dir, nbli_out)**
-
+NBLI(landsat_dir, nbli_out)
+-------------------------------------------------------
     Calculates the Normalized Bare Land Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -307,8 +311,8 @@ Urban / Landscape Indices
                           './.../NBLI.tif')
 
 
-**EBBI(landsat_dir, ebbi_out)**
-
+EBBI(landsat_dir, ebbi_out)
+--------------------------------------------------------
     Calculates the Enhanced Built-up and Bareness Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -331,8 +335,8 @@ Urban / Landscape Indices
                           './.../EBBI.tif')
 
 
-**UI(landsat_dir, ui_out)**
-
+UI(landsat_dir, ui_out)
+--------------------------------------------------------
     Calculates the Urban Index with Landsat-8 and outputs a TIFF raster file.
 
     UI = (SWIR2 - NIR) / (SWIR2 + NIR)
@@ -353,15 +357,17 @@ Urban / Landscape Indices
                rc.ls.UI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../UI.tif')
 
-Burn / Fire Indices
-^^^^^^^^^^^^^^^^^^^
+--------------------------------------------------------------------------------
 
-**NBRI(landsat_dir, nbri_out)**
+**Burn / Fire Indices**
+^^^^^^^^^^^^^^^^^^^^^^^
 
+NBRI(landsat_dir, nbri_out)
+--------------------------------------------------------
     Calculates the Normalized Burn Ratio Index with Landsat-8 and outputs a
     TIFF raster file.
 
-    UI = (SWIR2 - NIR) / (SWIR2 + NIR)
+    NBRI = (NIR - SWIR2) / (NIR + SWIR2)
 
     **Parameters:**
 
