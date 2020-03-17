@@ -1,1 +1,1 @@
-pip install sphinx_materialdesign_theme
+sphinx_materialdesign_theme
