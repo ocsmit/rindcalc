@@ -10,8 +10,8 @@ allowsfor easy, quick, and consistent index calculations from Landsat-8 imagery.
    :caption: Functions
    :maxdepth: 1
 
-    source/landsat/ls_indices
-    source/landsat/ls_composites
+   ls_indices
+   ls_composites
 
 
 Cloud Masking - Landsat-8 | rindcalc.ls.cloud_masking

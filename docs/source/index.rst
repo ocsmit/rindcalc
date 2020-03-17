@@ -39,7 +39,7 @@ Directory
 .. toctree::
    :maxdepth: 2
 
-   Landsat-8
+   landsat/Landsat-8
    naip
    band_utils
    Index Formula List
