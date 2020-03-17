@@ -1,5 +1,5 @@
-Index Formula List
-##################
+**Index Formula List**
+######################
 
 All index formulas are grouped by specific use here.
 
