@@ -3,6 +3,21 @@ Band Utilities | rindcalc.band_utils
 
 Utility functions for use with other rindcalc functions or analysis
 
+**def norm(array, max_value, min_value)**
+
+    Normalizes an input array to be between the input max and min values.
+
+    **Parameters**
+
+        **in_array ::** *array, required*
+            * array to normalize.
+
+        **max_value ::** *integer, required*
+            * Max value for normalization
+
+        **min_value ::** *integer, required*
+            * Minimum value for normalization.
+
 **save_raster(in_array, out, snap, dType=gdal.GDT_Float32)**
 
     Saves the input NumPy array as a one band raster.
