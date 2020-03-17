@@ -2,6 +2,7 @@
 **A Spectral Index Raster Calculator**
 
 [![Documentation Status](https://readthedocs.org/projects/rindcalc/badge/?version=latest)](https://rindcalc.readthedocs.io/en/latest/?badge=latest)
+![Conda Platforms](https://anaconda.org/rindcalc/rindcalc/badges/platforms.svg)
 
 Rindcalc is an open source python library built on numpy and gdal aiming to
 provide seamless and accurate raster index calculations and composites of 
