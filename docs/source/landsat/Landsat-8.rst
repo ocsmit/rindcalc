@@ -14,7 +14,7 @@ with an equatorial crossing time: 10:00 a.m. +/- 15 minutes.
 Landsat 8 aquires about 740 scenes a day on the Worldwide Reference System-2
 (WRS-2) path/row system, with a swath overlap (or sidelap) varying from 7
 percent at the Equator to a maximum of approximately 85 percent at extreme
-latitudes. The scene size is 185 km x 180 km (114 mi x 112 mi) `USGS
+latitudes. The scene size is 185 km x 180 km (114 mi x 112 mi) `(USGS)
 <https://www.usgs.gov/land-resources/nli/landsat/landsat-8?qt-science_support_page_related_con=0#qt-science_support_page_related_con>`_.
 
 .. figure:: https://user-images.githubusercontent.com/55674113/77010453-29e63e80-6940-11ea-943e-2fe6f0da21b6.png
