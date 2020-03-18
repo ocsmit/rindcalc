@@ -32,11 +32,15 @@ Example:
 
 .. figure:: https://user-images.githubusercontent.com/55674113/77011807-0c66a400-6943-11ea-8610-4af6b5a99fb6.png
    :alt: Cloud Mask NDVI
+   :width: 772.8px
+   :height: 824px
 
-   NDVI with cloud mask applied
+   NDVI with cloud mask applied.
 
 
 .. figure:: https://user-images.githubusercontent.com/55674113/77011948-56e82080-6943-11ea-8025-010ef7c32844.png
    :alt: No Cloud Mask NDVI
+   :width: 772.8px
+   :height: 824px
 
-   NDVI with cloud mask not applied
+   NDVI with cloud mask not applied with same color values.

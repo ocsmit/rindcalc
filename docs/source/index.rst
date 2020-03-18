@@ -40,25 +40,25 @@ Calculating the ARVI of a NAIP tile and saving as a raster.
 Output ARVI raster:
     .. image:: https://user-images.githubusercontent.com/55674113/76912798-82a7cf80-688b-11ea-9117-20e9e34f8999.png
        :alt: ARVI output
-       :width: 410px
-       :height: 515px
+       :width: 502px
+       :height: 574.7px
 
 
-Creating a false color composite of a NAIP tile.
+Creating a false color composite of a Landsat-8 Scene.
 
 .. code-block:: python
 
    import rindcalc as rc
 
-   rc.naip.FalseColor('/naip_folder/m_3008101_ne_17_1_20151017.tif',
-                      '/naip_outputs/FC_3008101_ne_17.tif')
+   rc.ls.FalseColor('/landsat_8/LC08_L1TP_197031_20131212_20170428_01_T1',
+                      '/landsat_8_outputs/FalseColor_Barcelona.tif')
 
 
 Output false color composite:
-    .. image:: https://user-images.githubusercontent.com/55674113/76913678-18445e80-688e-11ea-844d-c53c12c22850.png
+    .. image:: https://user-images.githubusercontent.com/55674113/77016121-2c02ca00-694d-11ea-9131-06836238e7fb.png
        :alt: False color composite output
-       :width: 410px
-       :height: 515px
+       :width: 772.8px
+       :height: 824px
 
 
 
