@@ -18,12 +18,12 @@ master_doc = 'index'
 
 # -- Project information -----------------------------------------------------
 
-project = 'Rindcalc - A Spectral Index Calculator'
+project = 'Rindcalc - A Spectral Index Raster Calculator'
 copyright = '2020, Owen Smith'
 author = 'Owen Smith'
 
 # The full version, including alpha/beta/rc tags
-release = '1.2.9'
+release = '2.0.1'
 
 
 # -- General configuration ---------------------------------------------------
@@ -63,5 +63,5 @@ html_theme_options = {
     'header_scroll': False,
     'show_drawer_title': True,
     'show_footer': False,
-    'fixed_drawer': False,
+    'fixed_drawer': True,
 }

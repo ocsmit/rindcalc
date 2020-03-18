@@ -8,13 +8,18 @@ composites of satellite imagery for remote sensing. It looks to fill the gap
 left by proprietary softwares and open source initiatives alike when it comes
 to the need to create and process spectral index raster files.
 
+
 Satellites & Imagery
 ------------------------
  * Landsat-8
+    * Index raster creation
+    * Composites
+    * Cloud Masking
  * National Agricultural Imagery Program - NAIP
+    * Index raster creation
+    * Composites
  * Sentinel-2 - WIP
  * MODIS - WIP
-
 
 **Example of use:**
 -------------------
@@ -57,39 +62,19 @@ Output false color composite:
 
 
 
-
-**Installation:**
-=================
-Install with pip from PyPI repository
--------------------------------------
-Dependencies
- * GDAL (v 3.0.0 or greater)
- * NumPy (v 1.0.0 or greater)
-
-.. code-block:: python
-
-   pip install rindcalc
-
-Install with conda
-------------------
-
-.. code-block:: python
-
-   conda install -c rindcalc rindcalc
-
-Directory
----------
+--------------------------------------------------------------------------------
 
 .. toctree::
-   :maxdepth: 2
+   :caption: Contents
+   :maxdepth: 1
 
+   install
    landsat/Landsat-8
    naip/naip
    band_utils
    Index Formula List
    Contact
 
---------------------------------------------------------------------------------
 
 :Authors: Owen Smith, University of North Georgia IESA
 :Version: 2.0.0
