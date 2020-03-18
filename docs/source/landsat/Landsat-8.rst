@@ -17,6 +17,13 @@ percent at the Equator to a maximum of approximately 85 percent at extreme
 latitudes. The scene size is 185 km x 180 km (114 mi x 112 mi) `USGS
 <https://www.usgs.gov/land-resources/nli/landsat/landsat-8?qt-science_support_page_related_con=0#qt-science_support_page_related_con>`_.
 
+.. figure:: https://user-images.githubusercontent.com/55674113/77010453-29e63e80-6940-11ea-943e-2fe6f0da21b6.png
+   :alt: Landsat calculated with RGB composite
+
+   Landsat-8 scene composite created with rindcalc RGB composite function.
+
+--------------------------------------------------------------------------------
+
 .. toctree::
    :caption: Functions
    :maxdepth: 2
