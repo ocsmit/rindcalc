@@ -64,5 +64,4 @@ html_theme_options = {
     'show_drawer_title': True,
     'show_footer': False,
     'fixed_drawer': False,
-    'button_next': False
 }
