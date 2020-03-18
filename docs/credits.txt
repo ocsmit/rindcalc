@@ -1,0 +1,2 @@
+Documentation hosting: https://readthedocs.org
+Sphinx material design theme: https://github.com/myyasuda/sphinx_materialdesign_theme
