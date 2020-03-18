@@ -7,11 +7,11 @@ setuptools.setup(
     author="Owen Smith",
     author_email="owen8461@protonmail.com",
     name='rindcalc',
-    license="MIT",
+    license="GNU 3.0",
     description='rindcalc is an open source python package created to calculate'
                 'Landsat-8 indices, composites, '
                 'and classification.',
-    version='v2.0.1',
+    version='v2.0.2',
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/ocsmit/raster-indices-calc',
