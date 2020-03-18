@@ -73,7 +73,7 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
                        / (blue_masked + green_masked + nir_masked +
                           swir1_masked + swir2_masked))
 
-        save_raster(aweish_mask, aweish_out, gdal.GDT_Float32, snap)
+        save_raster(aweish_mask, aweish_out, snap, gdal.GDT_Float32)
 
         return aweish_mask, print('Finished')
 
@@ -87,7 +87,7 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
 
         # Save Raster
 
-        save_raster(aweish, aweish_out, gdal.GDT_Float32, snap)
+        save_raster(aweish, aweish_out, snap, gdal.GDT_Float32)
 
         return aweish, print('Finished')
 
@@ -144,7 +144,7 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
                          - (0.25 * nir_masked + 2.75 * swir1_masked)) /
                         (green_masked + swir1_masked + nir_masked))
 
-        save_raster(aweinsh_mask, aweinsh_out, gdal.GDT_Float32, snap)
+        save_raster(aweinsh_mask, aweinsh_out, snap, gdal.GDT_Float32)
 
         return aweinsh_mask, print('Finished')
 
@@ -154,7 +154,7 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
                     (0.25 * nir_band + 2.75 * swir1_band)) /
                    (green_band + swir1_band + nir_band))
 
-        save_raster(aweinsh, aweinsh_out, gdal.GDT_Float32, snap)
+        save_raster(aweinsh, aweinsh_out, snap, gdal.GDT_Float32)
 
         return aweinsh, print('Finished')
 
@@ -196,7 +196,7 @@ def NDMI(landsat_dir, ndmi_out):
 
     # Save Raster
 
-    save_raster(ndmi, ndmi_out, gdal.GDT_Float32, snap)
+    save_raster(ndmi, ndmi_out, snap, gdal.GDT_Float32)
 
     return ndmi, print('Finished')
 
@@ -237,7 +237,7 @@ def MNDWI(landsat_dir, mndwi_out):
     mndwi = ((green_band - swir1_band) / (green_band + swir1_band))
 
     # Save Raster
-    save_raster(mndwi, mndwi_out, gdal.GDT_Float32, snap)
+    save_raster(mndwi, mndwi_out, snap, gdal.GDT_Float32)
 
     return mndwi, print('Finished')
 
@@ -284,14 +284,14 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
 
         ndvi_masked = ((nir_masked - red_masked) / (nir_masked + red_masked))
 
-        save_raster(ndvi_masked, ndvi_out, gdal.GDT_Float32, snap)
+        save_raster(ndvi_masked, ndvi_out, snap, gdal.GDT_Float32)
 
     if not mask_clouds:
         # Perform Calculation
         ndvi = ((nir_band - red_band) / (nir_band + red_band))
 
         # Save Raster
-        save_raster(ndvi, ndvi_out, gdal.GDT_Float32, snap)
+        save_raster(ndvi, ndvi_out, snap, gdal.GDT_Float32)
 
     return
 
@@ -333,7 +333,7 @@ def GNDVI(landsat_dir, gndvi_out):
     gndvi = ((nir_band - green_band) / (nir_band + green_band))
 
     # Save Raster
-    save_raster(gndvi, gndvi_out, gdal.GDT_Float32, snap)
+    save_raster(gndvi, gndvi_out, snap, gdal.GDT_Float32)
 
     return gndvi, print('Finished')
 
@@ -378,7 +378,7 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5, ):
            * (1 + soil_brightness)
 
     # Save Raster
-    save_raster(savi, savi_out, gdal.GDT_Float32, snap)
+    save_raster(savi, savi_out, snap, gdal.GDT_Float32)
 
     return savi, print('Finished')
 
@@ -423,7 +423,7 @@ def ARVI(landsat_dir, arvi_out):
             (nir_band + (2 * red_band) + blue_band))
 
     # Save Raster
-    save_raster(arvi, arvi_out, gdal.GDT_Float32, snap)
+    save_raster(arvi, arvi_out, snap, gdal.GDT_Float32)
 
     return arvi, print('Finished')
 
@@ -464,7 +464,7 @@ def VARI(landsat_dir, vari_out):
 
     vari = ((green_band - red_band) / (green_band + red_band - blue_band))
 
-    save_raster(vari, vari_out, gdal.GDT_Float32, snap)
+    save_raster(vari, vari_out, snap, gdal.GDT_Float32)
 
     return vari, print('Finished')
 
@@ -506,7 +506,7 @@ def NDBI(landsat_dir, ndbi_out):
     ndbi = ((swir1_band - nir_band) / (swir1_band + nir_band))
 
     # Save Raster
-    save_raster(ndbi, ndbi_out, gdal.GDT_Float32, snap)
+    save_raster(ndbi, ndbi_out, snap, gdal.GDT_Float32)
 
     return ndbi, print('Finished')
 
@@ -548,7 +548,7 @@ def NDBaI(landsat_dir, ndbai_out):
     ndbai = ((swir1_band - tir_band) / (swir1_band + tir_band))
 
     # Save Raster
-    save_raster(ndbai, ndbai_out, gdal.GDT_Float32, snap)
+    save_raster(ndbai, ndbai_out, snap, gdal.GDT_Float32)
 
     return ndbai, print('NDBaI raster created')
 
@@ -590,7 +590,7 @@ def NBLI(landsat_dir, nbli_out):
     nbli = ((red_band - tir_band) / (red_band + tir_band))
 
     # Save Raster
-    save_raster(nbli, nbli_out, gdal.GDT_Float32, snap)
+    save_raster(nbli, nbli_out, snap, gdal.GDT_Float32)
 
     return nbli, print('NBLI raster created.')
 
@@ -636,7 +636,7 @@ def EBBI(landsat_dir, ebbi_out):
     ebbi_mask = np.ma.MaskedArray(ebbi, mask=(ebbi == 0))
     ebbi_mask.reshape(ebbi.shape)
     # Save Raster
-    save_raster(ebbi_mask, ebbi_out, gdal.GDT_Float32, snap)
+    save_raster(ebbi_mask, ebbi_out, snap, gdal.GDT_Float32)
 
     return ebbi_mask, print('EBBI raster created.')
 
@@ -676,7 +676,7 @@ def UI(landsat_dir, ui_out):
     ui = ((swir2_band - nir_band) / (swir2_band + nir_band))
 
     # Save Raster
-    save_raster(ui, ui_out, gdal.GDT_Float32, snap)
+    save_raster(ui, ui_out, snap, gdal.GDT_Float32)
 
     return ui, print('UI raster created.')
 
@@ -719,6 +719,6 @@ def NBRI(landsat_dir, nbri_out):
     nbri = ((nir_band - swir2_band) / (nir_band + swir2_band))
 
     # Save Raster
-    save_raster(nbri, nbri_out, gdal.GDT_Float32, snap)
+    save_raster(nbri, nbri_out, snap, gdal.GDT_Float32)
 
     return nbri, print('NBRI raster created.')
