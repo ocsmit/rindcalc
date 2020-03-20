@@ -77,5 +77,5 @@ Output false color composite:
 
 
 :Authors: Owen Smith, University of North Georgia IESA
-:Version: 2.0.0
+:Version: 2.0.2
 :License: GPL v3.0
