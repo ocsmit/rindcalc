@@ -12,7 +12,6 @@ from .cloud_masking import cloud_mask_array
 from rindcalc.band_utils import save_raster
 
 
-# Water Indices
 def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     """
     AWEIsh(landsat_dir, aweish_out, mask_clouds=False)
@@ -167,6 +166,7 @@ def NDMI(landsat_dir, ndmi_out, mask_clouds=False):
     if not mask_clouds:
         save_raster(equation, ndmi_out, snap, gdal.GDT_Float32)
         return equation, print('Finished')
+
 
 def MNDWI(landsat_dir, mndwi_out, mask_clouds=False):
     """
@@ -443,7 +443,7 @@ def VARI(landsat_dir, vari_out, mask_clouds=False):
         save_raster(equation, vari_out, snap, gdal.GDT_Float32)
         return equation, print('Finished')
 
-# Urban and Landscape indices
+
 def NDBI(landsat_dir, ndbi_out, mask_clouds=False):
     """
     NDBI(landsat_dir, ndbi_out)
@@ -672,7 +672,6 @@ def UI(landsat_dir, ui_out, mask_clouds=False):
         return equation, print('Finished')
 
 
-# Fire indices
 def NBRI(landsat_dir, nbri_out, mask_clouds=False):
     """
     NBRI(landsat_dir, nbri_out)
