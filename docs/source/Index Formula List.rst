@@ -58,6 +58,11 @@ Soil Adjusted Vegetation Index | SAVI
 - SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
     - *L = Soil Brightness Factor*
 
+Structure Insensitive Pigment Index | SIPI
+------------------------------------------
+- SIPI = (NIR – Blue) / (NIR – Red)
+
+
 --------------------------------------------------------------------------------
 
 **Urban / Landscape Indices**
