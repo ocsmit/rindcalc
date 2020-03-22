@@ -39,7 +39,7 @@ def RGB(sent_dir, out_composite):
     dst_ds = None
 
 
-def bathymetric(sent_dir, out_composite):
+def bathymetry(sent_dir, out_composite):
 
     bands = get_bands(sent_dir)
 
