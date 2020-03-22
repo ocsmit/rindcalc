@@ -34,7 +34,7 @@ def cloud_mask_array(landsat_dir, array):
     np.ma.set_fill_value(m, 0)
     m1 = m.filled()
     m1[m1 != 0] = 1
-    
+
     m1.reshape(qa_band.shape)
     mask_array = array * m1
     mask_array[mask_array == 0] = np.nan
