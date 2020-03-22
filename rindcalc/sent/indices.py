@@ -20,3 +20,19 @@ def NDVI(sent_dir, out_raster):
 
     save_raster(equation, out_raster, snap, gdal.GDT_Float32)
     return equation, print('Finished')
+
+
+def SIPI(sent_dir, out_raster):
+
+    bands = get_bands(sent_dir)
+
+    nir = gdal.Open(bands[7])
+    nir_band = nir.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    blue = gdal.Open(bands[1])
+    blue_band = blue.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    snap = nir
+
+    equation = (nir_band - blue_band) / (nir_band + blue_band)
+
+    save_raster(equation, out_raster, snap, gdal.GDT_Float32)
+    return equation, print('Finished')
