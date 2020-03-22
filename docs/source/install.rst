@@ -27,4 +27,4 @@ Latest development version
 ---------------------------
 
 For latest version clone the `Rindcalc GitHub Repository <https://github.com/ocsmit/rindcalc>`_
-and add the module to path with sys.path.append
+and add the module to path with sys.path.append.
