@@ -21,3 +21,10 @@ Install with Conda from Anaconda Cloud
 .. code-block:: python
 
    conda install -c rindcalc rindcalc
+
+
+Latest development version
+---------------------------
+
+For latest version clone the `Rindcalc GitHub Repository <https://github.com/ocsmit/rindcalc>`_
+and add the module to path with sys.path.append
