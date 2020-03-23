@@ -14,7 +14,7 @@ def NDVI(sent_dir, out_raster):
     nir_band = nir.GetRasterBand(1).ReadAsArray().astype(np.float32)
     red = gdal.Open(bands[3])
     red_band = red.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    snap = nir
+    snap = gdal.Open(bands[7])
 
     equation = (nir_band - red_band) / (nir_band + red_band)
 
