@@ -1,7 +1,4 @@
 import os
-import numpy as np
-from osgeo import gdal
-from glob import glob
 
 
 def get_bands(path):
