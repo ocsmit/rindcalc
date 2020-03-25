@@ -1,5 +1,6 @@
 **Rindcalc Documentation**
 ==========================
+
 About
 ---------
 Rindcalc is an open source python library built on NumPy and GDAL with the
