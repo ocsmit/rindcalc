@@ -7,8 +7,6 @@
 [![Documentation Status](https://readthedocs.org/projects/rindcalc/badge/?version=latest)](https://rindcalc.readthedocs.io/en/latest/?badge=latest)
 [![Conda Platforms](https://anaconda.org/rindcalc/rindcalc/badges/platforms.svg)](https://anaconda.org/rindcalc/rindcalc)
 
----
-
 #### For more information visit the [Rindcalc documentation](https://rindcalc.readthedocs.io/en/latest/)
 
 Rindcalc is an open source python library built on numpy and gdal aiming to
