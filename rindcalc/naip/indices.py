@@ -34,13 +34,13 @@ def ARVI(in_naip, arvi_out):
     arvi = ((nir_band - (2 * red_band) + blue_band) /
             (nir_band + (2 * red_band) + blue_band))
     # Save Raster
-    save_raster(arvi, arvi_out, gdal.GDT_Float32, snap)
+    save_raster(arvi, arvi_out, snap)
     print(arvi_out)
 
 
 def VARI(in_naip, vari_out):
     """
-     VARI(landsat_dir, vari_out)
+     VARI(in_naip, vari_out)
 
     Calculates the Visual Atmospherically Resistant Index with NAIP imagery
     and outputs a TIFF raster file.
@@ -69,14 +69,14 @@ def VARI(in_naip, vari_out):
     vari = ((2 * green_band - (red_band + blue_band)) /
             (2 * green_band + (red_band + blue_band)))
     # Save Raster
-    save_raster(vari, vari_out, gdal.GDT_Float32, snap)
+    save_raster(vari, vari_out, snap)
 
     print(vari_out)
 
 
 def nVARI(in_naip, nvari_out):
     """
-    nVARI(landsat_dir, vari_out)
+    nVARI(in_naip, vari_out)
 
      **Normalized between -1 - 1**
 
@@ -108,14 +108,14 @@ def nVARI(in_naip, nvari_out):
             (2 * green_band + (red_band + blue_band)))
     normalized_vari = norm(vari, 1, 1)
     # Save Raster
-    save_raster(normalized_vari, nvari_out, gdal.GDT_Float32, snap)
+    save_raster(normalized_vari, nvari_out, snap)
 
     print(nvari_out)
 
 
 def NDVI(in_naip, ndvi_out):
     """
-    NDVI(landsat_dir, ndvi_out, mask_clouds=False)
+    NDVI(in_naip, ndvi_out, mask_clouds=False)
 
     Calculates the Normalized Difference Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
@@ -143,14 +143,14 @@ def NDVI(in_naip, ndvi_out):
     ndvi = ((nir_band - red_band) /
             (nir_band + red_band))
     # Save Raster
-    save_raster(ndvi, ndvi_out, gdal.GDT_Float32, snap)
+    save_raster(ndvi, ndvi_out, snap)
 
     print(ndvi_out)
 
 
 def SAVI(in_naip, savi_out, soil_brightness=0.5):
     """
-    SAVI(landsat_dir, soil_brightness=0.5, savi_out)
+    SAVI(in_naip, soil_brightness=0.5, savi_out)
 
     Calculates the Soil Adjusted Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
@@ -181,6 +181,44 @@ def SAVI(in_naip, savi_out, soil_brightness=0.5):
     savi = (((nir_band - red_band) / (nir_band + red_band + soil_brightness))
             * (1 + soil_brightness))
     # Save Raster
-    save_raster(savi, savi_out, gdal.GDT_Float32, snap)
+    save_raster(savi, savi_out, snap)
 
     print(savi_out)
+
+
+def RedRatio(in_naip, redratio_out):
+    """
+    RedRatio(in_naip, soil_brightness=0.5, savi_out)
+
+    Calculates the Soil Adjusted Vegetation Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
+                                        *L = Soil BrightnessFactor*
+
+    Parameters:
+
+            in_naip :: str, required
+                *File path for NAIP image.
+
+            savi_out :: str, required
+                * Output path and file name for calculated index raster.
+
+            soil_brightness :: float, required (default=0.5)
+    """
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
+    naip = gdal.Open(in_naip)
+    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
+    green_band = naip.GetRasterBand(2).ReadAsArray().astype(np.float32)
+    blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
+    snap = naip
+
+    # Perform Calculation
+    ratio = (blue_band + red_band + green_band) / red_band
+    # Save Raster
+    save_raster(ratio, redratio_out, snap)
+
+    print(redratio_out)
