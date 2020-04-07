@@ -193,18 +193,15 @@ def RedRatio(in_naip, redratio_out):
     Calculates the Soil Adjusted Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
 
-    SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
-                                        *L = Soil BrightnessFactor*
+    ratio = (blue_band + red_band + green_band) / red_band
 
     Parameters:
 
             in_naip :: str, required
                 *File path for NAIP image.
 
-            savi_out :: str, required
+            redratio_out :: str, required
                 * Output path and file name for calculated index raster.
-
-            soil_brightness :: float, required (default=0.5)
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
