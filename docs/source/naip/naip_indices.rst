@@ -123,3 +123,32 @@ SAVI(in_naip, soil_brightness=0.5, savi_out)
                import rindcalc as rc
                rc.naip.SAVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../SAVI.tif')
+
+RedRatio(in_naip, redratio_out)
+----------------------------------
+
+    Calculates red band ratio with NAIP imagery
+    and outputs a TIFF raster file.
+
+    RedRatio(in_naip, soil_brightness=0.5, savi_out)
+
+    Calculates the Soil Adjusted Vegetation Index with NAIP imagery
+    and outputs a TIFF raster file.
+
+    ratio = (blue_band + red_band + green_band) / red_band
+
+    **Parameters:**
+
+            in_naip :: str, required
+                * File path for NAIP image.
+
+            redratio_out :: str, required
+                * Output path and file name for calculated index raster.
+
+    **Example:**
+
+            .. code-block:: python
+
+               import rindcalc as rc
+               rc.naip.RedRatio('./.../m_3008101_ne_17_1_20151017.tif',
+                          './.../Red_Ratio.tif')
