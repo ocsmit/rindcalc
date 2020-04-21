@@ -1,3 +1,4 @@
+import os
 from osgeo import gdal
 import numpy as np
 from rindcalc.band_utils import save_raster, norm
@@ -219,3 +220,17 @@ def RedRatio(in_naip, redratio_out):
     save_raster(ratio, redratio_out, snap)
 
     print(redratio_out)
+
+
+def calculate_all(in_naip, out_dir):
+    NDVI(in_naip, os.path.join(out_dir, 'NDVI.tif'))
+    SAVI(in_naip, os.path.join(out_dir, 'SAVI.tif'))
+    ARVI(in_naip, os.path.join(out_dir, 'ARVI.tif'))
+    VARI(in_naip, os.path.join(out_dir, 'VARI.tif'))
+    nVARI(in_naip, os.path.join(out_dir, 'nVARI.tif'))
+    RedRatio(in_naip, os.path.join(out_dir, 'RedRatio.tif'))
+
+    print('All NAIP indices saved to ', out_dir) 
+
+
+
