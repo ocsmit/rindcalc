@@ -199,7 +199,7 @@ def RedRatio(in_naip, redratio_out):
     Parameters:
 
             in_naip :: str, required
-                *File path for NAIP image.
+                * File path for NAIP image.
 
             redratio_out :: str, required
                 * Output path and file name for calculated index raster.
@@ -223,6 +223,22 @@ def RedRatio(in_naip, redratio_out):
 
 
 def calculate_all(in_naip, out_dir):
+    """
+    calculate_all(in_naip, our_dir):
+
+    Calculates all indices in rindcalc.naip.indices for NAIP image and outputs
+    into a specified output folder with the output file names being the name of
+    the function. i.e: NDVI.tif
+
+    Parameters:
+
+            in_naip :: str, required
+                * File path for NAIP image.
+
+             out_dir :: str, required
+                * File path of output directory.
+
+    """
     NDVI(in_naip, os.path.join(out_dir, 'NDVI.tif'))
     SAVI(in_naip, os.path.join(out_dir, 'SAVI.tif'))
     ARVI(in_naip, os.path.join(out_dir, 'ARVI.tif'))
