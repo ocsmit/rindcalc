@@ -718,6 +718,25 @@ def NBRI(landsat_dir, nbri_out, mask_clouds=False):
 
 
 def calculate_all(landsat_dir, out_dir, mask_clouds=False):
+    """
+    calculate_all(landsat_dir, our_dir, mask_clouds=False):
+
+    Calculates all indices in rindcalc.naip.indices for NAIP image and outputs
+    into a specified output folder with the output file names being the name of
+    the function. i.e: NDVI.tif
+
+    Parameters:
+
+            landsat_dir :: str, required
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+             out_dir :: str, required
+                * File path of output directory.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
+    """
     if not os.path.exists(out_dir):
         os.mkdir(out_dir)
     AWEIsh(landsat_dir, os.path.join(out_dir, 'AWEIsh.tif'), mask_clouds)
