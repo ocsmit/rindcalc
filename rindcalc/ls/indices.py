@@ -715,3 +715,21 @@ def NBRI(landsat_dir, nbri_out, mask_clouds=False):
     if not mask_clouds:
         save_raster(equation, nbri_out, snap)
         return equation, print('Finished')
+
+
+def calculate_all(landsat_dir, out_dir, mask_clouds=False):
+    AWEIsh(landsat_dir, os.path.join(out_dir, 'AWEIsh.tif'), mask_clouds)
+    AWEInsh(landsat_dir, os.path.join(out_dir, 'AWEInsh.tif'), mask_clouds)
+    NDMI(landsat_dir, os.path.join(out_dir, 'NDMI.tif'), mask_clouds)
+    MNDWI(landsat_dir, os.path.join(out_dir, 'MNDWI.tif'), mask_clouds)
+    NDVI(landsat_dir, os.path.join(out_dir, 'NDVI.tif'), mask_clouds)
+    GNDVI(landsat_dir, os.path.join(out_dir, 'GNDVI.tif'), mask_clouds)
+    SAVI(landsat_dir, os.path.join(out_dir, 'SAVI.tif'),
+         mask_clouds=mask_clouds)
+    ARVI(landsat_dir, os.path.join(out_dir, 'ARVI.tif'), mask_clouds)
+    NDBI(landsat_dir, os.path.join(out_dir, 'NDBI.tif'), mask_clouds)
+    NDBaI(landsat_dir, os.path.join(out_dir, 'NDBaI.tif'), mask_clouds)
+    NBLI(landsat_dir, os.path.join(out_dir, 'NBLI.tif'), mask_clouds)
+    EBBI(landsat_dir, os.path.join(out_dir, 'EBBI.tif'), mask_clouds)
+    UI(landsat_dir, os.path.join(out_dir, 'UI.tif'), mask_clouds)
+    NBRI(landsat_dir, os.path.join(out_dir, 'NBRI.tif'), mask_clouds)
