@@ -144,7 +144,7 @@ def NDMI(landsat_dir, ndmi_out, mask_clouds=False):
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
-    swir1 = glob(os.path.join(landsat_dir, '/*B6*'))
+    swir1 = glob(os.path.join(landsat_dir, '*B6*'))
 
     # Open with gdal & create numpy arrays
     gdal.UseExceptions()
