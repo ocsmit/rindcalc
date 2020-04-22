@@ -718,6 +718,8 @@ def NBRI(landsat_dir, nbri_out, mask_clouds=False):
 
 
 def calculate_all(landsat_dir, out_dir, mask_clouds=False):
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
     AWEIsh(landsat_dir, os.path.join(out_dir, 'AWEIsh.tif'), mask_clouds)
     AWEInsh(landsat_dir, os.path.join(out_dir, 'AWEInsh.tif'), mask_clouds)
     NDMI(landsat_dir, os.path.join(out_dir, 'NDMI.tif'), mask_clouds)
