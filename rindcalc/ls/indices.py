@@ -64,10 +64,10 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, aweish_out, snap)
-        return masked, print('Finished')
+        return masked, print(aweish_out)
     if not mask_clouds:
         save_raster(equation, aweish_out, snap)
-        return equation, print('Finished')
+        return equation, print(aweish_out)
 
 
 def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
@@ -118,10 +118,10 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, aweinsh_out, snap)
-        return masked, print('Finished')
+        return masked, print(aweinsh_out)
     if not mask_clouds:
         save_raster(equation, aweinsh_out, snap)
-        return equation, print('Finished')
+        return equation, print(aweinsh_out)
 
 
 def NDMI(landsat_dir, ndmi_out, mask_clouds=False):
@@ -162,10 +162,10 @@ def NDMI(landsat_dir, ndmi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, ndmi_out, snap)
-        return masked, print('Finished')
+        return masked, print(ndmi_out)
     if not mask_clouds:
         save_raster(equation, ndmi_out, snap)
-        return equation, print('Finished')
+        return equation, print(ndmi_out)
 
 
 def MNDWI(landsat_dir, mndwi_out, mask_clouds=False):
@@ -206,10 +206,10 @@ def MNDWI(landsat_dir, mndwi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, mndwi_out, snap)
-        return masked, print('Finished')
+        return masked, print(mndwi_out)
     if not mask_clouds:
         save_raster(equation, mndwi_out, snap)
-        return equation, print('Finished')
+        return equation, print(mndwi_out)
 
 
 def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
@@ -252,10 +252,10 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, ndvi_out, snap)
-        return masked, print('Finished')
+        return masked, print(ndvi_out)
     if not mask_clouds:
         save_raster(equation, ndvi_out, snap)
-        return equation, print('Finished')
+        return equation, print(ndvi_out)
 
 
 def GNDVI(landsat_dir, gndvi_out, mask_clouds=False):
@@ -297,10 +297,10 @@ def GNDVI(landsat_dir, gndvi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, gndvi_out, snap)
-        return masked, print('Finished')
+        return masked, print(gndvi_out)
     if not mask_clouds:
         save_raster(equation, gndvi_out, snap)
-        return equation, print('Finished')
+        return equation, print(gndvi_out)
 
 
 def SAVI(landsat_dir, savi_out, soil_brightness=0.5, mask_clouds=False):
@@ -345,10 +345,10 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, savi_out, snap)
-        return masked, print('Finished')
+        return masked, print(savi_out)
     if not mask_clouds:
         save_raster(equation, savi_out, snap)
-        return equation, print('Finished')
+        return equation, print(savi_out)
 
 
 def ARVI(landsat_dir, arvi_out, mask_clouds=False):
@@ -393,10 +393,10 @@ def ARVI(landsat_dir, arvi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, arvi_out, snap)
-        return masked, print('Finished')
+        return masked, print(arvi_out)
     if not mask_clouds:
         save_raster(equation, arvi_out, snap)
-        return equation, print('Finished')
+        return equation, print(arvi_out)
 
 
 def VARI(landsat_dir, vari_out, mask_clouds=False):
@@ -438,10 +438,10 @@ def VARI(landsat_dir, vari_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, vari_out, snap)
-        return masked, print('Finished')
+        return masked, print(vari_out)
     if not mask_clouds:
         save_raster(equation, vari_out, snap)
-        return equation, print('Finished')
+        return equation, print(vari_out)
 
 
 def NDBI(landsat_dir, ndbi_out, mask_clouds=False):
@@ -483,10 +483,10 @@ def NDBI(landsat_dir, ndbi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, ndbi_out, snap)
-        return masked, print('Finished')
+        return masked, print(ndbi_out)
     if not mask_clouds:
         save_raster(equation, ndbi_out, snap)
-        return equation, print('Finished')
+        return equation, print(ndbi_out)
 
 
 def NDBaI(landsat_dir, ndbai_out, mask_clouds=False):
@@ -528,10 +528,10 @@ def NDBaI(landsat_dir, ndbai_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, ndbai_out, snap)
-        return masked, print('Finished')
+        return masked, print(ndbai_out)
     if not mask_clouds:
         save_raster(equation, ndbai_out, snap)
-        return equation, print('Finished')
+        return equation, print(ndbai_out)
 
 
 def NBLI(landsat_dir, nbli_out, mask_clouds=False):
@@ -573,10 +573,10 @@ def NBLI(landsat_dir, nbli_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, nbli_out, snap)
-        return masked, print('Finished')
+        return masked, print(nbli_out)
     if not mask_clouds:
         save_raster(equation, nbli_out, snap)
-        return equation, print('Finished')
+        return equation, print(nbli_out)
 
 
 def EBBI(landsat_dir, ebbi_out, mask_clouds=False):
@@ -623,10 +623,10 @@ def EBBI(landsat_dir, ebbi_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, ebbi_mask)
         save_raster(masked, ebbi_mask, snap)
-        return masked, print('Finished')
+        return masked, print(ebbi_out)
     if not mask_clouds:
         save_raster(ebbi_mask, ebbi_out, snap)
-        return ebbi_mask, print('Finished')
+        return ebbi_mask, print(ebbi_out)
 
 
 def UI(landsat_dir, ui_out, mask_clouds=False):
@@ -666,10 +666,10 @@ def UI(landsat_dir, ui_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, ui_out, snap)
-        return masked, print('Finished')
+        return masked, print(ui_out)
     if not mask_clouds:
         save_raster(equation, ui_out, snap)
-        return equation, print('Finished')
+        return equation, print(ui_out)
 
 
 def NBRI(landsat_dir, nbri_out, mask_clouds=False):
@@ -711,10 +711,10 @@ def NBRI(landsat_dir, nbri_out, mask_clouds=False):
     if mask_clouds:
         masked = cloud_mask_array(landsat_dir, equation)
         save_raster(masked, nbri_out, snap)
-        return masked, print('Finished')
+        return masked, print(nbri_out)
     if not mask_clouds:
         save_raster(equation, nbri_out, snap)
-        return equation, print('Finished')
+        return equation, print(nbri_out)
 
 
 def calculate_all(landsat_dir, out_dir, mask_clouds=False):
