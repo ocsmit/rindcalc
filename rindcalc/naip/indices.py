@@ -239,6 +239,8 @@ def calculate_all(in_naip, out_dir):
                 * File path of output directory.
 
     """
+    if not os.path.exists(out_dir):
+        os.mkdir(out_dir)
     NDVI(in_naip, os.path.join(out_dir, 'NDVI.tif'))
     SAVI(in_naip, os.path.join(out_dir, 'SAVI.tif'))
     ARVI(in_naip, os.path.join(out_dir, 'ARVI.tif'))
