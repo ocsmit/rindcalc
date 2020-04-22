@@ -1,4 +1,4 @@
- <img align="left" src="https://user-images.githubusercontent.com/55674113/80037387-7bdf2e80-84c1-11ea-85ca-bff644f9de9a.png" width="142.2" height="149.4"/> 
+ <img align="left" src="https://user-images.githubusercontent.com/55674113/80037936-949c1400-84c2-11ea-8b7f-3f2b7850187d.png" width="142.2" height="149.4"/> 
 
 # Rindcalc
 
