@@ -48,7 +48,7 @@ exclude_patterns = []
 # The theme to use for HTML and HTML Help pages.  See the documentation for
 # a list of builtin themes.
 
-html_logo = 'rindcalc logo.png'
+html_logo = 'rindcalc logo_color.png'
 
 
 html_theme = 'sphinx_materialdesign_theme'
