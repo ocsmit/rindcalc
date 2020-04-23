@@ -1,6 +1,38 @@
 Index Modules | rindcalc.ls.indices
 ===================================
 
+
+calculate_all(landsat_dir, our_dir, mask_clouds=False):
+--------------------------------------------------------
+    Calculates all indices in rindcalc.naip.indices for NAIP image and outputs
+    into a specified output folder with the output file names being the name of
+    the function. i.e: NDVI.tif
+
+    **Parameters:**
+
+            **landsat_dir :: str, required**
+                * Folder path where all landsat bands for the scene are
+                  contained.
+
+             **out_dir :: str, required**
+                * File path of output directory.
+
+            **mask_clouds :: boolean, optional (default=False)**
+                * Whether or not to apply cloud mask to scene based of QA band.
+
+    **Example:**
+
+            .. code-block:: python
+
+               from rindalc import ls
+               ls.calculate_all('./LC08_L1TP_091086_20191222_20191223_01_RT',
+                             './.../ls_20191222_indices',
+                              False)
+
+
+-------------------------
+
+
 **Water Indices**
 ^^^^^^^^^^^^^^^^^
 
@@ -27,8 +59,8 @@ AWEIsh(landsat_dir, aweish_out, mask_clouds=False)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.AWEInsh('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.AWEInsh('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                              './.../AWEIsh.tif',
                               True)
 
@@ -56,13 +88,13 @@ AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.AWEInsh('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.AWEInsh('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                              './.../AWEInsh.tif',
                               True)
 
 
-NDMI(landsat_dir, ndmi_out)
+NDMI(landsat_dir, ndmi_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Normalized Difference Moisture Index with Landsat-8
     and outputs a TIFF raster file.
@@ -77,15 +109,18 @@ NDMI(landsat_dir, ndmi_out)
             **ndmi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.NDMI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.NDMI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDMI.tif')
 
-MNDWI(landsat_dir, mndwi_out)
+MNDWI(landsat_dir, mndwi_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Modified Normalized Difference Water Index with Landsat-8
     and outputs a TIFF raster file.
@@ -100,12 +135,15 @@ MNDWI(landsat_dir, mndwi_out)
             **mndwi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.MNDWI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.MNDWI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                            './.../NDMI.tif')
 
 --------------------------------------------------------------------------------
@@ -135,12 +173,12 @@ NDVI(landsat_dir, ndvi_out, mask_clouds=False)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.NDVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.NDVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDVI.tif',
                           True)
 
-GNDVI(landsat_dir, gndvi_out)
+GNDVI(landsat_dir, gndvi_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Green Normalized Difference Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
@@ -155,15 +193,18 @@ GNDVI(landsat_dir, gndvi_out)
             **gndvi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.GNDVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.GNDVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../GNDVI.tif')
 
-ARVI(landsat_dir, arvi_out)
+ARVI(landsat_dir, arvi_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Atmospherically Resistant Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
@@ -178,15 +219,18 @@ ARVI(landsat_dir, arvi_out)
             **arvi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.ARVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.ARVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../ARVI.tif')
 
-VARI(landsat_dir, vari_out)
+VARI(landsat_dir, vari_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Visual Atmospherically Resistant Index with Landsat-8
     and outputs a TIFF raster file.
@@ -201,16 +245,19 @@ VARI(landsat_dir, vari_out)
             **vari_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.VARI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.VARI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../VARI.tif')
 
-SAVI(landsat_dir, soil_brightness=0.5, savi_out)
---------------------------------------------------------
+SAVI(landsat_dir, savi_out, soil_brightness=0.5, mask_clouds=False)
+--------------------------------------------------------------------
     Calculates the Soil Adjusted Vegetation Index with Landsat-8
     and outputs a TIFF raster file.
 
@@ -222,17 +269,20 @@ SAVI(landsat_dir, soil_brightness=0.5, savi_out)
             **landsat_dir ::** *str, required*
                 * Folder path where all landsat bands for the scene are contained.
 
-            **soil_brightness ::** *float, required (default=0.5)*
-
             **savi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
+
+            **soil_brightness ::** *float, required (default=0.5)*
+
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
 
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.SAVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.SAVI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           0.75,
                           './.../SAVI.tif')
 
@@ -241,7 +291,7 @@ SAVI(landsat_dir, soil_brightness=0.5, savi_out)
 **Urban / Landscape Indices**
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-NDBI(landsat_dir, ndbi_out)
+NDBI(landsat_dir, ndbi_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Normalized Difference Built-up Index with Landsat-8
     and outputs a TIFF raster file.
@@ -256,15 +306,18 @@ NDBI(landsat_dir, ndbi_out)
             **ndbi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.NDBI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.NDBI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDBI.tif')
 
-NDBaI(landsat_dir, ndbai_out)
+NDBaI(landsat_dir, ndbai_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Normalized Difference Bareness Index with Landsat-8
     and outputs a TIFF raster file.
@@ -279,15 +332,18 @@ NDBaI(landsat_dir, ndbai_out)
             **ndbai_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.NDBaI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.NDBaI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NDBaI.tif')
 
-NBLI(landsat_dir, nbli_out)
+NBLI(landsat_dir, nbli_out, mask_clouds=False)
 -------------------------------------------------------
     Calculates the Normalized Bare Land Index with Landsat-8
     and outputs a TIFF raster file.
@@ -302,16 +358,19 @@ NBLI(landsat_dir, nbli_out)
             **nbli_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.NBLI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.NBLI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NBLI.tif')
 
 
-EBBI(landsat_dir, ebbi_out)
+EBBI(landsat_dir, ebbi_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Enhanced Built-up and Bareness Index with Landsat-8
     and outputs a TIFF raster file.
@@ -326,16 +385,19 @@ EBBI(landsat_dir, ebbi_out)
             **ebbi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.EBBI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.EBBI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../EBBI.tif')
 
 
-UI(landsat_dir, ui_out)
+UI(landsat_dir, ui_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Urban Index with Landsat-8 and outputs a TIFF raster file.
 
@@ -349,12 +411,15 @@ UI(landsat_dir, ui_out)
             **ui_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.UI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.UI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../UI.tif')
 
 --------------------------------------------------------------------------------
@@ -362,7 +427,7 @@ UI(landsat_dir, ui_out)
 **Burn / Fire Indices**
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-NBRI(landsat_dir, nbri_out)
+NBRI(landsat_dir, nbri_out, mask_clouds=False)
 --------------------------------------------------------
     Calculates the Normalized Burn Ratio Index with Landsat-8 and outputs a
     TIFF raster file.
@@ -377,10 +442,14 @@ NBRI(landsat_dir, nbri_out)
             **nbri_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+            **mask_clouds ::** *boolean, optional (default=False)*
+                * Whether or not to apply cloud mask to scene based of QA band.
+
     **Example:**
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.ls.NBRI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
+               from rindalc import ls
+               ls.NBRI('./.../LC08_L1TP_091086_20191222_20191223_01_RT',
                           './.../NBRI.tif')
+
