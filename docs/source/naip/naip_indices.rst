@@ -1,6 +1,29 @@
 Index Modules | rindcalc.naip.indices
 =====================================
 
+calculate_all(in_naip, our_dir):
+--------------------------------------------------------
+    Calculates all indices in rindcalc.naip.indices for NAIP image and outputs
+    into a specified output folder with the output file names being the name of
+    the function. i.e: NDVI.tif
+
+    **Parameters:**
+
+            **in_naip :: str, required**
+                * File path for NAIP image.
+
+             **out_dir :: str, required**
+                * File path of output directory.
+
+    **Example:**
+
+            .. code-block:: python
+
+               from rindcalc import naip
+               naip.calculate_all('./.../m_3008101_ne_17_1_20151017.tif',
+                          './.../3008101_ne_17_indices')
+
+
 Vegetation Indices
 ^^^^^^^^^^^^^^^^^^
 
@@ -23,8 +46,8 @@ ARVI(in_naip, arvi_out)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.naip.ARVI('./.../m_3008101_ne_17_1_20151017.tif',
+               from rindcalc import naip
+               naip.ARVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../ARVI.tif')
 
 VARI(in_naip, vari_out)
@@ -46,8 +69,8 @@ VARI(in_naip, vari_out)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.naip.VARI('./.../m_3008101_ne_17_1_20151017.tif',
+               from rindcalc import naip
+               naip.VARI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../VARI.tif')
 
 nVARI(in_naip, nvari_out)
@@ -71,8 +94,8 @@ nVARI(in_naip, nvari_out)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.naip.nVARI('./.../m_3008101_ne_17_1_20151017.tif',
+               from rindcalc import naip
+               naip.nVARI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../nVARI.tif')
 
 NDVI(in_naip, ndvi_out)
@@ -94,8 +117,8 @@ NDVI(in_naip, ndvi_out)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.naip.NDVI('./.../m_3008101_ne_17_1_20151017.tif',
+               from rindcalc import naip
+               naip.NDVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../NDVI.tif')
 
 SAVI(in_naip, soil_brightness=0.5, savi_out)
@@ -120,8 +143,8 @@ SAVI(in_naip, soil_brightness=0.5, savi_out)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.naip.SAVI('./.../m_3008101_ne_17_1_20151017.tif',
+               from rindcalc import naip
+               naip.SAVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../SAVI.tif')
 
 RedRatio(in_naip, redratio_out)
@@ -149,6 +172,6 @@ RedRatio(in_naip, redratio_out)
 
             .. code-block:: python
 
-               import rindcalc as rc
-               rc.naip.RedRatio('./.../m_3008101_ne_17_1_20151017.tif',
+               from rindcalc import naip
+               naip.RedRatio('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../Red_Ratio.tif')
