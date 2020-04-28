@@ -47,7 +47,7 @@ def ARVI(in_naip, arvi_out=None):
         return equation
 
 
-def VARI(in_naip, vari_out):
+def VARI(in_naip, vari_out=None):
     """
      VARI(in_naip, vari_out)
 
@@ -85,7 +85,7 @@ def VARI(in_naip, vari_out):
         return equation
 
 
-def nVARI(in_naip, nvari_out):
+def nVARI(in_naip, nvari_out=None):
     """
     nVARI(in_naip, vari_out)
 
@@ -126,7 +126,7 @@ def nVARI(in_naip, nvari_out):
         return equation
 
 
-def NDVI(in_naip, ndvi_out):
+def NDVI(in_naip, ndvi_out=None):
     """
     NDVI(in_naip, ndvi_out, mask_clouds=False)
 
@@ -163,7 +163,7 @@ def NDVI(in_naip, ndvi_out):
         return equation
 
 
-def SAVI(in_naip, savi_out, soil_brightness=0.5):
+def SAVI(in_naip, savi_out=None, soil_brightness=0.5):
     """
     SAVI(in_naip, soil_brightness=0.5, savi_out)
 
@@ -203,7 +203,7 @@ def SAVI(in_naip, savi_out, soil_brightness=0.5):
         return equation
 
 
-def RedRatio(in_naip, redratio_out):
+def RedRatio(in_naip, redratio_out=None):
     """
     Redequation(in_naip, soil_brightness=0.5, savi_out)
 
