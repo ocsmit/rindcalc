@@ -1,3 +1,8 @@
+# ------------------------------------------------------------------------------
+# Name: rindcalc.naip.indices.py
+# Author: Owen Smith, University of North Georgia IESA
+# ------------------------------------------------------------------------------
+
 import os
 from osgeo import gdal
 import numpy as np

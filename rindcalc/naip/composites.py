@@ -1,3 +1,8 @@
+# ------------------------------------------------------------------------------
+# Name: rindcalc.naip.composites.py
+# Author: Owen Smith, University of North Georgia IESA
+# ------------------------------------------------------------------------------
+
 import numpy as np
 from osgeo import gdal
 from rindcalc.band_utils import norm

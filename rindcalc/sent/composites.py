@@ -1,3 +1,8 @@
+# ------------------------------------------------------------------------------
+# Name: rindcalc.sent.composites.py
+# Author: Owen Smith, University of North Georgia IESA
+# ------------------------------------------------------------------------------
+
 import os
 import numpy as np
 from osgeo import gdal

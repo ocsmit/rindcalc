@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.cloud_masking.py
+# Name: rindcalc.ls.cloud_masking.py
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 

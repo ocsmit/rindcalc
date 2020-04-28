@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.indices.py
+# Name: rindcalc.ls.indices.py
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 

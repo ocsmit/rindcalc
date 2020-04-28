@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.composites.py
+# Name: rindcalc.ls.composites.py
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 
