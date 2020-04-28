@@ -5,6 +5,7 @@ from glob import glob
 from rindcalc.band_utils import norm
 from rindcalc.sent.sent_utils import get_bands
 
+
 def RGB(sent_dir, out_composite):
 
     bands = get_bands(sent_dir)

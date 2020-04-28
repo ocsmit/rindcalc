@@ -84,7 +84,6 @@ def ARVI(sent_dir, out_raster):
     return equation, print('Finished')
 
 
-
 def ARVI(sent_dir, out_raster):
 
     bands = get_bands(sent_dir)
