@@ -66,5 +66,5 @@ html_theme_options = {
     'header_scroll': False,
     'show_drawer_title': True,
     'show_footer': False,
-    'fixed_drawer': True,
+    'fixed_drawer': False
 }
