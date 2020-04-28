@@ -11,7 +11,7 @@ from .cloud_masking import cloud_mask_array
 from rindcalc.band_utils import save_raster
 
 
-def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
+def AWEIsh(landsat_dir, aweish_out=None, mask_clouds=False):
     """
     AWEIsh(landsat_dir, aweish_out, mask_clouds=False)
 
@@ -57,19 +57,26 @@ def AWEIsh(landsat_dir, aweish_out, mask_clouds=False):
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
     equation = ((blue_band + 2.5 * green_band - 1.5 * (nir_band + swir1_band)
-               - 0.25 * swir2_band) / (blue_band + green_band + nir_band +
-                                       swir1_band + swir2_band))
+                 - 0.25 * swir2_band) / (blue_band + green_band + nir_band +
+                                         swir1_band + swir2_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, aweish_out, snap)
-        return masked, print(aweish_out)
-    if not mask_clouds:
-        save_raster(equation, aweish_out, snap)
-        return equation, print(aweish_out)
+    if aweish_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, aweish_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, aweish_out, snap)
+            return equation
+    if aweish_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
+def AWEInsh(landsat_dir, aweinsh_out=None, mask_clouds=False):
     """
     AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)
 
@@ -114,16 +121,23 @@ def AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False):
                  (0.25 * nir_band + 2.75 * swir1_band)) /
                 (green_band + swir1_band + nir_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, aweinsh_out, snap)
-        return masked, print(aweinsh_out)
-    if not mask_clouds:
-        save_raster(equation, aweinsh_out, snap)
-        return equation, print(aweinsh_out)
+    if aweinsh_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, aweinsh_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, aweinsh_out, snap)
+            return equation
+    if aweinsh_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def NDMI(landsat_dir, ndmi_out, mask_clouds=False):
+def NDMI(landsat_dir, ndmi_out=None, mask_clouds=False):
     """
     NDMI(landsat_dir, ndmi_out)
 
@@ -158,16 +172,23 @@ def NDMI(landsat_dir, ndmi_out, mask_clouds=False):
     # calculation
     equation = ((nir_band - swir1_band) / (nir_band + swir1_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, ndmi_out, snap)
-        return masked, print(ndmi_out)
-    if not mask_clouds:
-        save_raster(equation, ndmi_out, snap)
-        return equation, print(ndmi_out)
+    if ndmi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, ndmi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, ndmi_out, snap)
+            return equation
+    if ndmi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def MNDWI(landsat_dir, mndwi_out, mask_clouds=False):
+def MNDWI(landsat_dir, mndwi_out=None, mask_clouds=False):
     """
     MNDWI(landsat_dir, mndwi_out)
 
@@ -202,16 +223,23 @@ def MNDWI(landsat_dir, mndwi_out, mask_clouds=False):
     # calculation
     equation = ((green_band - swir1_band) / (green_band + swir1_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, mndwi_out, snap)
-        return masked, print(mndwi_out)
-    if not mask_clouds:
-        save_raster(equation, mndwi_out, snap)
-        return equation, print(mndwi_out)
+    if mndwi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, mndwi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, mndwi_out, snap)
+            return equation
+    if mndwi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
+def NDVI(landsat_dir, ndvi_out=None, mask_clouds=False):
     """
     NDVI(landsat_dir, ndvi_out, mask_clouds=False)
 
@@ -248,16 +276,23 @@ def NDVI(landsat_dir, ndvi_out, mask_clouds=False):
 
     equation = ((nir_band - red_band) / (nir_band + red_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, ndvi_out, snap)
-        return masked, print(ndvi_out)
-    if not mask_clouds:
-        save_raster(equation, ndvi_out, snap)
-        return equation, print(ndvi_out)
+    if ndvi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, ndvi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, ndvi_out, snap)
+            return equation
+    if ndvi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def GNDVI(landsat_dir, gndvi_out, mask_clouds=False):
+def GNDVI(landsat_dir, gndvi_out=None, mask_clouds=False):
     """
     GNDVI(landsat_dir, gndvi_out)
 
@@ -293,16 +328,23 @@ def GNDVI(landsat_dir, gndvi_out, mask_clouds=False):
     # Perform Calculation
     equation = ((nir_band - green_band) / (nir_band + green_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, gndvi_out, snap)
-        return masked, print(gndvi_out)
-    if not mask_clouds:
-        save_raster(equation, gndvi_out, snap)
-        return equation, print(gndvi_out)
+    if gndvi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, gndvi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, gndvi_out, snap)
+            return equation
+    if gndvi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def SAVI(landsat_dir, savi_out, soil_brightness=0.5, mask_clouds=False):
+def SAVI(landsat_dir, savi_out=None, soil_brightness=0.5, mask_clouds=False):
     """
     SAVI(landsat_dir, soil_brightness=0.5, savi_out)
 
@@ -341,16 +383,23 @@ def SAVI(landsat_dir, savi_out, soil_brightness=0.5, mask_clouds=False):
     equation = ((nir_band - red_band) /
                 (nir_band + red_band + soil_brightness)) * (1 + soil_brightness)
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, savi_out, snap)
-        return masked, print(savi_out)
-    if not mask_clouds:
-        save_raster(equation, savi_out, snap)
-        return equation, print(savi_out)
+    if savi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, savi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, savi_out, snap)
+            return equation
+    if savi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def ARVI(landsat_dir, arvi_out, mask_clouds=False):
+def ARVI(landsat_dir, arvi_out=None, mask_clouds=False):
     """
     ARVI(landsat_dir, arvi_out)
 
@@ -389,16 +438,23 @@ def ARVI(landsat_dir, arvi_out, mask_clouds=False):
     equation = ((nir_band - (2 * red_band) + blue_band) /
                 (nir_band + (2 * red_band) + blue_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, arvi_out, snap)
-        return masked, print(arvi_out)
-    if not mask_clouds:
-        save_raster(equation, arvi_out, snap)
-        return equation, print(arvi_out)
+    if arvi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, arvi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, arvi_out, snap)
+            return equation
+    if arvi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def VARI(landsat_dir, vari_out, mask_clouds=False):
+def VARI(landsat_dir, vari_out=None, mask_clouds=False):
     """
     VARI(landsat_dir, vari_out)
 
@@ -434,16 +490,23 @@ def VARI(landsat_dir, vari_out, mask_clouds=False):
 
     equation = ((green_band - red_band) / (green_band + red_band - blue_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, vari_out, snap)
-        return masked, print(vari_out)
-    if not mask_clouds:
-        save_raster(equation, vari_out, snap)
-        return equation, print(vari_out)
+    if vari_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, vari_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, vari_out, snap)
+            return equation
+    if vari_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def NDBI(landsat_dir, ndbi_out, mask_clouds=False):
+def NDBI(landsat_dir, ndbi_out=None, mask_clouds=False):
     """
     NDBI(landsat_dir, ndbi_out)
 
@@ -479,16 +542,23 @@ def NDBI(landsat_dir, ndbi_out, mask_clouds=False):
     equation = ((swir1_band - nir_band) / (swir1_band + nir_band))
 
     # Save Raster
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, ndbi_out, snap)
-        return masked, print(ndbi_out)
-    if not mask_clouds:
-        save_raster(equation, ndbi_out, snap)
-        return equation, print(ndbi_out)
+    if ndbi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, ndbi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, ndbi_out, snap)
+            return equation
+    if ndbi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def NDBaI(landsat_dir, ndbai_out, mask_clouds=False):
+def NDBaI(landsat_dir, ndbai_out=None, mask_clouds=False):
     """
     NDBaI(landsat_dir, ndbai_out)
 
@@ -524,16 +594,23 @@ def NDBaI(landsat_dir, ndbai_out, mask_clouds=False):
     # Perform Calculation
     equation = ((swir1_band - tir_band) / (swir1_band + tir_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, ndbai_out, snap)
-        return masked, print(ndbai_out)
-    if not mask_clouds:
-        save_raster(equation, ndbai_out, snap)
-        return equation, print(ndbai_out)
+    if ndbai_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, ndbai_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, ndbai_out, snap)
+            return equation
+    if ndbai_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def NBLI(landsat_dir, nbli_out, mask_clouds=False):
+def NBLI(landsat_dir, nbli_out=None, mask_clouds=False):
     """
     NBLI(landsat_dir, nbli_out)
 
@@ -569,16 +646,23 @@ def NBLI(landsat_dir, nbli_out, mask_clouds=False):
     # Perform Calculation
     equation = ((red_band - tir_band) / (red_band + tir_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, nbli_out, snap)
-        return masked, print(nbli_out)
-    if not mask_clouds:
-        save_raster(equation, nbli_out, snap)
-        return equation, print(nbli_out)
+    if nbli_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, nbli_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, nbli_out, snap)
+            return equation
+    if nbli_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def EBBI(landsat_dir, ebbi_out, mask_clouds=False):
+def EBBI(landsat_dir, ebbi_out=None, mask_clouds=False):
     """
     EBBI(landsat_dir, ebbi_out)
 
@@ -619,16 +703,23 @@ def EBBI(landsat_dir, ebbi_out, mask_clouds=False):
     ebbi_mask = np.ma.MaskedArray(ebbi, mask=(ebbi == 0))
     ebbi_mask.reshape(ebbi.shape)
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, ebbi_mask)
-        save_raster(masked, ebbi_mask, snap)
-        return masked, print(ebbi_out)
-    if not mask_clouds:
-        save_raster(ebbi_mask, ebbi_out, snap)
-        return ebbi_mask, print(ebbi_out)
+    if ebbi_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, ebbi_mask)
+            save_raster(masked, ebbi_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(ebbi_mask, ebbi_out, snap)
+            return ebbi_mask
+    if ebbi_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, ebbi_mask)
+            return masked
+        if not mask_clouds:
+            return ebbi_mask
 
 
-def UI(landsat_dir, ui_out, mask_clouds=False):
+def UI(landsat_dir, ui_out=None, mask_clouds=False):
     """
     UI(landsat_dir, ui_out)
 
@@ -662,16 +753,23 @@ def UI(landsat_dir, ui_out, mask_clouds=False):
     # Perform Calculation
     equation = ((swir2_band - nir_band) / (swir2_band + nir_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, ui_out, snap)
-        return masked, print(ui_out)
-    if not mask_clouds:
-        save_raster(equation, ui_out, snap)
-        return equation, print(ui_out)
+    if ui_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, ui_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, ui_out, snap)
+            return equation
+    if ui_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
-def NBRI(landsat_dir, nbri_out, mask_clouds=False):
+def NBRI(landsat_dir, nbri_out=None, mask_clouds=False):
     """
     NBRI(landsat_dir, nbri_out)
 
@@ -707,13 +805,20 @@ def NBRI(landsat_dir, nbri_out, mask_clouds=False):
     # calculation
     equation = ((nir_band - swir2_band) / (nir_band + swir2_band))
 
-    if mask_clouds:
-        masked = cloud_mask_array(landsat_dir, equation)
-        save_raster(masked, nbri_out, snap)
-        return masked, print(nbri_out)
-    if not mask_clouds:
-        save_raster(equation, nbri_out, snap)
-        return equation, print(nbri_out)
+    if nbri_out is not None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            save_raster(masked, nbri_out, snap)
+            return masked
+        if not mask_clouds:
+            save_raster(equation, nbri_out, snap)
+            return equation
+    if nbri_out is None:
+        if mask_clouds:
+            masked = cloud_mask_array(landsat_dir, equation)
+            return masked
+        if not mask_clouds:
+            return equation
 
 
 def calculate_all(landsat_dir, out_dir, mask_clouds=False):
