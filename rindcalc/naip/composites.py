@@ -50,4 +50,3 @@ def FalseColor(in_naip, out_composite):
     dst_ds = None
 
     print('False Color composite created.')
-    
