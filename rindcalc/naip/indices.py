@@ -9,7 +9,7 @@ import numpy as np
 from rindcalc.band_utils import save_raster, norm
 
 
-def ARVI(in_naip, arvi_out):
+def ARVI(in_naip, arvi_out=None):
     """
     ARVI(in_naip, arvi_out)
 
@@ -37,11 +37,14 @@ def ARVI(in_naip, arvi_out):
     snap = naip
 
     # Perform Calculation
-    ratio = ((nir_band - (2 * red_band) + blue_band) /
-            (nir_band + (2 * red_band) + blue_band))
-    # Save Raster
-    save_raster(ratio, arvi_out, snap)
-    return ratio, print(arvi_out)
+    equation = ((nir_band - (2 * red_band) + blue_band) /
+                (nir_band + (2 * red_band) + blue_band))
+
+    if arvi_out is not None:
+        save_raster(equation, arvi_out, snap)
+        return equation
+    if arvi_out is None:
+        return equation
 
 
 def VARI(in_naip, vari_out):
@@ -72,12 +75,14 @@ def VARI(in_naip, vari_out):
     snap = naip
 
     # Perform Calculation
-    ratio = ((2 * green_band - (red_band + blue_band)) /
+    equation = ((2 * green_band - (red_band + blue_band)) /
             (2 * green_band + (red_band + blue_band)))
-    # Save Raster
-    save_raster(ratio, vari_out, snap)
 
-    return ratio, print(vari_out)
+    if vari_out is not None:
+        save_raster(equation, vari_out, snap)
+        return equation
+    if vari_out is None:
+        return equation
 
 
 def nVARI(in_naip, nvari_out):
@@ -110,13 +115,15 @@ def nVARI(in_naip, nvari_out):
     snap = naip
 
     # Perform Calculation
-    ratio = ((2 * green_band - (red_band + blue_band)) /
+    equation = ((2 * green_band - (red_band + blue_band)) /
             (2 * green_band + (red_band + blue_band)))
-    normalized_vari = norm(ratio, 1, 1)
-    # Save Raster
-    save_raster(normalized_vari, nvari_out, snap)
+    normalized_vari = norm(equation, 1, 1)
 
-    return normalized_vari, print(nvari_out)
+    if nvari_out is not None:
+        save_raster(equation, nvari_out, snap)
+        return equation
+    if nvari_out is None:
+        return equation
 
 
 def NDVI(in_naip, ndvi_out):
@@ -146,12 +153,14 @@ def NDVI(in_naip, ndvi_out):
     snap = naip
 
     # Perform Calculation
-    ratio = ((nir_band - red_band) /
-            (nir_band + red_band))
-    # Save Raster
-    save_raster(ratio, ndvi_out, snap)
+    equation = ((nir_band - red_band) /
+                (nir_band + red_band))
 
-    return ratio, print(ndvi_out)
+    if ndvi_out is not None:
+        save_raster(equation, ndvi_out, snap)
+        return equation
+    if ndvi_out is None:
+        return equation
 
 
 def SAVI(in_naip, savi_out, soil_brightness=0.5):
@@ -184,29 +193,31 @@ def SAVI(in_naip, savi_out, soil_brightness=0.5):
     snap = naip
 
     # Perform Calculation
-    ratio = (((nir_band - red_band) / (nir_band + red_band + soil_brightness))
-            * (1 + soil_brightness))
-    # Save Raster
-    save_raster(ratio, savi_out, snap)
+    equation = (((nir_band - red_band) / (nir_band + red_band + soil_brightness))
+                * (1 + soil_brightness))
 
-    return ratio, print(savi_out)
+    if savi_out is not None:
+        save_raster(equation, savi_out, snap)
+        return equation
+    if savi_out is None:
+        return equation
 
 
 def RedRatio(in_naip, redratio_out):
     """
-    RedRatio(in_naip, soil_brightness=0.5, savi_out)
+    Redequation(in_naip, soil_brightness=0.5, savi_out)
 
     Calculates the Soil Adjusted Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
 
-    ratio = (blue_band + red_band + green_band) / red_band
+    equation = (blue_band + red_band + green_band) / red_band
 
     Parameters:
 
             in_naip :: str, required
                 * File path for NAIP image.
 
-            redratio_out :: str, required
+            redequation_out :: str, required
                 * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
@@ -220,11 +231,13 @@ def RedRatio(in_naip, redratio_out):
     snap = naip
 
     # Perform Calculation
-    ratio = (blue_band + red_band + green_band) / red_band
-    # Save Raster
-    save_raster(ratio, redratio_out, snap)
+    equation = (blue_band + red_band + green_band) / red_band
 
-    return ratio, print(redratio_out)
+    if redratio_out is not None:
+        save_raster(equation, redratio_out, snap)
+        return equation
+    if redratio_out is None:
+        return equation
 
 
 def calculate_all(in_naip, out_dir):
@@ -251,6 +264,6 @@ def calculate_all(in_naip, out_dir):
     ARVI(in_naip, os.path.join(out_dir, 'ARVI.tif'))
     VARI(in_naip, os.path.join(out_dir, 'VARI.tif'))
     nVARI(in_naip, os.path.join(out_dir, 'nVARI.tif'))
-    RedRatio(in_naip, os.path.join(out_dir, 'RedRatio.tif'))
+    RedRatio(in_naip, os.path.join(out_dir, 'Redequation.tif'))
 
     print('All NAIP indices saved to ', out_dir) 
