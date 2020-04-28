@@ -1,7 +1,5 @@
-import os
 import numpy as np
 from osgeo import gdal
-from glob import glob
 from rindcalc.band_utils import norm
 
 
@@ -52,3 +50,4 @@ def FalseColor(in_naip, out_composite):
     dst_ds = None
 
     print('False Color composite created.')
+    
