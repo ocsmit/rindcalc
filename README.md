@@ -6,7 +6,7 @@
 
 [![Documentation Status](https://readthedocs.org/projects/rindcalc/badge/?version=latest)](https://rindcalc.readthedocs.io/en/latest/?badge=latest)
 [![Conda Platforms](https://anaconda.org/rindcalc/rindcalc/badges/platforms.svg)](https://anaconda.org/rindcalc/rindcalc)
-
+[![DOI](https://zenodo.org/badge/232691170.svg)](https://zenodo.org/badge/latestdoi/232691170)
 ---
 
 #### For more information visit the [Rindcalc documentation](https://rindcalc.readthedocs.io/en/latest/)
