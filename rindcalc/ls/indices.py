@@ -1,7 +1,6 @@
 # ------------------------------------------------------------------------------
 # Name: rindcalc.indices.py
 # Author: Owen Smith, University of North Georgia IESA
-# Purpose: Create a functioning python module for Landsat 8 index calculations
 # ------------------------------------------------------------------------------
 
 import os

@@ -1,7 +1,6 @@
 # ------------------------------------------------------------------------------
 # Name: rindcalc.cloud_masking.py
 # Author: Owen Smith, University of North Georgia IESA
-# Purpose: Cloud mask function for rindcalc. Will be combined with band_utils
 # ------------------------------------------------------------------------------
 
 import os
