@@ -12,10 +12,8 @@ from glob import glob
 
 def cloud_mask_array(landsat_dir, array):
     """
-
-    :param landsat_dir:
-    :param band:
-    :return:
+    This function masks clouds in Landsat-8 imagery using the QA band and
+    returns an array to save as a raster.
     """
     qa = glob(os.path.join(landsat_dir, '*BQA*'))
     gdal.UseExceptions()
