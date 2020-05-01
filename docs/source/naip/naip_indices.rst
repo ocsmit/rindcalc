@@ -1,7 +1,7 @@
 Index Modules | rindcalc.naip.indices
 =====================================
 
-**Calculate All**
+Calculate All
 ^^^^^^^^^^^^^^^^^
 
 calculate_all(in_naip, our_dir):
@@ -30,7 +30,7 @@ calculate_all(in_naip, our_dir):
 Vegetation Indices
 ^^^^^^^^^^^^^^^^^^
 
-ARVI(in_naip, arvi_out)
+ARVI(in_naip, arvi_out=None)
 --------------------------------------------------------
     Calculates the Atmospherically Resistant Vegetation Index with NAIP Imagery
     and outputs a TIFF raster file.
@@ -45,6 +45,8 @@ ARVI(in_naip, arvi_out)
             **arvi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+    **Returns: Index array**
+                A NumPy array of the calculated index.
 
 
     **Example:**
@@ -55,7 +57,7 @@ ARVI(in_naip, arvi_out)
                naip.ARVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../ARVI.tif')
 
-VARI(in_naip, vari_out)
+VARI(in_naip, vari_out=None)
 --------------------------------------------------------
     Calculates the Visual Atmospherically Resistant Index with NAIP Imagery
     and outputs a TIFF raster file.
@@ -70,6 +72,9 @@ VARI(in_naip, vari_out)
             **vari_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+    **Returns: Index array**
+                A NumPy array of the calculated index.
+
     **Example:**
 
             .. code-block:: python
@@ -78,7 +83,7 @@ VARI(in_naip, vari_out)
                naip.VARI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../VARI.tif')
 
-nVARI(in_naip, nvari_out)
+nVARI(in_naip, nvari_out=None)
 --------------------------------------------------------
     Calculates the Visual Atmospherically Resistant Index with NAIP Imagery
     and outputs a TIFF raster file.
@@ -103,7 +108,7 @@ nVARI(in_naip, nvari_out)
                naip.nVARI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../nVARI.tif')
 
-NDVI(in_naip, ndvi_out)
+NDVI(in_naip, ndvi_out=None)
 --------------------------------------------------------
     Calculates the Normalized Difference Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
@@ -118,6 +123,9 @@ NDVI(in_naip, ndvi_out)
             **ndvi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
 
+    **Returns: Index array**
+                A NumPy array of the calculated index.
+
     **Example:**
 
             .. code-block:: python
@@ -126,7 +134,7 @@ NDVI(in_naip, ndvi_out)
                naip.NDVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../NDVI.tif')
 
-SAVI(in_naip, soil_brightness=0.5, savi_out)
+SAVI(in_naip, soil_brightness=0.5, savi_out=None)
 --------------------------------------------------------
     Calculates the Soil Adjusted Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
@@ -144,6 +152,9 @@ SAVI(in_naip, soil_brightness=0.5, savi_out)
 
             **soil_brightness ::** *float, required (default=0.5)*
 
+    **Returns: Index array**
+                A NumPy array of the calculated index.
+
     **Example:**
 
             .. code-block:: python
@@ -152,8 +163,8 @@ SAVI(in_naip, soil_brightness=0.5, savi_out)
                naip.SAVI('./.../m_3008101_ne_17_1_20151017.tif',
                           './.../SAVI.tif')
 
-RedRatio(in_naip, redratio_out)
-----------------------------------
+RedRatio(in_naip, redratio_out=None)
+-------------------------------------
 
     Calculates red band ratio with NAIP imagery
     and outputs a TIFF raster file.
@@ -172,6 +183,9 @@ RedRatio(in_naip, redratio_out)
 
             redratio_out :: str, required
                 * Output path and file name for calculated index raster.
+
+    **Returns: Index array**
+                A NumPy array of the calculated index.
 
     **Example:**
 
