@@ -1,1 +1,1 @@
-sphinx_materialdesign_theme
+pydata-sphinx-theme
