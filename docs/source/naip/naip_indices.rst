@@ -1,6 +1,9 @@
 Index Modules | rindcalc.naip.indices
 =====================================
 
+**Calculate All**
+^^^^^^^^^^^^^^^^^
+
 calculate_all(in_naip, our_dir):
 --------------------------------------------------------
     Calculates all indices in rindcalc.naip.indices for NAIP image and outputs
@@ -41,6 +44,8 @@ ARVI(in_naip, arvi_out)
 
             **arvi_out ::** *str, required*
                 * Output path and file name for calculated index raster.
+
+
 
     **Example:**
 

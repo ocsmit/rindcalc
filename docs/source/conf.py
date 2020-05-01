@@ -50,21 +50,8 @@ exclude_patterns = []
 
 html_logo = 'rindcalc logo_color.png'
 
-
-html_theme = 'sphinx_materialdesign_theme'
+html_theme = 'pydata_sphinx_theme'
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
-
-html_theme_options = {
-    'header_links': [
-        ('GitHub', "https://github.com/ocsmit/rindcalc", True, 'link')
-    ],
-    'primary_color': 'teal',
-    'accent_color': 'indigo',
-    'header_scroll': False,
-    'show_drawer_title': True,
-    'show_footer': False,
-    'fixed_drawer': False
-}
