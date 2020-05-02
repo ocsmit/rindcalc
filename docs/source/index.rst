@@ -128,5 +128,5 @@ and add the module to path with sys.path.append.
 
 
 :Authors: Owen Smith, University of North Georgia IESA
-:Version: 2.0.4
+:Version: 2.0.5
 :License: GPL v3.0
