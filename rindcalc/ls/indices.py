@@ -27,8 +27,11 @@ def AWEIsh(landsat_dir, aweish_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            aweish_out :: str, required
+            aweish_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
 
             mask_clouds :: boolean, optional (default=False)
                 * Whether or not to apply cloud mask to scene based of QA band.
@@ -92,8 +95,11 @@ def AWEInsh(landsat_dir, aweinsh_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            aweinsh_out :: str, required
+            aweinsh_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
 
             mask_clouds :: boolean, optional (default=False)
                 * Whether or not to apply cloud mask to scene based of QA band.
@@ -152,8 +158,11 @@ def NDMI(landsat_dir, ndmi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndmi_out :: str, required
+            ndmi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -203,8 +212,11 @@ def MNDWI(landsat_dir, mndwi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            mndwi_out :: str, required
+            mndwi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -254,7 +266,7 @@ def NDVI(landsat_dir, ndvi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndvi_out :: str, required
+            ndvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -307,9 +319,11 @@ def GNDVI(landsat_dir, gndvi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            gndvi_out :: str, required
+            gndvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     green = glob(os.path.join(landsat_dir, '*B3*'))
@@ -360,10 +374,13 @@ def SAVI(landsat_dir, savi_out=None, soil_brightness=0.5, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            savi_out :: str, required
+            savi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             soil_brightness :: float, required (default=0.5)
+
+             mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -414,8 +431,11 @@ def ARVI(landsat_dir, arvi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            arvi_out :: str, required
+            arvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -469,8 +489,11 @@ def VARI(landsat_dir, vari_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            vari_out :: str, required
+            vari_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     blue = glob(os.path.join(landsat_dir, '*B2*'))
@@ -521,8 +544,11 @@ def NDBI(landsat_dir, ndbi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndbi_out :: str, required
+            ndbi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -573,9 +599,11 @@ def NDBaI(landsat_dir, ndbai_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndbai_out :: str, required
+            ndbai_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     swir1 = glob(os.path.join(landsat_dir, '*B6*'))
@@ -625,9 +653,11 @@ def NBLI(landsat_dir, nbli_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            nbli_out :: str, required
+            nbli_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -677,8 +707,11 @@ def EBBI(landsat_dir, ebbi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ebbi_out :: str, required
+            ebbi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -733,8 +766,11 @@ def UI(landsat_dir, ui_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ui_out :: str, required
+            ui_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
+
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))
@@ -784,9 +820,11 @@ def NBRI(landsat_dir, nbri_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            nbri_out :: str, required
+            nbri_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
+            mask_clouds :: boolean, optional (default=False)
+                * Whether or not to apply cloud mask to scene based of QA band.
     """
     # Create list with file names
     nir = glob(os.path.join(landsat_dir, '*B5*'))

@@ -26,6 +26,7 @@ Satellites & Imagery
 -------------------
 
 Calculating the ARVI of a NAIP tile and saving as a raster.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -45,7 +46,25 @@ Output ARVI raster:
        :height: 574.7px
 
 
+Using in conjunction with matplotlib
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. code-block:: python
+
+   from rindcalc import ls
+   import matplotlib.pyplot as plt
+
+   aweish = ls.AWEIsh('/landsat_8/2019_11_28')
+   plt.imshow(i, 'ocean')
+   plt.title('AWEIsh - Water Index')
+   plt.show()
+
+.. image:: https://user-images.githubusercontent.com/55674113/80848987-4930e680-8be3-11ea-9564-a1fabd9c32e8.png
+   :alt: False color composite output
+
+
 Creating a false color composite of a Landsat-8 Scene.
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
 
@@ -101,7 +120,6 @@ and add the module to path with sys.path.append.
    :caption: Contents
    :maxdepth: 1
 
-   install
    landsat/Landsat-8
    naip/naip
    band_utils

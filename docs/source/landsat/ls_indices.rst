@@ -4,6 +4,7 @@ Index Modules | rindcalc.ls.indices
 **Calculate All**
 ^^^^^^^^^^^^^^^^^
 
+
 calculate_all(landsat_dir, our_dir, mask_clouds=False):
 --------------------------------------------------------------------------------
     Calculates all indices in rindcalc.naip.indices for NAIP image and outputs

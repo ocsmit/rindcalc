@@ -23,7 +23,7 @@ def ARVI(in_naip, arvi_out=None):
             in_naip :: str, required
                 * File path for NAIP image.
 
-            arvi_out :: str, required
+            arvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
@@ -61,7 +61,7 @@ def VARI(in_naip, vari_out=None):
             in_naip :: str, required
                 * File path for NAIP image.
 
-            vari_out :: str, required
+            vari_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
@@ -101,7 +101,7 @@ def nVARI(in_naip, nvari_out=None):
             in_naip :: str, required
                 * File path for NAIP image.
 
-            nvari_out :: str, required
+            nvari_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
@@ -140,7 +140,7 @@ def NDVI(in_naip, ndvi_out=None):
             in_naip :: str, required
                 * File path for NAIP image.
 
-            ndvi_out :: str, required
+            ndvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
@@ -178,7 +178,7 @@ def SAVI(in_naip, savi_out=None, soil_brightness=0.5):
             in_naip :: str, required
                 *File path for NAIP image.
 
-            savi_out :: str, required
+            savi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             soil_brightness :: float, required (default=0.5)
@@ -217,7 +217,7 @@ def RedRatio(in_naip, redratio_out=None):
             in_naip :: str, required
                 * File path for NAIP image.
 
-            redequation_out :: str, required
+            redratio_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
     gdal.PushErrorHandler('CPLQuietErrorHandler')
