@@ -72,7 +72,7 @@ def AWEInsh(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            aweinsh_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -111,7 +111,7 @@ def NDMI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndmi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -148,7 +148,7 @@ def MNDWI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            mndwi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -170,7 +170,7 @@ def MNDWI(landsat_dir, out_tif=None, mask_clouds=False):
     return out_ras
 
 
-def NDVI(landsat_dir, ndvi_out=None, mask_clouds=False):
+def NDVI(landsat_dir, out_tif=None, mask_clouds=False):
     """
     NDVI(landsat_dir, ndvi_out, mask_clouds=False)
 
@@ -185,7 +185,7 @@ def NDVI(landsat_dir, ndvi_out=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndvi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -259,7 +259,7 @@ def SAVI(landsat_dir, out_tif=None, soil_brightness=0.5, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            savi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             soil_brightness :: float, required (default=0.5)
@@ -299,7 +299,7 @@ def ARVI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            arvi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -336,7 +336,7 @@ def VARI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            vari_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -372,7 +372,7 @@ def NDBI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndbi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -408,7 +408,7 @@ def NDBaI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ndbai_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -445,7 +445,7 @@ def NBLI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            nbli_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -482,7 +482,7 @@ def EBBI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ebbi_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster
 
             mask_clouds :: boolean, optional (default=False)
@@ -521,7 +521,7 @@ def UI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            ui_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
@@ -558,7 +558,7 @@ def NBRI(landsat_dir, out_tif=None, mask_clouds=False):
                 * Folder path where all landsat bands for the scene are
                   contained.
 
-            nbri_out :: str, optional (default=None)
+            out_tif :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
 
             mask_clouds :: boolean, optional (default=False)
