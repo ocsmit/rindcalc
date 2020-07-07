@@ -1,7 +1,7 @@
 import numpy as np
 from osgeo import gdal
-from skimage.segmentation import felzenszwalb, slic, quickshift, watershed
-from .band_utils import save_raster
+from skimage.segmentation import felzenszwalb, quickshift
+from rindcalc.utils.band_utils import save_index
 
 def felzenszwalb_seg(input_index, output_raster=None, scale=1, sigma=0.8,
                      min_size=20):
@@ -10,7 +10,7 @@ def felzenszwalb_seg(input_index, output_raster=None, scale=1, sigma=0.8,
 
         fz = felzenszwalb(arr, scale, sigma, min_size)
         if output_raster:
-            save_raster(fz, output_raster, snap=data, dType=gdal.GDT_Int16)
+            save_index(fz, output_raster, snap=data, dType=gdal.GDT_Int16)
             return fz
         if not output_raster:
             return fz
@@ -26,7 +26,7 @@ def quickshift_seg(input_index, output_raster=None, ratio=1.0, kernel_size=5,
     seg = quickshift(arr, ratio, kernel_size, max_dist, return_tree, sigma,
                      convert2lab, random_seed)
     if output_raster:
-        save_raster(seg, output_raster, snap=data, dType=gdal.GDT_Int16)
+        save_index(seg, output_raster, snap=data, dType=gdal.GDT_Int16)
         return seg
     if not output_raster:
         return seg

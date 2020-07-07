@@ -3,12 +3,10 @@
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 
-import os
 import numpy as np
 from osgeo import gdal
-from glob import glob
 from rindcalc.sent.sent_utils import get_bands
-from rindcalc.band_utils import save_raster
+from rindcalc.utils.band_utils import save_index
 
 
 def AWEIsh(sent_dir, out_raster):
@@ -34,7 +32,7 @@ def AWEIsh(sent_dir, out_raster):
     b = (blue_band + green_band + nir_band + swir1_band + swir2_band)
     equation = a / b
 
-    save_raster(equation, out_raster, snap, gdal.GDT_Float32)
+    save_index(equation, out_raster, snap, gdal.GDT_Float32)
     return equation, print('Finished')
 
 
@@ -50,7 +48,7 @@ def NDVI(sent_dir, out_raster):
 
     equation = (nir_band - red_band) / (nir_band + red_band)
 
-    save_raster(equation, out_raster, snap, gdal.GDT_Float32)
+    save_index(equation, out_raster, snap, gdal.GDT_Float32)
     return equation, print('Finished')
 
 
@@ -66,7 +64,7 @@ def SIPI(sent_dir, out_raster):
 
     equation = (nir_band - blue_band) / (nir_band + blue_band)
 
-    save_raster(equation, out_raster, snap, gdal.GDT_Float32)
+    save_index(equation, out_raster, snap, gdal.GDT_Float32)
     return equation, print('Finished')
 
 
@@ -85,7 +83,7 @@ def ARVI(sent_dir, out_raster):
     equation = ((nir_band - (2 * red_band) + blue_band) /
                 (nir_band + (2 * red_band) + blue_band))
 
-    save_raster(equation, out_raster, snap, gdal.GDT_Float32)
+    save_index(equation, out_raster, snap, gdal.GDT_Float32)
     return equation, print('Finished')
 
 
@@ -104,5 +102,5 @@ def ARVI(sent_dir, out_raster):
     equation = ((nir_band - (2 * red_band) + blue_band) /
                 (nir_band + (2 * red_band) + blue_band))
 
-    save_raster(equation, out_raster, snap, gdal.GDT_Float32)
+    save_index(equation, out_raster, snap, gdal.GDT_Float32)
     return equation, print('Finished')

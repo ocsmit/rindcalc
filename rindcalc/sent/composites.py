@@ -3,11 +3,9 @@
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 
-import os
 import numpy as np
 from osgeo import gdal
-from glob import glob
-from rindcalc.band_utils import norm
+from rindcalc.utils.band_utils import norm
 from rindcalc.sent.sent_utils import get_bands
 
 

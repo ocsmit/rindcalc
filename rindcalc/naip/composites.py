@@ -5,7 +5,7 @@
 
 import numpy as np
 from osgeo import gdal
-from rindcalc.band_utils import norm
+from rindcalc.utils.band_utils import norm
 
 
 def FalseColor(in_naip, out_composite):

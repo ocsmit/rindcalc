@@ -7,7 +7,8 @@ import os
 import numpy as np
 from osgeo import gdal
 from glob import glob
-from rindcalc.band_utils import norm
+from rindcalc.utils.band_utils import norm
+from rindcalc.ls.load_ls import load_ls
 
 
 def RGB(landsat_dir, out_composite):
@@ -28,20 +29,10 @@ def RGB(landsat_dir, out_composite):
     """
 
     # Create list with file names
-    blue = glob(os.path.join(landsat_dir, '*B2*'))
-    green = glob(os.path.join(landsat_dir, '*B3*'))
-    red = glob(os.path.join(landsat_dir, '*B4*'))
-
-    blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
-    blue_band = norm(blue_path.GetRasterBand(1).ReadAsArray(
-    ).astype(np.uint16), 255, 0)
-    green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
-    green_band = norm(green_path.GetRasterBand(1).ReadAsArray(
-    ).astype(np.uint16), 255, 0)
-    red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
-    red_band = norm(red_path.GetRasterBand(1).ReadAsArray().astype(
-        np.uint16), 255, 0)
-    snap = gdal.Open(os.path.join(landsat_dir, red[0]))
+    bands = load_ls(landsat_dir)
+    norm_red = norm(bands["red"], 255, 0)
+    norm_blue = norm(bands["blue"], 255, 0)
+    norm_green = norm(bands["green"], 255, 0)
 
     # Save Raster
     if os.path.exists(out_composite):
@@ -49,19 +40,19 @@ def RGB(landsat_dir, out_composite):
     if not os.path.exists(out_composite):
         driver = gdal.GetDriverByName('GTiff')
         metadata = driver.GetMetadata()
-        shape = red_band.shape
+        shape = bands["red"].shape
         dst_ds = driver.Create(out_composite,
                                xsize=shape[1],
                                ysize=shape[0],
                                bands=3,
                                eType=gdal.GDT_Byte)
-        proj = snap.GetProjection()
-        geo = snap.GetGeoTransform()
+        proj = bands["snap"].GetProjection()
+        geo = bands["snap"].GetGeoTransform()
         dst_ds.SetGeoTransform(geo)
         dst_ds.SetProjection(proj)
-        dst_ds.GetRasterBand(1).WriteArray(red_band)
-        dst_ds.GetRasterBand(2).WriteArray(green_band)
-        dst_ds.GetRasterBand(3).WriteArray(blue_band)
+        dst_ds.GetRasterBand(1).WriteArray(norm_red)
+        dst_ds.GetRasterBand(2).WriteArray(norm_green)
+        dst_ds.GetRasterBand(3).WriteArray(norm_blue)
         dst_ds.FlushCache()
         dst_ds = None
 

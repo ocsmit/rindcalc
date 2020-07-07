@@ -6,7 +6,7 @@
 import os
 from osgeo import gdal
 import numpy as np
-from rindcalc.band_utils import save_raster, norm
+from rindcalc.utils.band_utils import save_index, norm
 
 
 def ARVI(in_naip, arvi_out=None):
@@ -41,7 +41,7 @@ def ARVI(in_naip, arvi_out=None):
                 (nir_band + (2 * red_band) + blue_band))
 
     if arvi_out is not None:
-        save_raster(equation, arvi_out, snap)
+        save_index(equation, arvi_out, snap)
         return equation
     if arvi_out is None:
         return equation
@@ -79,7 +79,7 @@ def VARI(in_naip, vari_out=None):
             (2 * green_band + (red_band + blue_band)))
 
     if vari_out is not None:
-        save_raster(equation, vari_out, snap)
+        save_index(equation, vari_out, snap)
         return equation
     if vari_out is None:
         return equation
@@ -120,7 +120,7 @@ def nVARI(in_naip, nvari_out=None):
     normalized_vari = norm(equation, 1, 1)
 
     if nvari_out is not None:
-        save_raster(equation, nvari_out, snap)
+        save_index(equation, nvari_out, snap)
         return equation
     if nvari_out is None:
         return equation
@@ -157,7 +157,7 @@ def NDVI(in_naip, ndvi_out=None):
                 (nir_band + red_band))
 
     if ndvi_out is not None:
-        save_raster(equation, ndvi_out, snap)
+        save_index(equation, ndvi_out, snap)
         return equation
     if ndvi_out is None:
         return equation
@@ -197,7 +197,7 @@ def SAVI(in_naip, savi_out=None, soil_brightness=0.5):
                 * (1 + soil_brightness))
 
     if savi_out is not None:
-        save_raster(equation, savi_out, snap)
+        save_index(equation, savi_out, snap)
         return equation
     if savi_out is None:
         return equation
@@ -234,7 +234,7 @@ def RedRatio(in_naip, redratio_out=None):
     equation = (blue_band + red_band + green_band) / red_band
 
     if redratio_out is not None:
-        save_raster(equation, redratio_out, snap)
+        save_index(equation, redratio_out, snap)
         return equation
     if redratio_out is None:
         return equation
