@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.ls.ls_cloud_masking.py
+# Name: rindcalc.ls.ls_cloud_mask_array.py
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 
@@ -9,7 +9,7 @@ from osgeo import gdal
 from glob import glob
 
 
-def cloud_mask_array(landsat_dir, array):
+def ls_cloud_mask_array(landsat_dir, array):
     """
     This function masks clouds in Landsat-8 imagery using the QA band and
     returns an array to save as a raster.
