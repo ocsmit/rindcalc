@@ -6,7 +6,8 @@
 import os
 from osgeo import gdal
 import numpy as np
-from rindcalc.utils.band_utils import save_index, norm
+from rindcalc.utils import save_index
+from rindcalc.utils import norm
 
 
 def ARVI(in_naip, arvi_out=None):
