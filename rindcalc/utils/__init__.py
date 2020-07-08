@@ -11,3 +11,6 @@ from .ls_cloud_mask_array import ls_cloud_mask_array
 
 # NAIP utils
 from .load_naip import load_naip
+
+# Sentinel-2 utils
+from .load_sent import load_sent

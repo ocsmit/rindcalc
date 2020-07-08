@@ -1,5 +1,5 @@
 # ------------------------------------------------------------------------------
-# Name: rindcalc.sent.sent_utils.py
+# Name: rindcalc.sent.load_sent.py
 # Author: Owen Smith, University of North Georgia IESA
 # ------------------------------------------------------------------------------
 import os
@@ -7,7 +7,7 @@ from osgeo import gdal
 import numpy as np
 
 
-def get_bands(path):
+def load_sent(path):
     ends = ['B01.jp2', 'B02.jp2', 'B03.jp2', 'B04.jp2', 'B05.jp2',
             'B06.jp2', 'B07.jp2', 'B08.jp2', 'B8A.jp2', 'B09.jp2',
             'B10.jp2', 'B11.jp2']
@@ -52,6 +52,6 @@ def get_bands(path):
              "band_4": band_4, "band_5": band_5, "band_6": band_6,
              "band_7": band_7, "band_8": band_8, "band_8a": band_8a,
              "band_9": band_9, "band_10": band_10, "band_11": band_11,
-             "band_12": band_12}
+             "band_12": band_12, "snap": snap}
 
     return bands
