@@ -42,10 +42,10 @@ def AWEIsh(landsat_dir, out_tif=None, mask_clouds=False):
 
     bands = load_ls(landsat_dir)
 
-    a = (bands["blue"] + 2.5 * bands["green"] - 1.5 *
-         (bands["nir"] + bands["swir1"]) - 0.25 * bands["swir2"])
-    b = (bands["blue"] + bands["blue"] + bands["nir"] + bands["swir1"]
-         + bands["swir2"])
+    a = (bands["band_2"] + 2.5 * bands["band_3"] - 1.5 *
+         (bands["band_5"] + bands["band_6"]) - 0.25 * bands["band_7"])
+    b = (bands["band_2"] + bands["band_2"] + bands["band_5"] + bands["band_6"]
+         + bands["band_7"])
     equation = (a / b)
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
@@ -84,9 +84,9 @@ def AWEInsh(landsat_dir, out_tif=None, mask_clouds=False):
     
     bands = load_ls(landsat_dir)
 
-    equation = ((4 * (bands["green"] - bands["swir1"]) -
-                 (0.25 * bands["nir"] + 2.75 * bands["swir1"])) /
-                (bands["green"] + bands["swir1"] + bands["nir"]))
+    equation = ((4 * (bands["band_3"] - bands["band_6"]) -
+                 (0.25 * bands["band_5"] + 2.75 * bands["band_6"])) /
+                (bands["band_3"] + bands["band_6"] + bands["band_5"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -122,8 +122,8 @@ def NDMI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # calculation
-    equation = ((bands["nir"] - bands["swir1"]) / 
-                (bands["nir"] + bands["swir1"]))
+    equation = ((bands["band_5"] - bands["band_6"]) / 
+                (bands["band_5"] + bands["band_6"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -159,8 +159,8 @@ def MNDWI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # calculation
-    equation = ((bands["green"] - bands["swir1"]) / 
-                (bands["green"] + bands["swir1"]))
+    equation = ((bands["band_3"] - bands["band_6"]) / 
+                (bands["band_3"] + bands["band_6"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -195,8 +195,8 @@ def NDVI(landsat_dir, out_tif=None, mask_clouds=False):
 
     bands = load_ls(landsat_dir)
 
-    equation = ((bands["nir"] - bands["red"]) / 
-                (bands["nir"] + bands["red"]))
+    equation = ((bands["band_5"] - bands["band_4"]) / 
+                (bands["band_5"] + bands["band_4"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -232,8 +232,8 @@ def GNDVI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # Perform Calculation
-    equation = ((bands["nir"] - bands["green"])
-                / (bands["nir"] + bands["green"]))
+    equation = ((bands["band_5"] - bands["band_3"])
+                / (bands["band_5"] + bands["band_3"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -272,8 +272,8 @@ def SAVI(landsat_dir, out_tif=None, soil_brightness=0.5, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # Perform Calculation
-    equation = ((bands["nir"] - bands["red"]) /
-                (bands["nir"] + bands["red"] + soil_brightness)) \
+    equation = ((bands["band_5"] - bands["band_4"]) /
+                (bands["band_5"] + bands["band_4"] + soil_brightness)) \
                * (1 + soil_brightness)
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
@@ -310,8 +310,8 @@ def ARVI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # Perform Calculation
-    equation = ((bands["nir"] - (2 * bands["red"]) + bands["blue"]) /
-                (bands["nir"] + (2 * bands["red"]) + bands["blue"]))
+    equation = ((bands["band_5"] - (2 * bands["band_4"]) + bands["band_2"]) /
+                (bands["band_5"] + (2 * bands["band_4"]) + bands["band_2"]))
     
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -346,8 +346,8 @@ def VARI(landsat_dir, out_tif=None, mask_clouds=False):
 
     bands = load_ls(landsat_dir)
 
-    equation = ((bands["green"] - bands["red"]) / 
-                (bands["green"] + bands["red"] - bands["blue"]))
+    equation = ((bands["band_3"] - bands["band_4"]) / 
+                (bands["band_3"] + bands["band_4"] - bands["band_2"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -383,7 +383,7 @@ def NDBI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # Perform Calculation
-    equation = ((bands["swir1"] - bands["nir"]) / (bands["swir1"] + bands["nir"]))
+    equation = ((bands["band_6"] - bands["band_5"]) / (bands["band_6"] + bands["band_5"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -419,8 +419,8 @@ def NDBaI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # Perform Calculation
-    equation = ((bands["swir1"] - bands["tir"]) / 
-                (bands["swir1"] + bands["tir"]))
+    equation = ((bands["band_6"] - bands["band_10"]) / 
+                (bands["band_6"] + bands["band_10"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -456,8 +456,8 @@ def NBLI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
     
     # Perform Calculation
-    equation = ((bands["red"] - bands["tir"]) / 
-                (bands["red"] + bands["tir"]))
+    equation = ((bands["band_4"] - bands["band_10"]) / 
+                (bands["band_4"] + bands["band_10"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -493,8 +493,8 @@ def EBBI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # calculation
-    ebbi = ((bands["swir1"] - bands["nir"]) / 
-            (10 * ((bands["swir1"] + bands["tir"]) ** 0.5)))
+    ebbi = ((bands["band_6"] - bands["band_5"]) / 
+            (10 * ((bands["band_6"] + bands["band_10"]) ** 0.5)))
     ebbi[np.isneginf(ebbi)] = 0
     ebbi_mask = np.ma.MaskedArray(ebbi, mask=(ebbi == 0))
     ebbi_mask.reshape(ebbi.shape)
@@ -532,8 +532,8 @@ def UI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # Perform Calculation
-    equation = ((bands["swir2"] - bands["nir"]) /
-                (bands["swir2"] + bands["nir"]))
+    equation = ((bands["band_7"] - bands["band_5"]) /
+                (bands["band_7"] + bands["band_5"]))
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
 
@@ -569,8 +569,8 @@ def NBRI(landsat_dir, out_tif=None, mask_clouds=False):
     bands = load_ls(landsat_dir)
 
     # calculation
-    equation = ((bands["nir"] - bands["swir2"]) /
-                (bands["nir"] + bands["swir2"]))
+    equation = ((bands["band_5"] - bands["band_7"]) /
+                (bands["band_5"] + bands["band_7"]))
 
 
     out_ras = save_ls(out_tif, mask_clouds, landsat_dir, equation, bands)
