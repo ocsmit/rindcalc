@@ -31,9 +31,9 @@ def RGB(landsat_dir, out_composite):
 
     # Create list with file names
     bands = load_ls(landsat_dir, np.uint16)
-    norm_red = norm(bands["red"], 255, 0)
-    norm_blue = norm(bands["blue"], 255, 0)
-    norm_green = norm(bands["green"], 255, 0)
+    norm_red = norm(bands["band_4"], 255, 0)
+    norm_blue = norm(bands["band_2"], 255, 0)
+    norm_green = norm(bands["band_3"], 255, 0)
 
     save_comp(norm_red, norm_green, norm_blue, out_composite, bands["snap"])
 
@@ -56,9 +56,9 @@ def FalseColor(landsat_dir, out_composite):
     """
     # Create list with file names
     bands = load_ls(landsat_dir, np.uint16)
-    norm_red = norm(bands["red"], 255, 0)
-    norm_nir = norm(bands["nir"], 255, 0)
-    norm_green = norm(bands["green"], 255, 0)
+    norm_red = norm(bands["band_4"], 255, 0)
+    norm_nir = norm(bands["band_5"], 255, 0)
+    norm_green = norm(bands["band_3"], 255, 0)
 
     save_comp(norm_nir, norm_red, norm_green, out_composite, bands["snap"])
 
