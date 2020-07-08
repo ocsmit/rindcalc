@@ -1,5 +1,4 @@
 import os
-from glob import glob
 from osgeo import gdal
 import numpy as np
 
