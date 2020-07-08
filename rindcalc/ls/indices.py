@@ -6,8 +6,8 @@
 import os
 import numpy as np
 from osgeo import gdal
-from rindcalc.ls.load_ls import load_ls
-from rindcalc.ls.save_ls import save_ls
+from rindcalc.utils import load_ls
+from rindcalc.utils import save_ls
 
 
 def AWEIsh(landsat_dir, out_tif=None, mask_clouds=False):
