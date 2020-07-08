@@ -11,6 +11,11 @@ from rindcalc.utils import save_index
 
 def AWEIsh(sent_dir, out_raster):
 
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
+
     bands = load_sent(sent_dir)
 
     a = (bands["band_2"] + 2.5 * bands["band_3"] - 1.5 *
@@ -26,6 +31,11 @@ def AWEIsh(sent_dir, out_raster):
 
 def NDVI(sent_dir, out_raster):
 
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
+
     bands = load_sent(sent_dir)
 
     equation = (bands["band_8"] - bands["band_4"]) / \
@@ -36,6 +46,11 @@ def NDVI(sent_dir, out_raster):
 
 
 def SIPI(sent_dir, out_raster):
+
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
 
     bands = load_sent(sent_dir)
 
@@ -48,16 +63,10 @@ def SIPI(sent_dir, out_raster):
 
 def ARVI(sent_dir, out_raster):
 
-    bands = load_sent(sent_dir)
-
-    equation = ((bands["band_8"] - (2 * bands["band_4"]) + bands["band_2"]) /
-                (bands["band_8"] + (2 * bands["band_4"]) + bands["band_2"]))
-
-    save_index(equation, out_raster, bands["snap"], gdal.GDT_Float32)
-    return equation, print('Finished')
-
-
-def ARVI(sent_dir, out_raster):
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+    np.seterr(divide='ignore', invalid='ignore')
 
     bands = load_sent(sent_dir)
 
