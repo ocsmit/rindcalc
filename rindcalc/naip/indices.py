@@ -83,45 +83,6 @@ def VARI(in_naip, vari_out=None):
         return equation
 
 
-def nVARI(in_naip, nvari_out=None):
-    """
-    nVARI(in_naip, vari_out)
-
-     **Normalized between -1 - 1**
-
-    Calculates the Visual Atmospherically Resistant Index with NAIP imagery
-    and outputs a TIFF raster file.
-
-    VARI = ((Green - Red) / (Green + Red - Blue))
-
-    Parameters:
-
-            in_naip :: str, required
-                * File path for NAIP image.
-
-            nvari_out :: str, optional (default=None)
-                * Output path and file name for calculated index raster.
-    """
-
-    gdal.PushErrorHandler('CPLQuietErrorHandler')
-    gdal.UseExceptions()
-    gdal.AllRegister()
-    np.seterr(divide='ignore', invalid='ignore')
-
-    bands = load_naip(in_naip)
-
-    # Perform Calculation
-    equation = ((2 * bands["green"] - (bands["red"] + bands["blue"])) /
-            (2 * bands["green"] + (bands["red"] + bands["blue"])))
-    normalized_vari = norm(equation, 1, 1)
-
-    if nvari_out is not None:
-        save_index(equation, nvari_out, bands["snap"])
-        return equation
-    if nvari_out is None:
-        return equation
-
-
 def NDVI(in_naip, ndvi_out=None):
     """
     NDVI(in_naip, ndvi_out, mask_clouds=False)
