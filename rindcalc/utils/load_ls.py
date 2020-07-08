@@ -5,6 +5,7 @@ from glob import glob
 
 
 def load_ls(landsat_dir, dType=np.float32):
+    ca = glob(os.path.join(landsat_dir,  '*B1*'))
     blue = glob(os.path.join(landsat_dir, '*B2*'))
     green = glob(os.path.join(landsat_dir, '*B3*'))
     red = glob(os.path.join(landsat_dir, '*B4*'))
@@ -12,6 +13,9 @@ def load_ls(landsat_dir, dType=np.float32):
     swir1 = glob(os.path.join(landsat_dir, '*B6*'))
     swir2 = glob(os.path.join(landsat_dir, '*B7*'))
     tir = glob(os.path.join(landsat_dir, '*B10*'))
+
+    coastal_path = gdal.Open(os.path.join(landsat_dir, ca[0]))
+    band_1 = coastal_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
     band_2 = blue_path.GetRasterBand(1).ReadAsArray().astype(dType)
@@ -36,7 +40,7 @@ def load_ls(landsat_dir, dType=np.float32):
 
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
-    band_dict = {"band_2": band_2, "band_3": band_3, "band_4": band_4,
+    band_dict = {"band_1": band_1, "band_2": band_2, "band_3": band_3, "band_4": band_4,
                  "band_5": band_5, "band_6": band_6, "band_7": band_7,
                  "band_10": band_10, "snap": snap}
 
