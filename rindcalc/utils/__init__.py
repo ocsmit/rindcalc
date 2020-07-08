@@ -8,3 +8,6 @@ from .save_comp import save_comp
 from .load_ls import load_ls
 from .save_ls import save_ls
 from .ls_cloud_mask_array import ls_cloud_mask_array
+
+# NAIP utils
+from .load_naip import load_naip

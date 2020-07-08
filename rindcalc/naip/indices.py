@@ -8,6 +8,7 @@ from osgeo import gdal
 import numpy as np
 from rindcalc.utils import save_index
 from rindcalc.utils import norm
+from rindcalc.utils import load_naip
 
 
 def ARVI(in_naip, arvi_out=None):
@@ -27,22 +28,20 @@ def ARVI(in_naip, arvi_out=None):
             arvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
+
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    naip = gdal.Open(in_naip)
-    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
-    nir_band = naip.GetRasterBand(4).ReadAsArray().astype(np.float32)
-    snap = naip
+
+    bands = load_naip(in_naip)
 
     # Perform Calculation
-    equation = ((nir_band - (2 * red_band) + blue_band) /
-                (nir_band + (2 * red_band) + blue_band))
+    equation = ((bands["nir"] - (2 * bands["red"]) + bands["blue"]) /
+                (bands["nir"] + (2 * bands["red"]) + bands["blue"]))
 
     if arvi_out is not None:
-        save_index(equation, arvi_out, snap)
+        save_index(equation, arvi_out, bands["snap"])
         return equation
     if arvi_out is None:
         return equation
@@ -65,22 +64,20 @@ def VARI(in_naip, vari_out=None):
             vari_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
+
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    naip = gdal.Open(in_naip)
-    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    green_band = naip.GetRasterBand(2).ReadAsArray().astype(np.float32)
-    blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
-    snap = naip
+
+    bands = load_naip(in_naip)
 
     # Perform Calculation
-    equation = ((2 * green_band - (red_band + blue_band)) /
-            (2 * green_band + (red_band + blue_band)))
+    equation = ((2 * bands["green"] - (bands["red"] + bands["blue"])) /
+            (2 * bands["green"] + (bands["red"] + bands["blue"])))
 
     if vari_out is not None:
-        save_index(equation, vari_out, snap)
+        save_index(equation, vari_out, bands["snap"])
         return equation
     if vari_out is None:
         return equation
@@ -105,23 +102,21 @@ def nVARI(in_naip, nvari_out=None):
             nvari_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
+
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    naip = gdal.Open(in_naip)
-    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    green_band = naip.GetRasterBand(2).ReadAsArray().astype(np.float32)
-    blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
-    snap = naip
+
+    bands = load_naip(in_naip)
 
     # Perform Calculation
-    equation = ((2 * green_band - (red_band + blue_band)) /
-            (2 * green_band + (red_band + blue_band)))
+    equation = ((2 * bands["green"] - (bands["red"] + bands["blue"])) /
+            (2 * bands["green"] + (bands["red"] + bands["blue"])))
     normalized_vari = norm(equation, 1, 1)
 
     if nvari_out is not None:
-        save_index(equation, nvari_out, snap)
+        save_index(equation, nvari_out, bands["snap"])
         return equation
     if nvari_out is None:
         return equation
@@ -144,21 +139,20 @@ def NDVI(in_naip, ndvi_out=None):
             ndvi_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
+
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    naip = gdal.Open(in_naip)
-    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    nir_band = naip.GetRasterBand(4).ReadAsArray().astype(np.float32)
-    snap = naip
+
+    bands = load_naip(in_naip)
 
     # Perform Calculation
-    equation = ((nir_band - red_band) /
-                (nir_band + red_band))
+    equation = ((bands["nir"] - bands["red"]) /
+                (bands["nir"] + bands["red"]))
 
     if ndvi_out is not None:
-        save_index(equation, ndvi_out, snap)
+        save_index(equation, ndvi_out, bands["snap"])
         return equation
     if ndvi_out is None:
         return equation
@@ -184,21 +178,20 @@ def SAVI(in_naip, savi_out=None, soil_brightness=0.5):
 
             soil_brightness :: float, required (default=0.5)
     """
+
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    naip = gdal.Open(in_naip)
-    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    nir_band = naip.GetRasterBand(4).ReadAsArray().astype(np.float32)
-    snap = naip
+
+    bands = load_naip(in_naip)
 
     # Perform Calculation
-    equation = (((nir_band - red_band) / (nir_band + red_band + soil_brightness))
+    equation = (((bands["nir"] - bands["red"]) / (bands["nir"] + bands["red"] + soil_brightness))
                 * (1 + soil_brightness))
 
     if savi_out is not None:
-        save_index(equation, savi_out, snap)
+        save_index(equation, savi_out, bands["snap"])
         return equation
     if savi_out is None:
         return equation
@@ -211,7 +204,7 @@ def RedRatio(in_naip, redratio_out=None):
     Calculates the Soil Adjusted Vegetation Index with NAIP imagery
     and outputs a TIFF raster file.
 
-    equation = (blue_band + red_band + green_band) / red_band
+    equation = (bands["blue"] + bands["red"] + bands["green"]) / bands["red"]
 
     Parameters:
 
@@ -221,21 +214,18 @@ def RedRatio(in_naip, redratio_out=None):
             redratio_out :: str, optional (default=None)
                 * Output path and file name for calculated index raster.
     """
+
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
     np.seterr(divide='ignore', invalid='ignore')
-    naip = gdal.Open(in_naip)
-    red_band = naip.GetRasterBand(1).ReadAsArray().astype(np.float32)
-    green_band = naip.GetRasterBand(2).ReadAsArray().astype(np.float32)
-    blue_band = naip.GetRasterBand(3).ReadAsArray().astype(np.float32)
-    snap = naip
 
+    bands = load_naip(in_naip)
     # Perform Calculation
-    equation = (blue_band + red_band + green_band) / red_band
+    equation = (bands["blue"] + bands["red"] + bands["green"]) / bands["red"]
 
     if redratio_out is not None:
-        save_index(equation, redratio_out, snap)
+        save_index(equation, redratio_out, bands["snap"])
         return equation
     if redratio_out is None:
         return equation
