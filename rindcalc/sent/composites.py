@@ -5,7 +5,7 @@
 
 import numpy as np
 from osgeo import gdal
-from rindcalc.utils.band_utils import norm
+from rindcalc.utils import norm
 from rindcalc.sent.sent_utils import get_bands
 
 

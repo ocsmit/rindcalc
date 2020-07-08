@@ -6,7 +6,7 @@
 import numpy as np
 from osgeo import gdal
 from rindcalc.sent.sent_utils import get_bands
-from rindcalc.utils.band_utils import save_index
+from rindcalc.utils import save_index
 
 
 def AWEIsh(sent_dir, out_raster):
