@@ -14,30 +14,31 @@ def load_ls(landsat_dir, dType=np.float32):
     tir = glob(os.path.join(landsat_dir, '*B10*'))
 
     blue_path = gdal.Open(os.path.join(landsat_dir, blue[0]))
-    blue_band = blue_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_2 = blue_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     green_path = gdal.Open(os.path.join(landsat_dir, green[0]))
-    green_band = green_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_3 = green_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     red_path = gdal.Open(os.path.join(landsat_dir, red[0]))
-    red_band = red_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_4 = red_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     NIR_path = gdal.Open(os.path.join(landsat_dir, nir[0]))
-    nir_band = NIR_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_5 = NIR_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     SWIR1_path = gdal.Open(os.path.join(landsat_dir, swir1[0]))
-    swir1_band = SWIR1_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_6 = SWIR1_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     SWIR2_path = gdal.Open(os.path.join(landsat_dir, swir2[0]))
-    swir2_band = SWIR2_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_7 = SWIR2_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     tir_path = gdal.Open(os.path.join(landsat_dir, tir[0]))
-    tir_band = tir_path.GetRasterBand(1).ReadAsArray().astype(dType)
+    band_10 = tir_path.GetRasterBand(1).ReadAsArray().astype(dType)
 
     snap = gdal.Open(os.path.join(landsat_dir, blue[0]))
 
-    band_dict = {"blue": blue_band, "green": green_band, "red": red_band,
-                 "nir": nir_band, "swir1": swir1_band, "swir2": swir2_band,
-                 "tir": tir_band, "snap": snap}
+    band_dict = {"band_2": band_2, "band_3": band_3, "band_4": band_4,
+                 "band_5": band_5, "band_6": band_6, "band_7": band_7,
+                 "band_10": band_10, "snap": snap}
 
     return band_dict
+
