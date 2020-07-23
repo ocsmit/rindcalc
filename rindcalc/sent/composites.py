@@ -8,7 +8,7 @@ from osgeo import gdal
 from rindcalc.utils import norm, load_sent, save_comp
 
 
-def RGB(sent_dir, out_composite):
+def natural_color(sent_dir, out_composite):
 
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
@@ -16,11 +16,41 @@ def RGB(sent_dir, out_composite):
 
     bands = load_sent(sent_dir)
 
-    norm_red = norm(bands["band_4"], 255, 0)
-    norm_green = norm(bands["band_3"], 255, 0)
-    norm_blue = norm(bands["band_2"], 255, 0)
+    norm_one = norm(bands["band_4"], 255, 0)
+    norm_two = norm(bands["band_3"], 255, 0)
+    norm_three = norm(bands["band_2"], 255, 0)
 
-    save_comp(norm_red, norm_green, norm_blue, bands["snap"])
+    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+
+
+def false_color(sent_dir, out_composite):
+
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+
+    bands = load_sent(sent_dir)
+
+    norm_one = norm(bands["band_8"], 255, 0)
+    norm_two = norm(bands["band_4"], 255, 0)
+    norm_three = norm(bands["band_3"], 255, 0)
+
+    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+
+
+def SWIR(sent_dir, out_composite):
+
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+
+    bands = load_sent(sent_dir)
+
+    norm_one = norm(bands["band_12"], 255, 0)
+    norm_two = norm(bands["band_8a"], 255, 0)
+    norm_three = norm(bands["band_4"], 255, 0)
+
+    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
 
 
 def bathymetry(sent_dir, out_composite):
@@ -31,9 +61,38 @@ def bathymetry(sent_dir, out_composite):
 
     bands = load_sent(sent_dir)
 
-    norm_red = norm(bands["band_4"], 255, 0)
-    norm_green = norm(bands["band_3"], 255, 0)
-    norm_coastal = norm(bands["band_1"], 255, 0)
+    norm_one = norm(bands["band_4"], 255, 0)
+    norm_two = norm(bands["band_3"], 255, 0)
+    norm_three = norm(bands["band_1"], 255, 0)
 
-    save_comp(norm_red, norm_green, norm_coastal, bands["snap"])
+    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
 
+
+def agriculture(sent_dir, out_composite):
+
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+
+    bands = load_sent(sent_dir)
+
+    norm_one = norm(bands["band_11"], 255, 0)
+    norm_two = norm(bands["band_8"], 255, 0)
+    norm_three = norm(bands["band_2"], 255, 0)
+
+    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+
+
+def geology(sent_dir, out_composite):
+
+    gdal.PushErrorHandler('CPLQuietErrorHandler')
+    gdal.UseExceptions()
+    gdal.AllRegister()
+
+    bands = load_sent(sent_dir)
+
+    norm_one = norm(bands["band_12"], 255, 0)
+    norm_two = norm(bands["band_11"], 255, 0)
+    norm_three = norm(bands["band_2"], 255, 0)
+
+    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
