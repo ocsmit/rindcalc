@@ -1,2 +1,2 @@
 from .indices import *
-from .composites import *
+from rindcalc.sent import *
