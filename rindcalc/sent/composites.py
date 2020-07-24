@@ -5,7 +5,7 @@
 
 import numpy as np
 from osgeo import gdal
-from rindcalc.utils import norm, load_sent, save_comp
+from rindcalc.utils import norm, load_sent, save_comp, load_comp
 
 
 def natural_color(sent_dir, out_composite):
@@ -14,13 +14,9 @@ def natural_color(sent_dir, out_composite):
     gdal.UseExceptions()
     gdal.AllRegister()
 
-    bands = load_sent(sent_dir)
+    data = load_comp(sent_dir, ['band_4', 'band_3', 'band_2'])
 
-    norm_one = norm(bands["band_4"], 255, 0)
-    norm_two = norm(bands["band_3"], 255, 0)
-    norm_three = norm(bands["band_2"], 255, 0)
-
-    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+    trans = gdal.Translate(out_composite, data, format='GTiff')
 
 
 def false_color(sent_dir, out_composite):
@@ -29,13 +25,9 @@ def false_color(sent_dir, out_composite):
     gdal.UseExceptions()
     gdal.AllRegister()
 
-    bands = load_sent(sent_dir)
+    data = load_comp(sent_dir, ['band_8', 'band_4', 'band_3'])
 
-    norm_one = norm(bands["band_8"], 255, 0)
-    norm_two = norm(bands["band_4"], 255, 0)
-    norm_three = norm(bands["band_3"], 255, 0)
-
-    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+    trans = gdal.Translate(out_composite, data, format='GTiff')
 
 
 def SWIR(sent_dir, out_composite):
@@ -44,28 +36,20 @@ def SWIR(sent_dir, out_composite):
     gdal.UseExceptions()
     gdal.AllRegister()
 
-    bands = load_sent(sent_dir)
+    data = load_comp(sent_dir, ['band_12', 'band_8a', 'band_4'])
 
-    norm_one = norm(bands["band_12"], 255, 0)
-    norm_two = norm(bands["band_8a"], 255, 0)
-    norm_three = norm(bands["band_4"], 255, 0)
-
-    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+    trans = gdal.Translate(out_composite, data, format='GTiff')
 
 
-def bathymetry(sent_dir, out_composite):
+def bath(sent_dir, out_composite):
 
     gdal.PushErrorHandler('CPLQuietErrorHandler')
     gdal.UseExceptions()
     gdal.AllRegister()
 
-    bands = load_sent(sent_dir)
+    data = load_comp(sent_dir, ['band_4', 'band_3', 'band_1'])
 
-    norm_one = norm(bands["band_4"], 255, 0)
-    norm_two = norm(bands["band_3"], 255, 0)
-    norm_three = norm(bands["band_1"], 255, 0)
-
-    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+    trans = gdal.Translate(out_composite, data, format='GTiff')
 
 
 def agriculture(sent_dir, out_composite):
@@ -74,13 +58,9 @@ def agriculture(sent_dir, out_composite):
     gdal.UseExceptions()
     gdal.AllRegister()
 
-    bands = load_sent(sent_dir)
+    data = load_comp(sent_dir, ['band_11', 'band_8', 'band_2'])
 
-    norm_one = norm(bands["band_11"], 255, 0)
-    norm_two = norm(bands["band_8"], 255, 0)
-    norm_three = norm(bands["band_2"], 255, 0)
-
-    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
+    trans = gdal.Translate(out_composite, data, format='GTiff')
 
 
 def geology(sent_dir, out_composite):
@@ -89,10 +69,7 @@ def geology(sent_dir, out_composite):
     gdal.UseExceptions()
     gdal.AllRegister()
 
-    bands = load_sent(sent_dir)
+    data = load_comp(sent_dir, ['band_12', 'band_11', 'band_2'])
 
-    norm_one = norm(bands["band_12"], 255, 0)
-    norm_two = norm(bands["band_11"], 255, 0)
-    norm_three = norm(bands["band_2"], 255, 0)
+    trans = gdal.Translate(out_composite, data, format='GTiff')
 
-    save_comp(norm_one, norm_two, norm_three, out_composite, bands["snap"])
