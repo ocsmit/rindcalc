@@ -3,6 +3,7 @@ from .save_index import save_index
 from .gen_stats import gen_stats
 from .norm import norm
 from .save_comp import save_comp
+from .resample import resample
 
 # Landsat-8 utils
 from .load_ls import load_ls
@@ -14,3 +15,4 @@ from .load_naip import load_naip
 
 # Sentinel-2 utils
 from .load_sent import load_sent
+from .load_comp import load_comp
