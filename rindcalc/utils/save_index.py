@@ -24,12 +24,8 @@ def save_index(in_array, out, snap, dType=gdal.GDT_Float32):
             dType :: gdal datatype, required (default=gdal.GDT_Float32)_
                 * Datatype to save raster as.
     """
-    if not os.path.exists(out):
-        print('Writing raster')
-
     if os.path.exists(out):
         os.remove(out)
-        print('Overwriting raster.')
 
     driver = gdal.GetDriverByName('GTiff')
     metadata = driver.GetMetadata()
