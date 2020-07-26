@@ -6,8 +6,42 @@ from rindcalc.utils import save_index, resample
 
 
 class Sentinel:
+    """
+    Class to read and write Sentinel-2 data from.
+
+    Attributes
+    ----------
+    path : dict
+        Dictionary of the path for each Sentinel-2 band.
+    bands : dict, array
+        Dictionary of arrays for the bands chosen to load.
+    band_options : list
+        List of all options for band input names.
+
+    Methods
+    -------
+    load_bands(self, which_bands=None)
+    composite(self, which_bands, out_composite)
+    AWEIsh(self, out_raster=None)
+    NDVI(self, out_raster=None)
+    SIPI(self, out_raster=None)
+    ARVI(self, out_raster=None)
+    NDI45(self, out_raster=None)
+    MTCI(self, out_raster=None)
+    MCARI(self, out_raster=None)
+    GNDVI(self, out_raster=None)
+    PSSR(self, out_raster=None)
+    S2REP(self, out_raster=None)
+    IRECI(self, out_raster=None)
+    """
 
     def __init__(self, path):
+        """
+        Parameters
+        ----------
+            path : str
+                Path to folder where Sentinel-2 bands are contained.
+        """
         ends = ['*B01.jp2', '*B02.jp2', '*B03.jp2', '*B04.jp2', '*B05.jp2',
                 '*B06.jp2', '*B07.jp2', '*B08.jp2', '*B8A.jp2', '*B09.jp2',
                 '*B10.jp2', '*B11.jp2', '*B12.jp2']
@@ -29,6 +63,23 @@ class Sentinel:
                              'band_12']
 
     def load_bands(self, which_bands=None):
+        """
+        Opens and reads bands into Float 32 arrays. If no list is passed into
+        `which` bands then all bands are opened and added to the dictionary
+        `self.bands`.
+
+        Parameters
+        ----------
+            which_bands : list, optional
+                A list of band names to open as arrays.
+                e.g. which_bands=['band_1', 'band_2', 'band_3']
+
+        Returns
+        -------
+            self.bands : dict
+                Updated self.bands dictionary
+
+        """
 
         paths = self.path
         bands = {}
@@ -105,6 +156,18 @@ class Sentinel:
         return self.bands
 
     def composite(self, which_bands, out_composite):
+        """
+        Creates a three band composite out of the specified bands.
+
+        Parameters
+        ----------
+            which_bands : list
+                A list of bands to save as a three band composite. Must be in
+                order of how the bands are to saved within the output TIFF.
+                e.g. which_bands=['band_1', 'band_2', 'band_3']
+            out_composite : str
+                The output filename to save the composite,
+        """
 
         paths = self.path
         bands = []
@@ -140,6 +203,20 @@ class Sentinel:
         trans = gdal.Translate(out_composite, vrt, format='GTiff')
 
     def AWEIsh(self, out_raster=None):
+        """
+        Calculates AWEIsh index
+
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
@@ -165,6 +242,20 @@ class Sentinel:
         return equation
 
     def NDVI(self, out_raster=None):
+        """
+        Calculates NDVI index
+
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
@@ -182,7 +273,20 @@ class Sentinel:
         return equation
 
     def SIPI(self, out_raster=None):
+        """
+        Calculates SIPI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -200,7 +304,20 @@ class Sentinel:
         return equation
 
     def ARVI(self, out_raster=None):
+        """
+        Calculates ARVI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -218,7 +335,20 @@ class Sentinel:
         return equation
 
     def NDI45(self, out_raster=None):
+        """
+        Calculates NDI45 index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -237,7 +367,20 @@ class Sentinel:
         return equation
 
     def MTCI(self, out_raster=None):
+        """
+        Calculates MTCI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -257,7 +400,20 @@ class Sentinel:
         return equation
 
     def MCARI(self, out_raster=None):
+        """
+        Calculates MCARI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -277,7 +433,20 @@ class Sentinel:
         return equation
 
     def GNDVI(self, out_raster=None):
+        """
+        Calculates GNDVI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -296,7 +465,20 @@ class Sentinel:
         return equation
 
     def PSSR(self, out_raster=None):
+        """
+        Calculates PSSR index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -314,7 +496,20 @@ class Sentinel:
         return equation
 
     def S2REP(self, out_raster=None):
+        """
+        Calculates S2REP index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -335,7 +530,20 @@ class Sentinel:
         return equation
 
     def IRECI(self, out_raster=None):
+        """
+        Calculates IRECI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
