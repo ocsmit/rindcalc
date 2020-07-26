@@ -1,3 +1,3 @@
-import rindcalc.naip
+from .naip import NAIP
 from .landsat import Landsat
-from .sentinel import Sentinel, resample
+from .sentinel import Sentinel
