@@ -160,7 +160,8 @@ class Sentinel:
 
         snap = gdal.Open(self.path['band_2'])
 
-        save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
     def NDVI(self, out_raster):
@@ -194,8 +195,9 @@ class Sentinel:
 
         snap = gdal.Open(self.path['band_2'])
 
-        save_index(equation, out_raster, snap, gdal.GDT_Float32)
-        return equation, print('Finished')
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
 
     def ARVI(self, out_raster):
 
@@ -211,6 +213,7 @@ class Sentinel:
 
         snap = gdal.Open(self.path['band_2'])
 
-        save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
