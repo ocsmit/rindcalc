@@ -68,6 +68,14 @@ class Landsat:
     -------
     load_bands(self, which_bands=None)
     composite(self, which_bands, out_composite)
+    NDVI(self, out_tif=None, mask_clouds=False)
+    AWEIsh(self, out_tif=None, mask_clouds=False)
+    AWEInsh(self, out_tif=None, mask_clouds=False)
+    NDMI(self, out_tif=None, mask_clouds=False)
+    MNDWI(self, out_tif=None, mask_clouds=False)
+    GNDVI(self, out_tif=None, mask_clouds=False)
+    SAVI(self, out_tif=None, soil_brightness=0.5, mask_clouds=False)
+    ARVI(self, out_tif=None, mask_clouds=False)
     """
 
     def __init__(self, path):
@@ -426,6 +434,8 @@ class Landsat:
         ----------
             out_raster : str, optional
                 Output filepath for calculated TIFF.
+            soil_brightness : int
+                Soil brightness factor to compute SAVI with. Defaults to 0.5
             mask_clouds : bool, optional
                 Whether or not to apply cloud masking to output index with
                 the QA band.
