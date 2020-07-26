@@ -52,8 +52,31 @@ def save_ls(qa_band, equation, out_raster, snap, mask_clouds):
 
 
 class Landsat:
+    """
+    Class to read and write Landsat-8 data from.
+
+    Attributes
+    ----------
+    path : dict
+        Dictionary of the path for each Landsat-8 band.
+    bands : dict, array
+        Dictionary of arrays for the bands chosen to load.
+    band_options : list
+        List of all options for band input names.
+
+    Methods
+    -------
+    load_bands(self, which_bands=None)
+    composite(self, which_bands, out_composite)
+    """
 
     def __init__(self, path):
+        """
+        Parameters
+        ----------
+            path : str
+                Path to folder where Sentinel-2 bands are contained.
+        """
         ends = ['*B1.TIF', '*B2.TIF', '*B3.TIF', '*B4.TIF', '*B5.TIF',
                 '*B6.TIF', '*B7.TIF', '*B8.TIF', '*B9.TIF', '*B10.TIF',
                 '*BQA.TIF']
@@ -74,6 +97,23 @@ class Landsat:
                              'band_9', 'band_10', 'band_qa']
 
     def load_bands(self, which_bands=None):
+        """
+        Opens and reads bands into Float 32 arrays. If no list is passed into
+        `which` bands then all bands are opened and added to the dictionary
+        `self.bands`.
+
+        Parameters
+        ----------
+            which_bands : list, optional
+                A list of band names to open as arrays.
+                e.g. which_bands=['band_1', 'band_2', 'band_3']
+
+        Returns
+        -------
+            self.bands : dict
+                Updated self.bands dictionary
+
+        """
 
         paths = self.path
         bands = {}
@@ -135,6 +175,18 @@ class Landsat:
         return self.bands
 
     def composite(self, which_bands, out_composite):
+        """
+        Creates a three band composite out of the specified bands.
+
+        Parameters
+        ----------
+            which_bands : list
+                A list of bands to save as a three band composite. Must be in
+                order of how the bands are to saved within the output TIFF.
+                e.g. which_bands=['band_1', 'band_2', 'band_3']
+            out_composite : str
+                The output filename to save the composite,
+        """
 
         paths = self.path
         bands = []
@@ -164,7 +216,23 @@ class Landsat:
         trans = gdal.Translate(out_composite, vrt, format='GTiff')
 
     def NDVI(self, out_tif=None, mask_clouds=False):
+        """
+        Calculates NDVI index
 
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -181,29 +249,22 @@ class Landsat:
         return out_ras
 
     def AWEIsh(self, out_tif=None, mask_clouds=False):
-        """
-        AWEIsh(landsat_dir, aweish_out, mask_clouds=False)
+        """"
+        Calculates AWEIsh index
 
-        Calculates the Automated Water Extraction Index (shadow) with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        AWEIsh = (Blue + 2.5 * Green - 1.5 * (NIR + SWIR1) - 0.25 *
-                    SWIR2) /  (Blue + Green + NIR + SWIR1 + SWIR2)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
-
-                mask_clouds :: boolean, optional (default=False)
-                * Whether or not to apply cloud mask to scene based of QA band.
         """
 
         gdal.UseExceptions()
@@ -228,30 +289,22 @@ class Landsat:
 
     def AWEInsh(self, out_tif=None, mask_clouds=False):
         """
-        AWEInsh(landsat_dir, aweinsh_out, mask_clouds=False)
+        Calculates AWEInsh index
 
-        Calculates the Automated Water Extraction Index (no shadow) with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        AWEInsh = (4 * (Green - SWIR1) - (0.25 * NIR + 2.75 *
-                    SWIR1)) /  (Green + SWIR1 + NIR)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -271,26 +324,22 @@ class Landsat:
 
     def NDMI(self, out_tif=None, mask_clouds=False):
         """
-        NDMI(landsat_dir, ndmi_out)
+        Calculates NDMI index
 
-        Calculates the Normalized Difference Moisture Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        NDMI = (NIR - SWIR1) / (NIR + SWIR1)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -307,26 +356,22 @@ class Landsat:
 
     def MNDWI(self, out_tif=None, mask_clouds=False):
         """
-        MNDWI(landsat_dir, mndwi_out)
+        Calculates MNDWI index
 
-        Calculates the Modified Normalized Difference Water Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        MNDWI = (Green - SWIR1) / (Green + SWIR1)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -343,26 +388,22 @@ class Landsat:
 
     def GNDVI(self, out_tif=None, mask_clouds=False):
         """
-        GNDVI(landsat_dir, gndvi_out)
+        Calculates GNDVI index
 
-        Calculates the Green Normalized Difference Vegetation Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        GNDVI = (NIR - Green) / (NIR + Green)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                gndvi_out :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -379,29 +420,22 @@ class Landsat:
 
     def SAVI(self, out_tif=None, soil_brightness=0.5, mask_clouds=False):
         """
-        SAVI(landsat_dir, soil_brightness=0.5, savi_out)
+        Calculates SAVI index
 
-        Calculates the Soil Adjusted Vegetation Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
-                                            *L = Soil BrightnessFactor*
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                soil_brightness :: float, required (default=0.5)
-
-                 mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -420,26 +454,22 @@ class Landsat:
 
     def ARVI(self, out_tif=None, mask_clouds=False):
         """
-        ARVI(landsat_dir, arvi_out)
+        Calculates ARVI index
 
-        Calculates the Atmospherically Resistant Vegetation Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        ARVI = (NIR - (2 * Red) + Blue) / (NIR + (2 * Red) + Blue)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -458,26 +488,22 @@ class Landsat:
 
     def VARI(self, out_tif=None, mask_clouds=False):
         """
-        VARI(landsat_dir, vari_out)
+        Calculates VARI index
 
-        Calculates the Visual Atmospherically Resistant Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        VARI = ((Green - Red) / (Green + Red - Blue))
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -495,26 +521,22 @@ class Landsat:
 
     def NDBI(self, out_tif=None, mask_clouds=False):
         """
-        NDBI(landsat_dir, ndbi_out)
+        Calculates NDBI index
 
-        Calculates the Normalized Difference Built-up Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        NDBI = (SWIR1 - NIR) / (SWIR1 + NIR)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -532,26 +554,22 @@ class Landsat:
 
     def NDBaI(self, out_tif=None, mask_clouds=False):
         """
-        NDBaI(landsat_dir, ndbai_out)
+        Calculates NDBaI index
 
-        Calculates the Normalized Difference Bareness Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        NDBaI = ((SWIR1 - TIR) / (SWIR1 + TIR))
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -569,26 +587,22 @@ class Landsat:
 
     def NBLI(self, out_tif=None, mask_clouds=False):
         """
-        NBLI(landsat_dir, nbli_out)
+        Calculates NBLI index
 
-        Calculates the Normalized Difference Bareland Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        NBLI = (Red - TIR) / (Red + TIR)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -605,26 +619,22 @@ class Landsat:
 
     def EBBI(self, out_tif=None, mask_clouds=False):
         """
-        EBBI(landsat_dir, ebbi_out)
+        Calculates EBBI index
 
-        Calculates the Enhanced Built-up and Bareness Index with Landsat-8
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        EBBI = (SWIR1 - NIR) / (10 * (sqrt(SWIR1 + tir)))
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -644,25 +654,22 @@ class Landsat:
 
     def UI(self, out_tif=None, mask_clouds=False):
         """
-        UI(landsat_dir, ui_out)
+        Calculates UI index
 
-        Calculates the Urban Index with Landsat-8 and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        UI = (SWIR2 - NIR) / (SWIR2 + NIR)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
@@ -680,26 +687,22 @@ class Landsat:
 
     def NBRI(self, out_tif=None, mask_clouds=False):
         """
-        NBRI(landsat_dir, nbri_out)
+        Calculates NBRI index
 
-        Calculates the Normalized Burn Ratio Index with Landsat-8 and outputs a
-        TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+            mask_clouds : bool, optional
+                Whether or not to apply cloud masking to output index with
+                the QA band.
 
-        UI = (SWIR2 - NIR) / (SWIR2 + NIR)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                landsat_dir :: str, required
-                    * Folder path where all landsat bands for the scene are
-                      contained.
-
-                out_tif :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                mask_clouds :: boolean, optional (default=False)
-                    * Whether or not to apply cloud mask to scene based of QA band.
         """
-
         gdal.UseExceptions()
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
