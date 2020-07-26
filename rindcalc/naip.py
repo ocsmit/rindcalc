@@ -34,17 +34,49 @@ def save_comp(bands, out, snap, dType=gdal.GDT_Byte):
 
 
 class NAIP:
+    """
+    Class to read and write NAIP data from.
 
+    Attributes
+    ----------
+    path : dict
+        Dictionary of the path for each Landsat-8 band.
+    bands : dict, array
+        Dictionary of arrays for the bands chosen to load.
+    band_options : list
+        List of all options for band input names.
+
+    Methods
+    -------
+    load_bands(self, which_bands=None)
+    composite(self, which_bands, out_composite)
+    """
     def __init__(self, path):
 
         self.bands = {}
         self.path = path
 
         self.band_options = ['band_1', 'band_2',
-                             'band_3' ,'band_4']
+                             'band_3','band_4']
 
     def load_bands(self, which_bands=None):
+        """
+        Opens and reads bands into Float 32 arrays. If no list is passed into
+        `which` bands then all bands are opened and added to the dictionary
+        `self.bands`.
 
+        Parameters
+        ----------
+            which_bands : list, optional
+                A list of band names to open as arrays.
+                e.g. which_bands=['band_1', 'band_2', 'band_3']
+
+        Returns
+        -------
+            self.bands : dict
+                Updated self.bands dictionary
+
+        """
         bands = {}
         naip = gdal.Open(self.path)
         if which_bands is None:
@@ -70,7 +102,18 @@ class NAIP:
         return self.bands
 
     def composite(self, which_bands, out_composite):
+        """
+        Creates a three band composite out of the specified bands.
 
+         Parameters
+         ----------
+             which_bands : list
+                 A list of bands to save as a three band composite. Must be in
+                 order of how the bands are to saved within the output TIFF.
+                 e.g. which_bands=['band_1', 'band_2', 'band_3']
+             out_composite : str
+                 The output filename to save the composite,
+        """
         bands = []
         naip = gdal.Open(self.path)
         for i in range(len(which_bands)):
@@ -91,20 +134,18 @@ class NAIP:
 
     def NDVI(self, out_raster=None):
         """
-        NDVI(in_naip, ndvi_out, mask_clouds=False)
+        Calculates NDVI index
 
-        Calculates the Normalized Difference Vegetation Index with NAIP imagery
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
 
-        NDVI = ((NIR - Red) / (NIR + Red))
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                in_naip :: str, required
-                    * File path for NAIP image.
-
-                ndvi_out :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
         """
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
@@ -126,22 +167,19 @@ class NAIP:
 
     def ARVI(self, out_raster=None):
         """
-        ARVI(in_naip, arvi_out)
+        Calculates ARVI index
 
-        Calculates the Atmospherically Resistant Vegetation Index with NAIP imagery
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
 
-        ARVI = (NIR - (2 * Red) + Blue) / (NIR + (2 * Red) + Blue)
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                in_naip :: str, required
-                    * File path for NAIP image.
-
-                arvi_out :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
         """
-
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -161,22 +199,19 @@ class NAIP:
 
     def VARI(self, out_raster=None):
         """
-         VARI(in_naip, vari_out)
+        Calculates VARI index
 
-        Calculates the Visual Atmospherically Resistant Index with NAIP imagery
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
 
-        VARI = ((Green - Red) / (Green + Red - Blue))
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                in_naip :: str, required
-                    * File path for NAIP image.
-
-                vari_out :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
         """
-
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -196,25 +231,21 @@ class NAIP:
 
     def SAVI(self, soil_brightness=0.5, out_raster=None):
         """
-        SAVI(in_naip, soil_brightness=0.5, savi_out)
+        Calculates SAVI index
 
-        Calculates the Soil Adjusted Vegetation Index with NAIP imagery
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            soil_brightness : float
+                Soil brightness factor to compute SAVI with. Defaults to 0.5
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
 
-        SAVI = ((NIR - Red) / (NIR + Red + L)) x (1 + L)
-                                            *L = Soil BrightnessFactor*
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                in_naip :: str, required
-                    *File path for NAIP image.
-
-                savi_out :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
-
-                soil_brightness :: float, required (default=0.5)
         """
-
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
         gdal.AllRegister()
@@ -234,20 +265,18 @@ class NAIP:
 
     def RedRatio(self, out_raster=None):
         """
-        Redequation(in_naip, soil_brightness=0.5, savi_out)
+        Calculates ARVI index
 
-        Calculates the Soil Adjusted Vegetation Index with NAIP imagery
-        and outputs a TIFF raster file.
+        Parameters
+        ----------
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
 
-        equation = (bands['band_3'] + bands['band_1'] + bands['band_2']) / bands['band_1']
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
 
-        Parameters:
-
-                in_naip :: str, required
-                    * File path for NAIP image.
-
-                redratio_out :: str, optional (default=None)
-                    * Output path and file name for calculated index raster.
         """
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')

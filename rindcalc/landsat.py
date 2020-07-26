@@ -434,7 +434,7 @@ class Landsat:
         ----------
             out_raster : str, optional
                 Output filepath for calculated TIFF.
-            soil_brightness : int
+            soil_brightness : float
                 Soil brightness factor to compute SAVI with. Defaults to 0.5
             mask_clouds : bool, optional
                 Whether or not to apply cloud masking to output index with
