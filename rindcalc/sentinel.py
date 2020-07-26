@@ -139,7 +139,7 @@ class Sentinel:
         vrt = gdal.BuildVRT('tmp.vrt', bands, separate=True, bandList=[1, 1, 1])
         trans = gdal.Translate(out_composite, vrt, format='GTiff')
 
-    def AWEIsh(self, out_raster):
+    def AWEIsh(self, out_raster=None):
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
@@ -164,7 +164,7 @@ class Sentinel:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
-    def NDVI(self, out_raster):
+    def NDVI(self, out_raster=None):
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
@@ -181,7 +181,7 @@ class Sentinel:
         save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
-    def SIPI(self, out_raster):
+    def SIPI(self, out_raster=None):
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
@@ -199,7 +199,7 @@ class Sentinel:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
-    def ARVI(self, out_raster):
+    def ARVI(self, out_raster=None):
 
         gdal.PushErrorHandler('CPLQuietErrorHandler')
         gdal.UseExceptions()
@@ -217,3 +217,139 @@ class Sentinel:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
+    def NDI45(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_4'])
+        band_5 = resample(self.path['band_5'], 10)
+
+        equation = ((band_5 - bands['band_4']) /
+                    (band_5 + bands['band_4']))
+
+        snap = gdal.Open(self.path['band_4'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+    def MTCI(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_4'])
+        band_5 = resample(self.path['band_5'], 10)
+        band_6 = resample(self.path['band_6'], 10)
+
+        equation = ((band_6 - band_5) /
+                    (band_5 - bands['band_4']))
+
+        snap = gdal.Open(self.path['band_4'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+    def MCARI(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_3', 'band_4'])
+        band_5 = resample(self.path['band_5'], 10)
+
+        equation = (abs((band_5 - bands['band_4']) - 0.2 *
+                    (band_5 - bands['band_3'])) *
+                    (band_5 - bands['band_4']))
+
+        snap = gdal.Open(self.path['band_4'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+    def GNDVI(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_3'])
+        band_7 = resample(self.path['band_7'], 10)
+
+        equation = ((band_7 - bands['band_3']) /
+                    (band_7 + bands['band_3']))
+
+        snap = gdal.Open(self.path['band_3'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+    def PSSR(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        band_7 = resample(self.path['band_7'], 10)
+        bands = self.load_bands(['band_4'])
+
+        equation = (band_7 / bands['band_4'])
+
+        snap = gdal.Open(self.path['band_4'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+    def S2REP(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_4'])
+        band_5 = resample(self.path['band_5'], 10)
+        band_6 = resample(self.path['band_6'], 10)
+        band_7 = resample(self.path['band_7'], 10)
+
+        equation = 705 + 35 * ((((band_7 + bands['band_4']) / 2) - band_5) /
+                               (band_6 - band_5))
+
+        snap = gdal.Open(self.path['band_4'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+    def IRECI(self, out_raster=None):
+
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_4'])
+        band_5 = resample(self.path['band_5'], 10)
+        band_6 = resample(self.path['band_6'], 10)
+        band_7 = resample(self.path['band_7'], 10)
+
+        equation = ((band_7 - bands['band_4']) / (band_5 / band_6))
+
+        snap = gdal.Open(self.path['band_4'])
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
