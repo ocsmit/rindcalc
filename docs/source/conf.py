@@ -10,9 +10,12 @@
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
-# import os
-# import sys
-# sys.path.insert(0, os.path.abspath('.'))
+import os
+import sys
+sys.path.insert(0, os.path.abspath('../..'))
+
+
+autodoc_mock_imports = ["numpy", "osgeo"]
 
 master_doc = 'index'
 
@@ -33,8 +36,9 @@ release = '2.0.1'
 # ones.
 extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary"
-]
+    "sphinx.ext.autosummary",
+    "sphinx.ext.coverage",
+    'sphinx.ext.napoleon']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -44,6 +48,14 @@ templates_path = ['_templates']
 # This pattern also affects html_static_path and html_extra_path.
 exclude_patterns = []
 
+autodoc_default_options = {
+    'members': True,
+    'member-order': 'bysource',
+    'special-members': '__init__',
+    'undoc-members': True,
+    'exclude-members': '__weakref__'
+}
+
 
 # -- Options for HTML output -------------------------------------------------
 
@@ -51,11 +63,11 @@ exclude_patterns = []
 # a list of builtin themes.
 
 html_logo = 'rindcalc logo_color.png'
-html_theme = 'pydata_sphinx_theme'
+html_theme = "pydata_sphinx_theme"
 
-html_theme_options = {
-    "github_url": "https://github.com/ocsmit/rindcalc"
-}
+#html_theme_options = {
+#    "github_url": "https://github.com/ocsmit/rindcalc"
+#}
 
 # Add any paths that contain custom static files (such as style sheets) here,
 # relative to this directory. They are copied after the builtin static files,

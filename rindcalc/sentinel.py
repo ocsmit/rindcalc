@@ -6,41 +6,24 @@ from rindcalc.utils import save_index, resample
 
 
 class Sentinel:
-    """
-    Class to read and write Sentinel-2 data from.
-
-    Attributes
-    ----------
-    path : dict
-        Dictionary of the path for each Sentinel-2 band.
-    bands : dict, array
-        Dictionary of arrays for the bands chosen to load.
-    band_options : list
-        List of all options for band input names.
-
-    Methods
-    -------
-    load_bands(self, which_bands=None)
-    composite(self, which_bands, out_composite)
-    AWEIsh(self, out_raster=None)
-    NDVI(self, out_raster=None)
-    SIPI(self, out_raster=None)
-    ARVI(self, out_raster=None)
-    NDI45(self, out_raster=None)
-    MTCI(self, out_raster=None)
-    MCARI(self, out_raster=None)
-    GNDVI(self, out_raster=None)
-    PSSR(self, out_raster=None)
-    S2REP(self, out_raster=None)
-    IRECI(self, out_raster=None)
-    """
 
     def __init__(self, path):
         """
+        Class to read and write Sentinel-2 data from.
+
         Parameters
         ----------
             path : str
                 Path to folder where Sentinel-2 bands are contained.
+
+        Attributes
+        ----------
+            path : dict
+                Dictionary of the path for each Sentinel-2 band.
+            bands : dict, array
+                Dictionary of arrays for the bands chosen to load.
+            band_options : list
+                List of all options for band input names.
         """
         ends = ['*B01.jp2', '*B02.jp2', '*B03.jp2', '*B04.jp2', '*B05.jp2',
                 '*B06.jp2', '*B07.jp2', '*B08.jp2', '*B8A.jp2', '*B09.jp2',

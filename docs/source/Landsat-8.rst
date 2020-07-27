@@ -1,4 +1,4 @@
-**Landsat-8 | rindcalc.ls**
+Landsat-8
 ===========================
 
 Rindcalc uses the standard naming convention of landsat bands, it only needs
@@ -24,10 +24,7 @@ latitudes. The scene size is 185 km x 180 km (114 mi x 112 mi) `(USGS)
 
 --------------------------------------------------------------------------------
 
-.. toctree::
-   :caption: Functions
-   :maxdepth: 2
+.. autoclass:: rindcalc.Landsat
+    :members:
 
-   ls_indices
-   ls_composites
-   cloud_mask
+

@@ -34,25 +34,25 @@ def save_comp(bands, out, snap, dType=gdal.GDT_Byte):
 
 
 class NAIP:
-    """
-    Class to read and write NAIP data from.
 
-    Attributes
-    ----------
-    path : dict
-        Dictionary of the path for each Landsat-8 band.
-    bands : dict, array
-        Dictionary of arrays for the bands chosen to load.
-    band_options : list
-        List of all options for band input names.
-
-    Methods
-    -------
-    load_bands(self, which_bands=None)
-    composite(self, which_bands, out_composite)
-    """
     def __init__(self, path):
+        """
+        Class to read and write NAIP data from.
 
+        Parameters
+        ----------
+            path : str
+                Path to folder where Sentinel-2 bands are contained.
+
+        Attributes
+        ----------
+            path : dict
+                Dictionary of the path for each Landsat-8 band.
+            bands : dict, array
+                Dictionary of arrays for the bands chosen to load.
+            band_options : list
+                List of all options for band input names.
+        """
         self.bands = {}
         self.path = path
 
@@ -105,8 +105,8 @@ class NAIP:
         """
         Creates a three band composite out of the specified bands.
 
-         Parameters
-         ----------
+        Parameters
+        ----------
              which_bands : list
                  A list of bands to save as a three band composite. Must be in
                  order of how the bands are to saved within the output TIFF.

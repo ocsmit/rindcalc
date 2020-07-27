@@ -52,38 +52,25 @@ def save_ls(qa_band, equation, out_raster, snap, mask_clouds):
 
 
 class Landsat:
-    """
-    Class to read and write Landsat-8 data from.
-
-    Attributes
-    ----------
-    path : dict
-        Dictionary of the path for each Landsat-8 band.
-    bands : dict, array
-        Dictionary of arrays for the bands chosen to load.
-    band_options : list
-        List of all options for band input names.
-
-    Methods
-    -------
-    load_bands(self, which_bands=None)
-    composite(self, which_bands, out_composite)
-    NDVI(self, out_tif=None, mask_clouds=False)
-    AWEIsh(self, out_tif=None, mask_clouds=False)
-    AWEInsh(self, out_tif=None, mask_clouds=False)
-    NDMI(self, out_tif=None, mask_clouds=False)
-    MNDWI(self, out_tif=None, mask_clouds=False)
-    GNDVI(self, out_tif=None, mask_clouds=False)
-    SAVI(self, out_tif=None, soil_brightness=0.5, mask_clouds=False)
-    ARVI(self, out_tif=None, mask_clouds=False)
-    """
 
     def __init__(self, path):
         """
+        Class to read and write Landsat-8 data from.
+
+
         Parameters
         ----------
             path : str
-                Path to folder where Sentinel-2 bands are contained.
+                Path to folder where Landsat-8 bands are contained.
+
+        Attributes
+        ----------
+            path : dict
+                Dictionary of the path for each Landsat-8 band.
+            bands : dict, array
+                Dictionary of arrays for the bands chosen to load.
+            band_options : list
+                List of all options for band input names.
         """
         ends = ['*B1.TIF', '*B2.TIF', '*B3.TIF', '*B4.TIF', '*B5.TIF',
                 '*B6.TIF', '*B7.TIF', '*B8.TIF', '*B9.TIF', '*B10.TIF',

@@ -120,8 +120,9 @@ and add the module to path with sys.path.append.
    :caption: Contents
    :maxdepth: 1
 
-   landsat/Landsat-8
-   naip/naip
+   Landsat-8
+   naip
+   sent
    band_utils
    Index Formula List
    Contact
