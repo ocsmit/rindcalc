@@ -13,14 +13,9 @@ to the need to create and process spectral index raster files.
 Satellites & Imagery
 ------------------------
  * Landsat-8
-    * Index raster creation
-    * Composites
-    * Cloud Masking
  * National Agricultural Imagery Program - NAIP
-    * Index raster creation
-    * Composites
- * Sentinel-2 - WIP
- * MODIS - WIP
+ * Sentinel-2
+ * MODIS
 
 **Example of use:**
 -------------------
