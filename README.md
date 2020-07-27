@@ -21,9 +21,9 @@ functionality in the works
 
 **Roadmap**
 
-- Finish Sentinel-2 implementation
-- Rework Landsat, NAIP, and Sentinel to operate in classes
-- Segmentation and zonal statistics
+- [ ] Finish Sentinel-2 implementation
+- [x] Rework Landsat, NAIP, and Sentinel to operate in classes
+- [ ] Segmentation and zonal statistics
 
 **Install with pip**
 
