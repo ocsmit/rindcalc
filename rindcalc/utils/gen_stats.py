@@ -4,19 +4,21 @@ import numpy as np
 
 def gen_stats(raster_path):
     """
-    gen_stats(raster_path)
-
     Prints minimum, maximum, mean, median, and standard deviation values for
     a raster.
 
-    Parameters:
+    Parameters
+    ----------
+        raster_path : str, required
+            input raster with which to generate statistical summary of.
 
-            raster_path ::str, required
-                * input raster with which to generate statistical summary of.
-
-    Returns:
-
-            minimum, maximum, mean, median, standard deviation
+    Returns
+    -------
+        minimum
+        maximum
+        mean
+        median
+        standard deviation
     """
 
     path = gdal.Open(raster_path)

@@ -1,2 +1,0 @@
-from rindcalc.naip import *
-

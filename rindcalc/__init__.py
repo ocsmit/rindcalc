@@ -1,3 +1,4 @@
-import rindcalc.ls
-import rindcalc.naip
-import rindcalc.sent
+from .naip import NAIP
+from .landsat import Landsat
+from .sentinel import Sentinel
+

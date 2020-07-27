@@ -1,4 +1,4 @@
-**NAIP | rindcalc.naip**
+NAIP
 ========================
 
 The National Agriculture Imagery Program (NAIP) acquires aerial imagery during
@@ -10,10 +10,5 @@ The default spectral resolution is natural color (Red, Green and Blue, or RGB)
 but beginning in 2007, some states have been delivered with four bands of
 data: RGB and Near Infrared `(USDA) <https://www.fsa.usda.gov/programs-and-services/aerial-photography/imagery-programs/naip-imagery/>`_.
 
-.. toctree::
-   :caption: Functions
-   :maxdepth: 2
-
-   naip_indices
-   naip_composites
-
+.. autoclass:: rindcalc.NAIP
+    :members:
