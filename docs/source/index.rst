@@ -36,7 +36,8 @@ Calculating the ARVI of a NAIP tile and saving as a raster.
    input_naip = '/naip_folder/m_3008101_ne_17_1_20151017.tif'
    output_arvi = '/naip_outputs/ARVI_3008101_ne_17.tif'
 
-   rc.naip.ARVI(input_naip, output_ndvi)
+   data = rc.NAIP(path)
+   data.ARVI(output_ndvi)
 
 
 Output ARVI raster:
@@ -51,11 +52,12 @@ Using in conjunction with matplotlib
 
 .. code-block:: python
 
-   from rindcalc import ls
+   import rindcalc as rc
    import matplotlib.pyplot as plt
 
-   aweish = ls.AWEIsh('/landsat_8/2019_11_28')
-   plt.imshow(i, 'ocean')
+   ls = '/landsat_8/2019_11_28'
+   index = ls.AWEIsh('/landsat_8/2019_11_28')
+   plt.imshow(index, 'ocean')
    plt.title('AWEIsh - Water Index')
    plt.show()
 
@@ -68,17 +70,17 @@ Creating a false color composite of a Landsat-8 Scene.
 
 .. code-block:: python
 
-   import rindcalc as rc
+   from rindcalc import Landsat
 
-   rc.ls.FalseColor('/landsat_8/LC08_L1TP_197031_20131212_20170428_01_T1',
-                      '/landsat_8_outputs/FalseColor_Barcelona.tif')
+   ls = rc.Landsat('/landsat_8/LC08_L1TP_197031_20131212_20170428_01_T1')
+   ls.composite(['band_5', 'band_4', 'band_3'], '/landsat_8_outputs/FalseColor_Barcelona.tif')
 
 
 Output false color composite:
     .. image:: https://user-images.githubusercontent.com/55674113/77016121-2c02ca00-694d-11ea-9131-06836238e7fb.png
        :alt: False color composite output
-       :width: 772.8px
-       :height: 824px
+       :width: 390px
+       :height: 412px
 
 Install
 -------------------------------------
