@@ -5,3 +5,4 @@ Band Utilities
     :members:
 
 .. automodule:: rindcalc.utils.gen_stats
+    :members:
