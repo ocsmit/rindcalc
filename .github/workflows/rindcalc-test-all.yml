@@ -36,3 +36,5 @@ jobs:
         run: |
           pip3 install pytest
           python3 -m pytest tests/
+        env:
+          PYTHONPATH: "."
