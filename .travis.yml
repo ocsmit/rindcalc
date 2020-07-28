@@ -17,4 +17,4 @@ install:
   - conda list
 
 script:
-  - pytest --cov-report xml --cov=movingpandas
+  - pytest
