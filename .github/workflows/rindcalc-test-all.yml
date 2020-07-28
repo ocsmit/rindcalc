@@ -32,4 +32,4 @@ jobs:
         run: conda install pytest
       - name: Test with pytest
         run: |
-          pytest -m ../tests/test_sent.py
+          pytest tests/
