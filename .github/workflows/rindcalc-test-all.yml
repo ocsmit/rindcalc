@@ -35,4 +35,5 @@ jobs:
         run: conda install gdal
       - name: Test with pytest
         run: |
-          python3 -m pytest
+          pip install pytest
+          pytest rindcalc
