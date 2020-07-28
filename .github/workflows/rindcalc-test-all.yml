@@ -31,6 +31,9 @@ jobs:
       - name: Conda info
         shell: bash
         run: conda info
+      - name: ls
+        shell: bash
+        run: ls
       - name: gdal
         run: conda install gdal
       - name: install pytest  
