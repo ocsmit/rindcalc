@@ -12,6 +12,7 @@ install:
 
 # Install dependencies
   - conda env create --file=environment.yml
+  - source activate rindcalc
   - conda install pytest
 
   - conda list
