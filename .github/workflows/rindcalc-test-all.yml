@@ -37,4 +37,4 @@ jobs:
         run: conda install pytest
       - name: Test with pytest
         run: |
-          python -m pytest tests/
+          python -m pytest ../tests/
