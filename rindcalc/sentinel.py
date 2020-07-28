@@ -252,7 +252,8 @@ class Sentinel:
 
         snap = gdal.Open(self.path['band_2'])
 
-        save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
 
     def SIPI(self, out_raster=None):
