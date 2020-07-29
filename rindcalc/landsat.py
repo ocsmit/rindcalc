@@ -165,6 +165,11 @@ class Landsat:
                 band_10 = band.GetRasterBand(1).ReadAsArray().astype(
                     np.float32)
                 bands.update({"band_10": band_10})
+            if which_bands[i] == 'band_qa':
+                band = gdal.Open(paths["band_qa"])
+                band_qa = band.GetRasterBand(1).ReadAsArray().astype(
+                    np.float32)
+                bands.update({"band_qa": band_qa})
 
         self.bands = bands
         return self.bands
