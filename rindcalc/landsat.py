@@ -215,7 +215,7 @@ class Landsat:
         vrt = gdal.BuildVRT('tmp.vrt', bands, separate=True, bandList=[1, 1, 1])
         trans = gdal.Translate(out_composite, vrt, format='GTiff')
 
-    def NDVI(self, out_tif=None, mask_clouds=False):
+    def NDVI(self, out_raster=None, mask_clouds=False):
         """
         Calculates NDVI index
 
@@ -243,12 +243,12 @@ class Landsat:
                     (bands["band_3"] + bands["band_6"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
         return out_ras
 
-    def AWEIsh(self, out_tif=None, mask_clouds=False):
+    def AWEIsh(self, out_raster=None, mask_clouds=False):
         """"
         Calculates AWEIsh index
 
@@ -282,12 +282,12 @@ class Landsat:
         equation = (a / b)
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
         return out_ras
 
-    def AWEInsh(self, out_tif=None, mask_clouds=False):
+    def AWEInsh(self, out_raster=None, mask_clouds=False):
         """
         Calculates AWEInsh index
 
@@ -317,12 +317,12 @@ class Landsat:
                     (bands["band_3"] + bands["band_6"] + bands["band_5"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
         return out_ras
 
-    def NDMI(self, out_tif=None, mask_clouds=False):
+    def NDMI(self, out_raster=None, mask_clouds=False):
         """
         Calculates NDMI index
 
@@ -350,11 +350,11 @@ class Landsat:
                     (bands["band_5"] + bands["band_6"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def MNDWI(self, out_tif=None, mask_clouds=False):
+    def MNDWI(self, out_raster=None, mask_clouds=False):
         """
         Calculates MNDWI index
 
@@ -382,11 +382,11 @@ class Landsat:
                     (bands["band_3"] + bands["band_6"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def GNDVI(self, out_tif=None, mask_clouds=False):
+    def GNDVI(self, out_raster=None, mask_clouds=False):
         """
         Calculates GNDVI index
 
@@ -414,11 +414,11 @@ class Landsat:
                     / (bands["band_5"] + bands["band_3"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def SAVI(self, out_tif=None, soil_brightness=0.5, mask_clouds=False):
+    def SAVI(self, out_raster=None, soil_brightness=0.5, mask_clouds=False):
         """
         Calculates SAVI index
 
@@ -449,12 +449,12 @@ class Landsat:
                     * (1 + soil_brightness)
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
         return out_ras
 
-    def ARVI(self, out_tif=None, mask_clouds=False):
+    def ARVI(self, out_raster=None, mask_clouds=False):
         """
         Calculates ARVI index
 
@@ -483,12 +483,12 @@ class Landsat:
                     (bands["band_5"] + (2 * bands["band_4"]) + bands["band_2"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
         return out_ras
 
-    def VARI(self, out_tif=None, mask_clouds=False):
+    def VARI(self, out_raster=None, mask_clouds=False):
         """
         Calculates VARI index
 
@@ -516,12 +516,12 @@ class Landsat:
                     (bands["band_3"] + bands["band_4"] - bands["band_2"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
         return out_ras
 
-    def NDBI(self, out_tif=None, mask_clouds=False):
+    def NDBI(self, out_raster=None, mask_clouds=False):
         """
         Calculates NDBI index
 
@@ -550,11 +550,11 @@ class Landsat:
                     bands["band_6"] + bands["band_5"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def NDBaI(self, out_tif=None, mask_clouds=False):
+    def NDBaI(self, out_raster=None, mask_clouds=False):
         """
         Calculates NDBaI index
 
@@ -583,11 +583,11 @@ class Landsat:
                     (bands["band_6"] + bands["band_10"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def NBLI(self, out_tif=None, mask_clouds=False):
+    def NBLI(self, out_raster=None, mask_clouds=False):
         """
         Calculates NBLI index
 
@@ -615,11 +615,11 @@ class Landsat:
                     (bands["band_4"] + bands["band_10"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def EBBI(self, out_tif=None, mask_clouds=False):
+    def EBBI(self, out_raster=None, mask_clouds=False):
         """
         Calculates EBBI index
 
@@ -650,11 +650,11 @@ class Landsat:
         ebbi_mask.reshape(ebbi.shape)
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], ebbi_mask, out_tif,
+        out_ras = save_ls(self.path['band_qa'], ebbi_mask, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def UI(self, out_tif=None, mask_clouds=False):
+    def UI(self, out_raster=None, mask_clouds=False):
         """
         Calculates UI index
 
@@ -683,11 +683,11 @@ class Landsat:
                     (bands["band_7"] + bands["band_5"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
 
-    def NBRI(self, out_tif=None, mask_clouds=False):
+    def NBRI(self, out_raster=None, mask_clouds=False):
         """
         Calculates NBRI index
 
@@ -716,6 +716,6 @@ class Landsat:
                     (bands["band_5"] + bands["band_7"]))
 
         snap = gdal.Open(self.path['band_2'])
-        out_ras = save_ls(self.path['band_qa'], equation, out_tif,
+        out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
