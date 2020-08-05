@@ -32,7 +32,7 @@ For each remote sensing product a class is intitialized which will read the file
 The classes are further seperated into key methods to effiecently process imagery.
 
 
-![Rindcalc Library](fig-rindcalc.png)
+![Simple overveiw of the Rindcalc python library](fig-rindcalc.png)
 
 # Mathematics
 
