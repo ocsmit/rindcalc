@@ -28,10 +28,20 @@ The indices created with Rindcalc can subsequently be added to other workflows a
 
 # Methodology
 Rindcalc is seperated by remote sensing product with functionality for Landsat-8, Sentinel-2, and NAIP imagery provided at the time of writing.
-For each remote sensing product a class is intitialized which will read the filepath of each raster band utilizing the default naming conventions of each product.
-The classes are further seperated into key methods to effiecently process imagery.
+For each remote sensing product a class is intitialized which will read the filepaths of each raster band within the image directory utilizing the default naming conventions of each product. 
+Each class contains two main dictonary attributes, `paths` and `bands`, both of which follow the same key naming convention where the key of each band is titled "band_band#", e.g. Landsat-8 band seven would be "band_7". 
+This naming convention is utilized throughout Rindcalc with the goal of simplifiying the usage of the individual bands.
+Furthermore, the usage of the dictonary structure allows the data to be easily qeuryable and allows for only specific bands to only be loaded as arrays for reduced memory usage when working with each remote sensing product.
 
+## Key Modules
 
+* `load_bands`: 
+  For each remote sensing product each indvidual band can be read into an array using the `load_bands` method.
+  This allows for index formulas to be applied properly to the imagery as each cell can be effiecently computed.
+
+- `composite`:
+  For remote sensing products three band composites of varying band combinations are important to highlight various features.
+  Rindcalc provides a simple structure to create said composites as the band specification inputs use the naming convention standard within Rindcalc.
 ![Simple overveiw of the Rindcalc python library](fig-rindcalc.png)
 
 # Mathematics
