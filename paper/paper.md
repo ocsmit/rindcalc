@@ -42,6 +42,8 @@ Furthermore, the usage of the dictonary structure allows the data to be easily q
 - `composite`:
   For remote sensing products three band composites of varying band combinations are important to highlight various features.
   Rindcalc provides a simple structure to create said composites as the band specification inputs use the naming convention standard within Rindcalc.
+
+
 ![Simple overveiw of the Rindcalc python library](fig-rindcalc.png)
 
 # Mathematics
