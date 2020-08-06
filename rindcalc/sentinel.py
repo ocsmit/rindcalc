@@ -545,3 +545,39 @@ class Sentinel:
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
         return equation
+
+    def SAVI(self, soil_moisture=0.5, out_raster=None):
+        """
+        Calculates SAVI index
+
+        Parameters
+        ----------
+            soil_moisture : flt
+                Soil moisture value, default = 0.5
+            out_raster : str, optional
+                Output filepath for calculated TIFF.
+
+        Returns
+        -------
+            equation : array
+                Output array of the generated index.
+
+        """
+        gdal.PushErrorHandler('CPLQuietErrorHandler')
+        gdal.UseExceptions()
+        gdal.AllRegister()
+        np.seterr(divide='ignore', invalid='ignore')
+
+        bands = self.load_bands(['band_4', 'band_8'])
+
+        equation = (((bands['band_8'] - bands['band_4']) / (bands['band_8'] +
+                      bands['band_4'] + soil_moisture)) * (1 + soil_moisture))
+
+        snap = self.path['band_4']
+
+        if out_raster is not None:
+            save_index(equation, out_raster, snap, gdal.GDT_Float32)
+        return equation
+
+
+
