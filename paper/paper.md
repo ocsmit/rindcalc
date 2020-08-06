@@ -18,19 +18,19 @@ bibliography: paper.bib
 
 # Summary 
 The public availability of multispectral satellite imagery combined with the high temporal frequency with which it is taken allows for imagery to be incorporated into many aspects of research.
-The uses of indices derived from remote sensing products range from tracking vegetation health, monitoring forest canopy, observing water levels, fire detection, and even aiding in the creation of land cover datasets [@Silleos:2006; @Joshi:2006; @Ghulam:2007; @Roy:2006; @Jin:2013].
+Indices derived from multispectral remote sensing products are widely used in research with usage ranging from tracking vegetation health, monitoring forest canopy, observing water levels, fire detection, and even aiding in the creation of land cover datasets [@Silleos:2006; @Joshi:2006; @Ghulam:2007; @Roy:2006; @Jin:2013].
 Indices are computed through the application of algebraic formulas where the inputs are either the spectral bands or other ancillary information from multispectral imagery.
 However, outside of raster calculator Graphical User Interfaces (GUI's), like those in proprietary geospatial software’s such as ArcGIS [@Esri:2020] and ERDAS Imagine [@Erdas:2004], and in the open source QGIS [@QGIS:2019], there is currently no streamlined method for calculating these indices.
 
-The goal then of Rindcalc is to provide an efficient and seamless processing library capable of working directly with remote sensing products outside of a GUI and remove the need to set up a complex Python pipelines otherwise.
+The goal then of Rindcalc is to provide an efficient and seamless processing library capable of working directly with remote sensing products outside of a GUI and remove the need to set up a complex Python pipeline otherwise.
 The indices and composites computed with Rindcalc can subsequently be added to other workflows and algorithms to aid in research.
 
 Rindcalc is separated by remote sensing product with functionality for Landsat-8 [@Roy:2014], Sentinel-2 [@Drusch:2012], and National Agricultural Imagery Program (NAIP) [@USDA:2020] provided at the time of writing.
-For each remote sensing product a class is initialized which will read the filepaths of each raster band within the image directory utilizing the default naming conventions of each product. 
+For each remote sensing product a class is initialized which reads the filepaths of each raster band within the image directory utilizing the default naming conventions of each product. 
 Each class contains two main dictionary attributes, `paths` and `bands`, both of which follow the same naming convention where the key for each band is titled "band_band#", e.g. band seven of Landsat-8 would be identified with the key "band_7". 
 This naming convention is utilized throughout Rindcalc and effectively simplifies the process reading the individual bands.
 Furthermore, the usage of the dictionary structure allows the data to be easily queryable and allows for only the desired bands to be loaded as arrays in order to reduced memory usage.
-Spatial information for the imagery is maintained with the use of the Geospatial Data Abstraction software Library (GDAL) [@GDAL:2020] to convert bands to and from NumPy arrays [@Van:2011].
+Spatial information for the imagery is maintained through the use of the Geospatial Data Abstraction software Library (GDAL) [@GDAL:2020] to convert bands to and from NumPy arrays [@Van:2011].
 Additionally, processing functions are provided such as image compositing, cell size resampling, and cloud masking for Landsat-8 when computing indices.
  A simple structure of Rindcalc can be viewed in \autoref{fig:rindcalc}.
 
