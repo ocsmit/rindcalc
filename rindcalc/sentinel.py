@@ -218,7 +218,7 @@ class Sentinel:
              + band_11 + band_12)
         equation = a / b
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -250,7 +250,7 @@ class Sentinel:
         equation = (bands["band_8"] - bands["band_4"]) / \
                    (bands["band_8"] + bands["band_4"])
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -281,7 +281,7 @@ class Sentinel:
         equation = (bands["band_8"] - bands["band_2"]) / \
                    (bands["band_8"] + bands["band_2"])
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -312,7 +312,7 @@ class Sentinel:
         equation = ((bands["band_8"] - (2 * bands["band_4"]) + bands["band_2"])/
                     (bands["band_8"] + (2 * bands["band_4"]) + bands["band_2"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -344,7 +344,7 @@ class Sentinel:
         equation = ((band_5 - bands['band_4']) /
                     (band_5 + bands['band_4']))
 
-        snap = gdal.Open(self.path['band_4'])
+        snap = self.path['band_4']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -377,7 +377,7 @@ class Sentinel:
         equation = ((band_6 - band_5) /
                     (band_5 - bands['band_4']))
 
-        snap = gdal.Open(self.path['band_4'])
+        snap = self.path['band_4']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -410,7 +410,7 @@ class Sentinel:
                     (band_5 - bands['band_3'])) *
                     (band_5 - bands['band_4']))
 
-        snap = gdal.Open(self.path['band_4'])
+        snap = self.path['band_4']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -442,7 +442,7 @@ class Sentinel:
         equation = ((band_7 - bands['band_3']) /
                     (band_7 + bands['band_3']))
 
-        snap = gdal.Open(self.path['band_3'])
+        snap = self.path['band_3']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -473,7 +473,7 @@ class Sentinel:
 
         equation = (band_7 / bands['band_4'])
 
-        snap = gdal.Open(self.path['band_4'])
+        snap = self.path['band_4']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -507,7 +507,7 @@ class Sentinel:
         equation = 705 + 35 * ((((band_7 + bands['band_4']) / 2) - band_5) /
                                (band_6 - band_5))
 
-        snap = gdal.Open(self.path['band_4'])
+        snap = self.path['band_4']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)
@@ -540,7 +540,7 @@ class Sentinel:
 
         equation = ((band_7 - bands['band_4']) / (band_5 / band_6))
 
-        snap = gdal.Open(self.path['band_4'])
+        snap = self.path['band_4']
 
         if out_raster is not None:
             save_index(equation, out_raster, snap, gdal.GDT_Float32)

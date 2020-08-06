@@ -95,7 +95,7 @@ class NAIP:
                 band_4 = naip.GetRasterBand(4).ReadAsArray().astype(np.float32)
                 bands.update({"band_4": band_4})
 
-        snap = naip
+        snap = self.path
         bands.update({"snap": snap})
 
         self.bands = bands

@@ -27,6 +27,8 @@ def save_index(in_array, out, snap, dType=gdal.GDT_Float32):
     if os.path.exists(out):
         os.remove(out)
 
+    snap = gdal.Open(snap)
+
     driver = gdal.GetDriverByName('GTiff')
     metadata = driver.GetMetadata()
     shape = in_array.shape

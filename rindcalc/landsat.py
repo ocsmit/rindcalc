@@ -1,4 +1,3 @@
-
 import os
 from glob import glob
 import numpy as np
@@ -242,7 +241,7 @@ class Landsat:
         equation = ((bands["band_3"] - bands["band_6"]) /
                     (bands["band_3"] + bands["band_6"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
@@ -281,7 +280,7 @@ class Landsat:
              + bands["band_7"])
         equation = (a / b)
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
@@ -316,7 +315,7 @@ class Landsat:
                      (0.25 * bands["band_5"] + 2.75 * bands["band_6"])) /
                     (bands["band_3"] + bands["band_6"] + bands["band_5"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
@@ -349,7 +348,7 @@ class Landsat:
         equation = ((bands["band_5"] - bands["band_6"]) /
                     (bands["band_5"] + bands["band_6"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -381,7 +380,7 @@ class Landsat:
         equation = ((bands["band_3"] - bands["band_6"]) /
                     (bands["band_3"] + bands["band_6"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -413,7 +412,7 @@ class Landsat:
         equation = ((bands["band_5"] - bands["band_3"])
                     / (bands["band_5"] + bands["band_3"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -448,7 +447,7 @@ class Landsat:
                     (bands["band_5"] + bands["band_4"] + soil_brightness)) \
                     * (1 + soil_brightness)
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
@@ -482,7 +481,7 @@ class Landsat:
             "band_2"]) /
                     (bands["band_5"] + (2 * bands["band_4"]) + bands["band_2"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
@@ -515,7 +514,7 @@ class Landsat:
         equation = ((bands["band_3"] - bands["band_4"]) /
                     (bands["band_3"] + bands["band_4"] - bands["band_2"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
 
@@ -549,7 +548,7 @@ class Landsat:
         equation = ((bands["band_6"] - bands["band_5"]) / (
                     bands["band_6"] + bands["band_5"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -582,7 +581,7 @@ class Landsat:
         equation = ((bands["band_6"] - bands["band_10"]) /
                     (bands["band_6"] + bands["band_10"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -614,7 +613,7 @@ class Landsat:
         equation = ((bands["band_4"] - bands["band_10"]) /
                     (bands["band_4"] + bands["band_10"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -649,7 +648,7 @@ class Landsat:
         ebbi_mask = np.ma.MaskedArray(ebbi, mask=(ebbi == 0))
         ebbi_mask.reshape(ebbi.shape)
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], ebbi_mask, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -682,7 +681,7 @@ class Landsat:
         equation = ((bands["band_7"] - bands["band_5"]) /
                     (bands["band_7"] + bands["band_5"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
@@ -715,7 +714,7 @@ class Landsat:
         equation = ((bands["band_5"] - bands["band_7"]) /
                     (bands["band_5"] + bands["band_7"]))
 
-        snap = gdal.Open(self.path['band_2'])
+        snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
                           snap, mask_clouds)
         return out_ras
