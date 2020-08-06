@@ -1,5 +1,5 @@
 ---
-title: 'Rindcalc: A Python Package For Remote Sensing Calculations and Manipulation.'
+title: 'Rindcalc: A Python library For Spectral Index Raster Calculations & Remote Sensing Image Processing'
 tags:
   - Python
   - GIS
