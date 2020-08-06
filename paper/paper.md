@@ -35,11 +35,15 @@ This naming convention is utilized throughout Rindcalc with the goal of simplify
 Furthermore, the usage of the dictionary structure allows the data to be easily queryable and allows for only specific bands to only be loaded as arrays for reduced memory usage when working with each remote sensing product.
 A simple structure of Rindcalc can be viewed in \autoref{fig:rindcalc}.
 
+![Simple overveiw of the Rindcalc python library. \label{fig:rindcalc}](fig-rindcalc.png)
+    
+
 ## Key Modules
 
 * **`load_bands`**: 
-  For each remote sensing product each individual band can be read into an array using the `load_bands` method.
-  This allows for index formulas to be applied properly to the imagery as each cell can be efficiently computed.
+  For each remote sensing product individual bands can be read as an array using the `load_bands` method.
+  The method allows for index formulas to be applied with the imagery in the form of matrix calculations.
+  The dictionary created with `load_bands` also allows the imagery 
  
 - **`composite`**:
   For remote sensing products three band composites of varying band combinations are important to highlight various features.
@@ -52,7 +56,8 @@ A simple structure of Rindcalc can be viewed in \autoref{fig:rindcalc}.
   Each index however, also possess to ability to save the output index as a GeoTIFF raster with corresponding spatial information to allow for its use in GIS.
   
 
-![Simple overveiw of the Rindcalc python library. \label{fig:rindcalc}](fig-rindcalc.png)
+
+
 
 
 # Citations
