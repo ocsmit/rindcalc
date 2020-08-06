@@ -76,7 +76,7 @@ save_index(ndvi, "output.tif", snap=data.path["band_4"])
 
 ```
 
-![NDVI output from sample process. \label{fig:output}](fig-exout.png){width=50%, height=50%}
+![NDVI output from sample process. \label{fig:output}](fig-exout.png){width=25%, height=25%}
 
 # Citations
 
