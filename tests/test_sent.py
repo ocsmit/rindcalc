@@ -4,9 +4,9 @@ import sys
 import numpy as np
 sys.path.append('../rindcalc')
 
-
+path = './tests/data/sent'
 def test_sent_path():
-    path = './tests/data/sent'
+
     data = Sentinel(path)
     d = {'band_1': './tests/data/sent/B01.jp2', 
          'band_2': './tests/data/sent/B02.jp2', 
@@ -25,7 +25,6 @@ def test_sent_path():
 
 
 def test_sent_bands():
-    path = './tests/data/sent'
     data = Sentinel(path)
     bands = data.load_bands()
     d = {'band_1': [[1., 1., 0., 0., 0.],
@@ -96,3 +95,6 @@ def test_sent_bands():
     for i in range(len(data.band_options)):
         assert np.array_equal(bands[data.band_options[i]],
                               d[data.band_options[i]])
+
+def test_out():
+    data = Sentinel(path).NDVI('./tests/data/sentndvi.tif')

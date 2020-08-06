@@ -87,6 +87,8 @@ def test_ls_bands():
 
     for i in range(len(data.band_options)):
         print(bands[data.band_options[i]])
-        #print(d[data.band_options[i]])
         print(np.array_equal(bands[data.band_options[i]],
                               d[data.band_options[i]]))
+
+def test_out():
+    data = Landsat(path).NDVI('./tests/data/sentls.tif')
