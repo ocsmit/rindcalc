@@ -32,6 +32,7 @@ For each remote sensing product a class is intitialized which will read the file
 Each class contains two main dictonary attributes, `paths` and `bands`, both of which follow the same key naming convention where the key of each band is titled "band_band#", e.g. Landsat-8 band seven would be "band_7". 
 This naming convention is utilized throughout Rindcalc with the goal of simplifiying the usage of the individual bands.
 Furthermore, the usage of the dictonary structure allows the data to be easily qeuryable and allows for only specific bands to only be loaded as arrays for reduced memory usage when working with each remote sensing product.
+A simple structure of Rindcalc can be viewed in \autoref{fig:rindcalc}.
 
 ## Key Modules
 
@@ -44,7 +45,7 @@ Furthermore, the usage of the dictonary structure allows the data to be easily q
   Rindcalc provides a simple structure to create said composites as the band specification inputs use the naming convention standard within Rindcalc.
 
 
-![Simple overveiw of the Rindcalc python library](fig-rindcalc.png)
+![Simple overveiw of the Rindcalc python library. \label{fig:rindcalc}](fig-rindcalc.png)
 
 # Mathematics
 
