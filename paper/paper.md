@@ -76,7 +76,8 @@ data = Sentinel("path_to_img_dir")
 # Load neccisary bands as arrays
 bands = data.load_bands(["band_4", "band_8"])
 
-# Normalized Difference Vegetation Index (NDVI) array
+# Normalized Difference Vegetation Index (NDVI) array 
+# Formula is NIR - RED / NIR + RED
 ndvi = ((bands["band_8"] - bands["band_4"]) / 
 	(bands["band_8"] + bands["band_4"]))
 
