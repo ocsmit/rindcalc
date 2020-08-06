@@ -42,21 +42,23 @@ Additionally, processing functions are provided such as image compositing, cell 
 * **`load_bands`**: 
   For each remote sensing product individual bands can be read as an array using the `load_bands` method.
   The method allows for index formulas to be applied with the imagery in the form of matrix calculations.
-  Each index computed with Rindcalc only loads the neccisary bands through the `load_bands` method in order to reduce the memory size needed to compute each index.  
+  Bands loaded are returned as a dictionary which allows for easy integration with external work flows.
+  Each index computed with Rindcalc only loads the necessary bands through the `load_bands` method in order to reduce the memory size needed to compute each index.  
  
 - **`composite`**:
   For remote sensing products three band composites of varying band combinations are important to highlight various features.
-  Rindcalc provides a simple structure to create said composites as the band specification inputs use the naming convention standard within Rindcalc.
+  Through the use of Rindcalcs naming convention, bands are easily queryable after initialization.
+  A simplified structure is subsequently provided to create three band composites.
 
 - **`index`**: 
-  Index is not the name of this method but rather a placeholder where "index" is replaced by the name of the index to be calculated, e.g. `Landsat(in_path).NDVI()`. 
-  The index method is the core of Rindcalc effectively automating the Input/Output (I/O) in the process to compute and calculate indices.
+  Index is not the name of this method but rather a placeholder where "index" is replaced by the name of the remote sensing index to be calculated, e.g. `Landsat(in_path).NDVI()`. 
+  The index method is the core of Rindcalc effectively automating the Input/Output (I/O) and calculation in the process to compute and calculate indices.
   Indices computed are output as an array to allow for easy integration with other Python libraries such as Matplotlib, Scikit-learn, and Scikit-Image.
   Each index however, also possess to ability to save the output index as a GeoTIFF raster with corresponding spatial information to allow for its use in GIS.
 
 - **`utils.resample`**:
   Resampling allows for matrix calculations to be computed between bands of different cell sizes. 
-  The process to resample creates an in memory GDAL Virtual Dataset (VRT), a bytesize XML format file with the new xy resolution, in order to sidestep the need to write an intermediate file to a physical disk that could potentially slow the process down. 
+  The process to resample creates an in memory GDAL Virtual Dataset (VRT), a bytesize Extensible Markup Language (XML) file with the new xy resolution, in order to sidestep the need to write an intermediate file to a physical disk that could potentially slow the process down. 
   The newly resampled VRT is subsequently read as an array before being flushed from the memory.
 
 # Custom Equations 
