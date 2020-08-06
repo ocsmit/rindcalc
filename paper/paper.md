@@ -22,8 +22,7 @@ The uses of indices from remote sensing products range from tracking vegetation 
 Indices are computed through the application of algebraic formulas where the inputs are either the spectral bands or other ancillary information from multispectral imagery.
 However, outside of raster calculator Graphical User Interfaces (GUI's), like those in proprietary geospatial software’s such as ArcGIS [@Esri:2020] and ERDAS Imagine [@Erdas:2004], and in the open source QGIS [@QGIS:2019], there is currently no streamlined method for calculating these indices.
 
-The goal of Rindcalc is to provide an efficient and seamless processing library capable of working directly with remote sensing products outside of a GUI and remove the need to set up a complex Python pipelines otherwise.
-
+The goal then of Rindcalc is to provide an efficient and seamless processing library capable of working directly with remote sensing products outside of a GUI and remove the need to set up a complex Python pipelines otherwise.
 The indices and composites computed with Rindcalc can subsequently be added to other workflows and algorithms to aid in research.
 
 Rindcalc is separated by remote sensing product with functionality for Landsat-8 [@Roy:2014], Sentinel-2 [@Drusch:2012], and National Agricultural Imagery Program (NAIP) [@USDA:2020] provided at the time of writing.
