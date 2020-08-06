@@ -54,7 +54,7 @@ Additionally, processing functions are provided such as image compositing and ce
   Indices computed are output as an array to allow for easy integration with other Python libraries such as Matplotlib, Scikit-learn, and Scikit-Image.
   Each index however, also possess to ability to save the output index as a GeoTIFF raster with corresponding spatial information to allow for its use in GIS.
   
-#Custom Equations 
+# Custom Equations 
 
 Rindcalc is purposefully kept modular and indices not available in Rindcalc can easily be implemented by the end user with Rindcalc acting as the I/O library with only a few lines of code as opposed to the many lines required by GDAL.
 An example of using Rindcalc to compute a user equation is as follows:
