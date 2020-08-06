@@ -61,7 +61,7 @@ Additionally, processing functions are provided such as image compositing, cell 
 
 # Custom Equations 
 
-Rindcalc is purposefully kept modular and indices not available in Rindcalc can easily be implemented by the end user with Rindcalc acting as the I/O library with only a few lines of code as opposed to the many lines required by GDAL.
+Rindcalc is purposefully kept modular and indices not available in Rindcalc can easily be implemented by the end user with Rindcalc acting as the I/O library with only a few lines of code as opposed to the many lines potentially required by other geospatial processing libraries.
 An example of using Rindcalc to compute a user equation is as follows:
 
 ``` python
