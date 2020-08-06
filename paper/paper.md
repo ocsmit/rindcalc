@@ -56,10 +56,8 @@ Additionally, processing functions are provided such as image compositing, cell 
 
 - **`utils.resample`**:
   Resampling allows for matrix calculations to be computed between bands of different cell sizes. 
-  The process to resample creates an in memory GDAL Virtual Dataset (VRT), a bytesize XML format file,  with the new xy resolution. 
+  The process to resample creates an in memory GDAL Virtual Dataset (VRT), a bytesize XML format file with the new xy resolution, in order to sidestep the need to write an intermediate file to a physical disk that could potentially slow the process down. 
   The newly resampled VRT is subsequently read as an array before being flushed from the memory.
-  Using the VRT format allows for quick manipulation of the image band with out the need to write data to a physical drive which could potentially slow the process.
-
 
 # Custom Equations 
 
