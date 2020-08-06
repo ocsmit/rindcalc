@@ -47,7 +47,7 @@ A simple structure of Rindcalc can be viewed in \autoref{fig:rindcalc}.
 
 - **index**: 
   Index is not the name of this method but rather a placeholder where "index" is replaced by the name of the index to be calculated, e.g. `Landsat(in_path).NDVI()`. 
-  The index method is the core of Rindcalc effectively automating the I/O in the process to compute and calculate indices.
+  The index method is the core of Rindcalc effectively automating the Input/Output (I/O) in the process to compute and calculate indices.
   Indices computed are output as an array to allow for easy integration with other Python libraries such as Matplotlib, Scikit-learn, and Scikit-Image.
   Each index however, also possess to ability to save the output index as a GeoTIFF raster with corresponding spatial information to allow for its use in GIS.
   
