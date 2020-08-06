@@ -20,7 +20,7 @@ bibliography: paper.bib
 The public availability of multispectral satellite imagery combined with the high temporal frequency with which it is taken allows for imagery to be incorporated into many aspects of research.
 The uses of indices from remote sensing products range from tracking vegetation health, monitoring forest canopy, observing water levels, fire detection, and even aiding in the creation of land cover datasets [@Silleos:2006; @Joshi:2006; @Ghulam:2007; @Roy:2006; @Jin:2013].
 Indices are computed through the application of algebraic formulas where the inputs are either the spectral bands or other ancillary information from multispectral imagery.
-However, outside of raster calculator GUI's, like those in proprietary geospatial software’s such as ArcGIS [@Esri:2020] and ERDAS[@Erdas:2004], and in the open source QGIS [@QGIS:2019], there is currently no streamlined method for calculating these indices.
+However, outside of raster calculator GUI's, like those in proprietary geospatial software’s such as ArcGIS [@Esri:2020] and ERDAS Imagine [@Erdas:2004], and in the open source QGIS [@QGIS:2019], there is currently no streamlined method for calculating these indices.
 Additionally, processing functions are provided such as image compositing and cell size resampling.
 
 The goal of Rindcalc is to provide an efficient and seamless processing library capable of working directly with remote sensing products outside of a GUI or the usage of a complex python pipeline built from scratch.
