@@ -27,7 +27,6 @@ The goal of Rindcalc is to provide an efficient and seamless processing library 
 Spatial information is maintained with the use of the Geospatial Data Abstraction software Library (GDAL) [@GDAL:2020] to convert bands to and from NumPy arrays [@Van:2011]. 
 The indices computed with Rindcalc can subsequently be added to other workflows and algorithms to aid in research.
 
-# Methodology
 Rindcalc is separated by remote sensing product with functionality for Landsat-8 [@Roy:2014], Sentinel-2 [@Drusch:2012], and National Agricultural Imagery Program (NAIP) [@USDA:2020] provided at the time of writing.
 For each remote sensing product a class is initialized which will read the filepaths of each raster band within the image directory utilizing the default naming conventions of each product. 
 Each class contains two main dictionary attributes, `paths` and `bands`, both of which follow the same naming convention where the key for each band is titled "band_band#", e.g. band seven of Landsat-8 would be identified with the key "band_7". 
@@ -38,27 +37,46 @@ A simple structure of Rindcalc can be viewed in \autoref{fig:rindcalc}.
 ![Simple overveiw of the Rindcalc python library. \label{fig:rindcalc}](fig-rindcalc.png)
     
 
-## Key Modules
+# Key Modules
 
 * **`load_bands`**: 
   For each remote sensing product individual bands can be read as an array using the `load_bands` method.
   The method allows for index formulas to be applied with the imagery in the form of matrix calculations.
-  The dictionary created with `load_bands` also allows the imagery 
+  Each index computed with Rindcalc only loads the neccisary bands through the `load_bands` method in order to reduce the memory size needed to compute each index.  
  
 - **`composite`**:
   For remote sensing products three band composites of varying band combinations are important to highlight various features.
   Rindcalc provides a simple structure to create said composites as the band specification inputs use the naming convention standard within Rindcalc.
 
-- **index**: 
+- **`index`**: 
   Index is not the name of this method but rather a placeholder where "index" is replaced by the name of the index to be calculated, e.g. `Landsat(in_path).NDVI()`. 
   The index method is the core of Rindcalc effectively automating the Input/Output (I/O) in the process to compute and calculate indices.
   Indices computed are output as an array to allow for easy integration with other Python libraries such as Matplotlib, Scikit-learn, and Scikit-Image.
   Each index however, also possess to ability to save the output index as a GeoTIFF raster with corresponding spatial information to allow for its use in GIS.
   
+#Custom Equations 
 
+Rindcalc is purposefully kept modular and indices not available in Rindcalc can easily be implemented by the end user with Rindcalc acting as the I/O library with only a few lines of code as opposed to the many lines required by GDAL.
+An example of using Rindcalc to compute a user equation is as follows:
 
+``` python
+from rindcalc import Sentinel
+from rindcalc.utils import save_index
 
+# Intialize class and read all band paths into dictionary
+data = Sentinel("path_to_img_dir")
 
+bands = data.load_bands(["band_4", "band_8"])
+
+# Normalized Difference Vegetation Index (NDVI) array
+ndvi = ((bands["band_8"] - bands["band_4"]) / 
+	(bands["band_8"] + bands["band_4"]))
+
+save_index(ndvi, "output.tif", snap=data.path["band_4"])
+
+```
+
+![NDVI output from sample process. /label{fig:output}](fig-exout.png)
 
 # Citations
 
