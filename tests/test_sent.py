@@ -97,4 +97,4 @@ def test_sent_bands():
                               d[data.band_options[i]])
 
 def test_out():
-    data = Sentinel(path).NDVI('./tests/data/sentndvi.tif')
+    data = Sentinel(path).NDVI('./tests/data/senttest.tif')

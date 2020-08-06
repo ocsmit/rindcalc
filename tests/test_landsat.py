@@ -91,4 +91,4 @@ def test_ls_bands():
                               d[data.band_options[i]]))
 
 def test_out():
-    data = Landsat(path).NDVI('./tests/data/sentls.tif')
+    data = Landsat(path).NDVI('./tests/data/lstest.tif')

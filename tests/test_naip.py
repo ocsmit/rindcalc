@@ -35,3 +35,7 @@ def test_naip_bands():
     for i in range(len(data.band_options) - 1):
         assert np.array_equal(bands[data.band_options[i]],
                               d[data.band_options[i]])
+
+
+def test_out():
+    data = NAIP(path).NDVI('./tests/data/naiptest.tif')
