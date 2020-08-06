@@ -10,7 +10,7 @@ authors:
     orcid: 0000-0002-4740-2985
     affiliation: 1
 affiliations:
- - name: Undergrad, University of North Georgia IESA.
+ - name: Undergradate, University of North Georgia IESA.
    index: 1
 date: 25 May 2020
 bibliography: paper.bib
