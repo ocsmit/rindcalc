@@ -20,12 +20,6 @@ It currently consists of index calculation, composite and utility functions
 for Landsat-8 and USDA NAIP imagery, with Sentinel-2 and MODIS satellite
 functionality in the works
 
-**Roadmap**
-
-- [ ] Finish Sentinel-2 implementation
-- [x] Rework Landsat, NAIP, and Sentinel to operate in classes
-- [ ] Segmentation and zonal statistics
-
 **Install with pip**
 
 Dependencies:
