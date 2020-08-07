@@ -26,5 +26,5 @@ latitudes. The scene size is 185 km x 180 km (114 mi x 112 mi) `(USGS)
 
 .. autoclass:: rindcalc.Landsat
     :members:
-
+    :member-order: bysource
 

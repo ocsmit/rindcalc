@@ -12,3 +12,4 @@ data: RGB and Near Infrared `(USDA) <https://www.fsa.usda.gov/programs-and-servi
 
 .. autoclass:: rindcalc.NAIP
     :members:
+    :member-order: bysource
