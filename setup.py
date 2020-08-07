@@ -8,9 +8,9 @@ setuptools.setup(
     author_email="owen8461@protonmail.com",
     name='rindcalc',
     license="GNU 3.0",
-    description='rindcalc is an open source python package created to calculate'
+    description='Rindcalc is an open source python package created to calculate'
                 'remote-sensing indices and composites.',
-    version='v2.0.5',
+    version='v3.0.0',
     long_description=README,
     long_description_content_type='text/markdown',
     url='https://github.com/ocsmit/rindcalc',

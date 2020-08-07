@@ -1,5 +1,5 @@
 ---
-title: 'Rindcalc: A Python library For Spectral Index Raster Calculations & Remote Sensing Image Processing'
+title: 'Rindcalc: A Python Library For Spectral Index Raster Calculations & Remote Sensing Image Processing'
 tags:
   - Python
   - GIS
@@ -20,11 +20,15 @@ bibliography: paper.bib
 The public availability of multispectral satellite imagery combined with the high temporal frequency with which it is taken allows for imagery to be incorporated into many aspects of research.
 Indices derived from multispectral remote sensing products are widely used in research with usage ranging from tracking vegetation health, monitoring forest canopy, observing water levels, fire detection, and even aiding in the creation of land cover datasets [@Silleos:2006; @Joshi:2006; @Ghulam:2007; @Roy:2006; @Jin:2013].
 Indices are computed through the application of algebraic formulas where the inputs are either the spectral bands or other ancillary information from multispectral imagery.
-However, outside of raster calculator Graphical User Interfaces (GUI's), like those in proprietary geospatial software’s such as ArcGIS [@Esri:2020] and ERDAS Imagine [@Erdas:2004], and in the open source QGIS [@QGIS:2019], there is currently no streamlined method for calculating these indices.
+However, outside of raster calculator Graphical User Interfaces (GUI's), like those in proprietary geospatial software’s such as ArcGIS [@Esri:2020] and ERDAS Imagine [@Erdas:2004], and in the open source QGIS [@QGIS:2019], there is currently no streamlined method for calculating these indices especially as resolutions can differ between bands.
 
+# Statement Of Need
 The goal then of Rindcalc is to provide an efficient and seamless processing library capable of working directly with remote sensing products outside of a GUI and remove the need to set up a complex Python pipeline otherwise.
+The less time a researcher has to take loading data the more time can be devoted to working with the data.
+Rindcalc provides these streamlined methods to load remote sensing data, apply index equations, and write the output data with all of the appropriate spatial information maintained.
 The indices and composites computed with Rindcalc can subsequently be added to other workflows and algorithms to aid in research.
 
+# Package Overview
 Rindcalc is separated by remote sensing product with functionality for Landsat-8 [@Roy:2014], Sentinel-2 [@Drusch:2012], and National Agricultural Imagery Program (NAIP) [@USDA:2020] provided at the time of writing.
 For each remote sensing product a class is initialized which reads the filepaths of each raster band within the image directory utilizing the default naming conventions of each product. 
 Each class contains two main dictionary attributes, `paths` and `bands`, both of which follow the same naming convention where the key for each band is titled "band_band#", e.g. band seven of Landsat-8 would be identified with the key "band_7". 
@@ -37,7 +41,7 @@ Additionally, processing functions are provided such as image compositing, cell 
 ![Simple overveiw of the Rindcalc python library. \label{fig:rindcalc}](fig-rindcalc.png)
     
 
-# Key Modules
+## Key Modules
 
 * **`load_bands`**: 
   For each remote sensing product individual bands can be read as an array using the `load_bands` method.
@@ -61,7 +65,7 @@ Additionally, processing functions are provided such as image compositing, cell 
   The process to resample creates an in memory GDAL Virtual Dataset (VRT), a bytesize Extensible Markup Language (XML) file with the new xy resolution, in order to sidestep the need to write an intermediate file to a physical disk that could potentially slow the process down. 
   The newly resampled VRT is subsequently read as an array before being flushed from the memory.
 
-# Custom Equations 
+## Custom Equations 
 
 Rindcalc is purposefully kept modular and indices not available in Rindcalc can easily be implemented by the end user with Rindcalc acting as the I/O library with only a few lines of code as opposed to the many lines potentially required by other geospatial processing libraries.
 An example of using Rindcalc to compute a user equation is as follows:
