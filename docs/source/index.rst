@@ -46,11 +46,11 @@ Using in conjunction with matplotlib
 
 .. code-block:: python
 
-   import rindcalc as rc
+   from rindcalc import Landsat
    import matplotlib.pyplot as plt
 
    ls = '/landsat_8/2019_11_28'
-   index = ls.AWEIsh('/landsat_8/2019_11_28')
+   index = Landsat(ls).AWEIsh('/landsat_8/2019_11_28')
    plt.imshow(index, 'ocean')
    plt.title('AWEIsh - Water Index')
    plt.show()
@@ -66,7 +66,7 @@ Creating a false color composite of a Landsat-8 Scene.
 
    from rindcalc import Landsat
 
-   ls = rc.Landsat('/landsat_8/LC08_L1TP_197031_20131212_20170428_01_T1')
+   ls = Landsat('/landsat_8/LC08_L1TP_197031_20131212_20170428_01_T1')
    ls.composite(['band_5', 'band_4', 'band_3'], '/landsat_8_outputs/FalseColor_Barcelona.tif')
 
 
