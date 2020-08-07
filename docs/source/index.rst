@@ -15,7 +15,6 @@ Satellites & Imagery
  * Landsat-8
  * National Agricultural Imagery Program - NAIP
  * Sentinel-2
- * MODIS
 
 **Example of use:**
 -------------------
