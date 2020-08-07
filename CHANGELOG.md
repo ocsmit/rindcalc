@@ -7,17 +7,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [2.1.0] - 2019-02-15
+## [3.0.0] - 2020-08-6
 
 ### Added
-
-- Image segmentation with [Scikit-learn](https://scikit-image.org/).
-- 
+  
+  - Full Sentinel-2 support 
+  - Added resampling function
 
 ### Changed
-- Fixed typos in Italian translation from [@lorenzo-arena](https://github.com/lorenzo-arena).
-- Fixed typos in Indonesian translation from [@ekojs](https://github.com/ekojs).
 
+  - Complete restructuring of the code base. 
+  - Individual classes created for Sentinel-2, Landsat-8, & NAIP.
+  - Update structure for reading data, new dictionary classes to allow for the 
+    easy integration with other python libraries.
+  
 ## [2.0.5] - 2020-05-01
 
 ### Changed 
