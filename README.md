@@ -4,7 +4,7 @@
 
 **A Spectral Index Raster Calculator For Satellite Image Processing**
 
-[![Documentation Status](https://readthedocs.org/projects/rindcalc/badge/?version=2.0.5)](https://rindcalc.readthedocs.io/en/2.0.5/?badge=2.0.5)
+[![Documentation Status](https://readthedocs.org/projects/rindcalc/badge/?version=latest)](https://rindcalc.readthedocs.io/en/latest/?badge=latest)
 [![Build Status](https://travis-ci.org/ocsmit/rindcalc.svg?branch=master)](https://travis-ci.org/ocsmit/rindcalc)
 [![Conda Platforms](https://anaconda.org/rindcalc/rindcalc/badges/platforms.svg)](https://anaconda.org/rindcalc/rindcalc)
 [![DOI](https://zenodo.org/badge/232691170.svg)](https://zenodo.org/badge/latestdoi/232691170)
