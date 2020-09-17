@@ -236,10 +236,10 @@ class Landsat:
         gdal.AllRegister()
         np.seterr(divide='ignore', invalid='ignore')
 
-        bands = self.load_bands(['band_3', 'band_6'])
+        bands = self.load_bands(['band_4', 'band_5'])
 
-        equation = ((bands["band_3"] - bands["band_6"]) /
-                    (bands["band_3"] + bands["band_6"]))
+        equation = ((bands["band_4"] - bands["band_5"]) /
+                    (bands["band_4"] + bands["band_5"]))
 
         snap = self.path['band_2']
         out_ras = save_ls(self.path['band_qa'], equation, out_raster,
