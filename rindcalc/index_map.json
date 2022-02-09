@@ -1,0 +1,4 @@
+{
+"ndvi":
+    "(nir – red) / (nir + red 1) "
+}
